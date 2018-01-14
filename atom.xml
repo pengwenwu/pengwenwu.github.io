@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Pena&#39;s Blog</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://pengwenwu.github.io/"/>
+  <updated>2018-01-14T04:02:42.483Z</updated>
+  <id>https://pengwenwu.github.io/</id>
+  
+  <author>
+    <name>pengwenwu</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>如何将一个数组乱序？</title>
+    <link href="https://pengwenwu.github.io/2018/01/13/%E5%A6%82%E4%BD%95%E5%B0%86%E4%B8%80%E4%B8%AA%E6%95%B0%E7%BB%84%E4%B9%B1%E5%BA%8F%EF%BC%9F/"/>
+    <id>https://pengwenwu.github.io/2018/01/13/如何将一个数组乱序？/</id>
+    <published>2018-01-13T13:55:11.000Z</published>
+    <updated>2018-01-14T04:02:42.483Z</updated>
+    
+    <content type="html"><![CDATA[<p>前几天php实习面试，问到一个问题：<strong>如何将一个数组乱序？</strong><br>答：使用自带的array_rand()或者shuffle()函数，或者用随机数取值赋值给新的数组。<br>又问：万一一直随机到同一个数怎么办？<br>那就进行判断，如果已经取过的位置，重新选取随机数。<br>这样问题就来了：随着新数组长度增加，原数组中的随机数选取碰撞几率会原来越大，最后几乎是一直碰撞的。也没有想出更好的办法。</p><p>后来回家后查了一下，总结一下，有以下几种方法：</p><ol><li><p>使用自带的函数</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">shuffle_rand1</span><span class="params">($arr)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"原来数组为："</span>;</span><br><span class="line">print_r($arr);</span><br><span class="line">shuffle($arr);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"&lt;br&gt;乱序数组为："</span>;</span><br><span class="line">print_r($arr);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li><p>第一时间想到的方法，就是随机取值，赋值给新的数组</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">shuffle_rand2</span><span class="params">($arr)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"原来数组为："</span>;</span><br><span class="line">print_r($arr);</span><br><span class="line">$len = count($arr);</span><br><span class="line">$shuffle_arr = <span class="keyword">array</span>();</span><br><span class="line"><span class="keyword">while</span>(count($shuffle_arr)&lt;$len)&#123;</span><br><span class="line">$index = rand(<span class="number">0</span>,$len<span class="number">-1</span>);</span><br><span class="line"><span class="keyword">if</span>(!in_array($index, $shuffle_arr))&#123;</span><br><span class="line">$shuffle_arr[] = $index;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">$newarr = <span class="keyword">array</span>();</span><br><span class="line"><span class="keyword">foreach</span> ($shuffle_arr <span class="keyword">as</span> $v) &#123;</span><br><span class="line">$newarr[] = $arr[$v];</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"&lt;br&gt;新的数组为："</span>;</span><br><span class="line">print_r($newarr);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li><p>数组中随机取一个元素赋值给新的数组，然后将原数组最后一位赋值到该位置,数组长度减一，继续重复上述步奏</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">shuffle_rand3</span><span class="params">($arr)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"原来数组为："</span>;</span><br><span class="line">print_r($arr);</span><br><span class="line">$len = count($arr);</span><br><span class="line">$shuffle_arr = <span class="keyword">array</span>();</span><br><span class="line"><span class="keyword">while</span>($len&gt;<span class="number">0</span>)&#123;</span><br><span class="line">$index = rand(<span class="number">0</span>,$len<span class="number">-1</span>);</span><br><span class="line">$shuffle_arr[] = $arr[$index];</span><br><span class="line">$arr[$index] = $arr[$len<span class="number">-1</span>];</span><br><span class="line">$len--;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"&lt;br&gt;新的数组为："</span>;</span><br><span class="line">print_r($shuffle_arr);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li><p>在具有n个元素的数组中，对0到n-1一次进行与一个随机位置元素进行交换,这种方法不需要新建一个数组，直接在原数组中进行</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">shuffle_rand4</span><span class="params">($arr)</span></span>&#123;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"原来数组为："</span>;</span><br><span class="line">print_r($arr);</span><br><span class="line">$len = count($arr);</span><br><span class="line"><span class="keyword">for</span>($i=<span class="number">0</span>;$i&lt;$len;$i++)&#123;</span><br><span class="line">$index = rand(<span class="number">0</span>,$len<span class="number">-1</span>);</span><br><span class="line">$temp = $arr[$i];</span><br><span class="line">$arr[$i] = $arr[$index];</span><br><span class="line">$arr[$index] = $temp;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"&lt;br&gt;新的数组为："</span>;</span><br><span class="line">print_r($arr);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;前几天php实习面试，问到一个问题：&lt;strong&gt;如何将一个数组乱序？&lt;/strong&gt;&lt;br&gt;答：使用自带的array_rand()或者shuffle()函数，或者用随机数取值赋值给新的数组。&lt;br&gt;又问：万一一直随机到同一个数怎么办？&lt;br&gt;那就进行判断，如果已经取过
+      
+    
+    </summary>
+    
+      <category term="算法" scheme="https://pengwenwu.github.io/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="算法" scheme="https://pengwenwu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="PHP" scheme="https://pengwenwu.github.io/tags/PHP/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="https://pengwenwu.github.io/2018/01/10/hello-world/"/>
+    <id>https://pengwenwu.github.io/2018/01/10/hello-world/</id>
+    <published>2018-01-10T15:18:30.173Z</published>
+    <updated>2018-01-10T15:18:30.173Z</updated>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+</feed>
