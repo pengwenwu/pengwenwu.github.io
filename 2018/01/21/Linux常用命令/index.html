@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Linux常用命令 | Pena&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Linux">
+    <meta name="description" content="记录一些阅读《鸟哥的Linux私房菜-基础学习篇》中不太熟悉的命令    软连接、硬链接 软连接：连接文件的内容只会写上目标文件的“文件名”，实际是通过记录的目标文件地址去访问实际存储内容。大小就是文件名大小。如果删除目标文件，则当前文件无法访问。(等同于windows的快捷方式)    硬连接：只能针对单个文件，实际会创建一个一模一样的“文件”(权限、大小)，连接数增加。连接到同一个地址，只是">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux常用命令">
+<meta property="og:url" content="https://pengwenwu.github.io/2018/01/21/Linux常用命令/index.html">
+<meta property="og:site_name" content="Pena&#39;s Blog">
+<meta property="og:description" content="记录一些阅读《鸟哥的Linux私房菜-基础学习篇》中不太熟悉的命令    软连接、硬链接 软连接：连接文件的内容只会写上目标文件的“文件名”，实际是通过记录的目标文件地址去访问实际存储内容。大小就是文件名大小。如果删除目标文件，则当前文件无法访问。(等同于windows的快捷方式)    硬连接：只能针对单个文件，实际会创建一个一模一样的“文件”(权限、大小)，连接数增加。连接到同一个地址，只是">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-02-23T15:23:42.674Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux常用命令">
+<meta name="twitter:description" content="记录一些阅读《鸟哥的Linux私房菜-基础学习篇》中不太熟悉的命令    软连接、硬链接 软连接：连接文件的内容只会写上目标文件的“文件名”，实际是通过记录的目标文件地址去访问实际存储内容。大小就是文件名大小。如果删除目标文件，则当前文件无法访问。(等同于windows的快捷方式)    硬连接：只能针对单个文件，实际会创建一个一模一样的“文件”(权限、大小)，连接数增加。连接到同一个地址，只是">
+    
+        <link rel="alternate" type="application/atom+xml" title="Pena&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">pengwenwu</h5>
+          <a href="mailto:18751943608@163.com" title="18751943608@163.com" class="mail">18751943608@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/pengwenwu" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Linux常用命令</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Linux常用命令</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-01-21T13:27:15.000Z" itemprop="datePublished" class="page-time">
+  2018-01-21
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Linux/">Linux</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#软连接、硬链接"><span class="post-toc-number">1.</span> <span class="post-toc-text">软连接、硬链接</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#查看分区"><span class="post-toc-number">2.</span> <span class="post-toc-text">查看分区</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#解压缩"><span class="post-toc-number">3.</span> <span class="post-toc-text">解压缩</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#列出第三段，第五段"><span class="post-toc-number"></span> <span class="post-toc-text">列出第三段，第五段</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#取得第5字符之后"><span class="post-toc-number"></span> <span class="post-toc-text">取得第5字符之后</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#每个人登录的次数"><span class="post-toc-number"></span> <span class="post-toc-text">每个人登录的次数</span></a>
+        </nav>
+    </aside>
+    
+<article id="post-Linux常用命令"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Linux常用命令</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-01-21 21:27:15" datetime="2018-01-21T13:27:15.000Z"  itemprop="datePublished">2018-01-21</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Linux/">Linux</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <blockquote>
+<p>记录一些阅读《鸟哥的Linux私房菜-基础学习篇》中不太熟悉的命令  </p>
+</blockquote>
+<h3 id="软连接、硬链接"><a href="#软连接、硬链接" class="headerlink" title="软连接、硬链接"></a>软连接、硬链接</h3><blockquote>
+<p><strong>软连接</strong>：连接文件的内容只会写上目标文件的“文件名”，实际是通过记录的目标文件地址去访问实际存储内容。大小就是文件名大小。如果删除目标文件，则当前文件无法访问。(等同于windows的快捷方式)  </p>
+<p> <strong>硬连接</strong>：只能针对单个文件，实际会创建一个一模一样的“文件”(权限、大小)，连接数增加。连接到同一个地址，只是使用了不同的文件名，均可以对源文件进行数据修改，删除任意一个，不影响其余文件访问<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cp -s test test1  </span><br><span class="line">ln -s test test1  # 软连接(快捷方式)</span><br><span class="line"></span><br><span class="line">cp -l demo.php demo1.php </span><br><span class="line">ln -l demo.php demo1.php # 硬链接(只支持单个文件)</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h3 id="查看分区"><a href="#查看分区" class="headerlink" title="查看分区"></a>查看分区</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fdisk -l</span><br></pre></td></tr></table></figure>
+<h3 id="解压缩"><a href="#解压缩" class="headerlink" title="解压缩"></a>解压缩</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#-z gzip压缩，-j bzip2压缩</span><br><span class="line">tar -zcvf [newfilename] filename </span><br><span class="line">tar -zxvf filename.tar.gz [-C 目录] 解压要到指定目录</span><br><span class="line">```  </span><br><span class="line">### 查看命令</span><br></pre></td></tr></table></figure>
+<p>type name<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 命名别名</span><br></pre></td></tr></table></figure></p>
+<p>alias rm=’rm -i’<br>alias st=’status’</p>
+<p>unalias rm  #取消别名<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 数据流重定向</span><br><span class="line">&gt; 标准输入：&lt;或&lt;&lt; (将由键盘输入的数据由文件代替/**结束输入**)  </span><br><span class="line">&gt; 标准输出：&gt;或&gt;&gt; (覆盖/追加)  </span><br><span class="line">&gt; 标准错误输出：2&gt;或2&gt;&gt; (覆盖/追加)</span><br></pre></td></tr></table></figure></p>
+<p>cat &gt; catfile &lt;&lt; eof</p>
+<blockquote>
+<p>This is a test.<br>Ok now stop<br>eof<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 命令执行判断：; || &amp;&amp;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>#依次执行<br>echo 1; echo 2; echo 3 </p>
+<p>#若cmd1正确执行，则开始执行cmd2</p>
+<p>#若cmd1执行错误，则cmd2不执行<br>cmd1 &amp;&amp; cmd2   </p>
+<p>#若cmd1正确执行，则不执行cmd2</p>
+<p>#若cmd1执行错误，则开始执行cmd2<br>cmd1 || cmd2<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 选取命令：cut, grep  </span><br><span class="line">&gt; cut:  </span><br><span class="line">&gt;   -d：分割字符，与-f一起用  </span><br><span class="line">&gt;   -f：取出第几段  </span><br><span class="line">&gt;   -c：取出固定字符区间</span><br></pre></td></tr></table></figure></p>
+<h1 id="列出第三段，第五段"><a href="#列出第三段，第五段" class="headerlink" title="列出第三段，第五段"></a>列出第三段，第五段</h1><p>echo $PATH | cut -d ‘:’ -f 3,5 </p>
+<h1 id="取得第5字符之后"><a href="#取得第5字符之后" class="headerlink" title="取得第5字符之后"></a>取得第5字符之后</h1><p>echo $PATH | cut -c 5-<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 排序命令:sort, wc, uniq</span><br><span class="line">&gt; sort [-fbMnrtuk]    </span><br><span class="line">&gt; uniq [-ic]  </span><br><span class="line">&gt; -c：进行计数</span><br></pre></td></tr></table></figure></p>
+<h1 id="每个人登录的次数"><a href="#每个人登录的次数" class="headerlink" title="每个人登录的次数"></a>每个人登录的次数</h1><p>last | cut -d ‘ ‘ -f 1 | sort | uniq -c<br>```</p>
+<blockquote>
+<p>wc [-lwm]<br>-l：仅列出行<br>-w：仅列出多少字<br>-m：多少字符</p>
+</blockquote>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-02-23T15:23:42.674Z" itemprop="dateUpdated">2018-02-23 23:23:42</time>
+</span><br>
+
+
+        
+        原文链接：<a href="/2018/01/21/Linux常用命令/" target="_blank" rel="external">https://pengwenwu.github.io/2018/01/21/Linux常用命令/</a>
+        
+    </div>
+    <footer>
+        <a href="https://pengwenwu.github.io">
+            <img src="/img/avatar.jpg" alt="pengwenwu">
+            pengwenwu
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://pengwenwu.github.io/2018/01/21/Linux常用命令/&title=《Linux常用命令》 — Pena's Blog&pic=https://pengwenwu.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://pengwenwu.github.io/2018/01/21/Linux常用命令/&title=《Linux常用命令》 — Pena's Blog&source=pengwenwu的个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://pengwenwu.github.io/2018/01/21/Linux常用命令/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Linux常用命令》 — Pena's Blog&url=https://pengwenwu.github.io/2018/01/21/Linux常用命令/&via=https://pengwenwu.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://pengwenwu.github.io/2018/01/21/Linux常用命令/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/03/03/阅读《微服务设计》笔记/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">阅读《微服务设计》笔记</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/01/14/hexo + github搭建个人博客教程/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">hexo + github搭建个人博客教程</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'true' == 'true',
+            appId: "U2qzDNI480QyyzN2kDGB7bGu-gzGzoHsz",
+            appKey: "6o2PFFkLctFMxXg3qBrhr0CF",
+            avatar: "retro",
+            placeholder: "要不要说点什么？",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>pengwenwu &copy; 2017 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://pengwenwu.github.io/2018/01/21/Linux常用命令/&title=《Linux常用命令》 — Pena's Blog&pic=https://pengwenwu.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://pengwenwu.github.io/2018/01/21/Linux常用命令/&title=《Linux常用命令》 — Pena's Blog&source=pengwenwu的个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://pengwenwu.github.io/2018/01/21/Linux常用命令/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Linux常用命令》 — Pena's Blog&url=https://pengwenwu.github.io/2018/01/21/Linux常用命令/&via=https://pengwenwu.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://pengwenwu.github.io/2018/01/21/Linux常用命令/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACMElEQVR42u3aS27DMAxFUe9/0+40QBv3PlJpIepqFCS17OMBy4+uC6/723r9/t3n12+ed06vKi4ZMmRsy7gfV+1v+FXkNZEdZMiQcQKDhMI0+JJv3mH4s8mQIUMGuWUfRtJNGTJkyEgDLtoaFK7//H9DhgwZWzHS0ElSxlr77OO1uAwZMjZk1Lb+m88fmW/IkCFjK8YdrlpAJENKvucPd5EhQ8ZoBg9w/WMWtcEAfx4ZMmTMZqzalGRrBPYcjq/Oo8iQIWNzRr+txmvM9Fce1mXIkDGV0TnaFSRt4BUs+48hQ4aMcYz0oAMJl7VrFxzpkCFDxjhGp33WPyrB08TF+awMGTK2YvCgyRtqvG2XjhN+SRxlyJAxmrHqkFZ/PEBK32CEKUOGjBGM2nAxvdnaRtvbkYAMGTKOYaRBs1P6po+OclsZMmSMY/CSMi1Za+ljrZEnQ4aM0xjpo9eaa50EVIYMGacxeDLHi9hVjf5gzCBDhozRDD4Y6ByD4L+m7T8ZMmScw0ibXK0MNBwhBENTGTJkHMDgyVytNdZJQFun22TIkDGIkW5045WGYxLEg8mGDBkyNmfc4UrTO1LEpq8S+WTIkDGIsSxmh6VvOmDoFLoyZMiYwVh7qCJtui17ZTJkyDiAwQMfedD+sYxiKStDhgwZOBFMr0pf0JXGbxkyZBzG6CR8hMEPtrYCrgwZMjZk8IOq/Da1FPPj7TYZMmRsyOClI79xejijMx6QIUPGaMYXrI/bGXjLCicAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

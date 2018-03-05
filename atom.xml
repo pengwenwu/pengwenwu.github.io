@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://pengwenwu.github.io/"/>
-  <updated>2018-01-14T10:45:53.241Z</updated>
+  <updated>2018-03-05T15:06:22.640Z</updated>
   <id>https://pengwenwu.github.io/</id>
   
   <author>
@@ -17,11 +17,66 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>hexo+github搭建个人博客教程</title>
-    <link href="https://pengwenwu.github.io/2018/01/14/hexo-github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%95%99%E7%A8%8B/"/>
-    <id>https://pengwenwu.github.io/2018/01/14/hexo-github搭建个人博客教程/</id>
+    <title>阅读《微服务设计》笔记</title>
+    <link href="https://pengwenwu.github.io/2018/03/03/%E9%98%85%E8%AF%BB%E3%80%8A%E5%BE%AE%E6%9C%8D%E5%8A%A1%E8%AE%BE%E8%AE%A1%E3%80%8B%E7%AC%94%E8%AE%B0/"/>
+    <id>https://pengwenwu.github.io/2018/03/03/阅读《微服务设计》笔记/</id>
+    <published>2018-03-03T10:14:59.000Z</published>
+    <updated>2018-03-05T15:06:22.640Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>记录阅读《微服务设计》收获的点  </p><h2 id="什么是微服务？"><a href="#什么是微服务？" class="headerlink" title="什么是微服务？"></a>什么是微服务？</h2><p><strong>一些协同工作的小而自治的服务</strong></p></blockquote><h2 id="打破外键关系"><a href="#打破外键关系" class="headerlink" title="打破外键关系"></a>打破外键关系</h2><p><strong>对于有外键关系的表如何做服务拆分？</strong><br>通过api调用访问  </p><ul><li>优点：数据表拆分，进而服务拆分</li><li>缺点：增加了数据库的调用，会影响性能。需要测试是否在可接受范围内，权衡拆分服务带来的好处</li></ul><h2 id="共享表拆分"><a href="#共享表拆分" class="headerlink" title="共享表拆分"></a>共享表拆分</h2><p><strong>共享表拆分后，如何保证插入数据的一致性？</strong><br>设计之初为了减少数据库的调用，必然会建立基于外键的共享表。拆分之后，如何保证同时插入多张表数据的一致性？（某张表插入失败）  </p><ul><li>通过<code>事务</code>处理  </li><li>推荐对及时性较弱的操作，异常捕获后放入队列或者日志文件中进行延迟处理，保证<code>最终一致性</code>  </li><li>终止整个操作，再发起<code>补偿事务</code>来抵消之前的操作（自动化处理）</li><li><p><code>分布式事务</code>。通过专门的事务管理器工具来协调底层事务（不推荐，易出错，难扩展）</p><blockquote><p>阅读完感觉云里雾里，可能是自己的水平还没到达那个深度。收获大概是：了解了后端的架构，后期拓展可能会遇到的问题，以及解决这样问题的思路。</p></blockquote></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;记录阅读《微服务设计》收获的点  &lt;/p&gt;
+&lt;h2 id=&quot;什么是微服务？&quot;&gt;&lt;a href=&quot;#什么是微服务？&quot; class=&quot;headerlink&quot; title=&quot;什么是微服务？&quot;&gt;&lt;/a&gt;什么是微服务？&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;一些协同
+      
+    
+    </summary>
+    
+      <category term="后端" scheme="https://pengwenwu.github.io/categories/%E5%90%8E%E7%AB%AF/"/>
+    
+    
+      <category term="微服务" scheme="https://pengwenwu.github.io/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Linux常用命令</title>
+    <link href="https://pengwenwu.github.io/2018/01/21/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
+    <id>https://pengwenwu.github.io/2018/01/21/Linux常用命令/</id>
+    <published>2018-01-21T13:27:15.000Z</published>
+    <updated>2018-02-23T15:23:42.674Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>记录一些阅读《鸟哥的Linux私房菜-基础学习篇》中不太熟悉的命令  </p></blockquote><h3 id="软连接、硬链接"><a href="#软连接、硬链接" class="headerlink" title="软连接、硬链接"></a>软连接、硬链接</h3><blockquote><p><strong>软连接</strong>：连接文件的内容只会写上目标文件的“文件名”，实际是通过记录的目标文件地址去访问实际存储内容。大小就是文件名大小。如果删除目标文件，则当前文件无法访问。(等同于windows的快捷方式)  </p><p> <strong>硬连接</strong>：只能针对单个文件，实际会创建一个一模一样的“文件”(权限、大小)，连接数增加。连接到同一个地址，只是使用了不同的文件名，均可以对源文件进行数据修改，删除任意一个，不影响其余文件访问<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cp -s test test1  </span><br><span class="line">ln -s test test1  # 软连接(快捷方式)</span><br><span class="line"></span><br><span class="line">cp -l demo.php demo1.php </span><br><span class="line">ln -l demo.php demo1.php # 硬链接(只支持单个文件)</span><br></pre></td></tr></table></figure></p></blockquote><h3 id="查看分区"><a href="#查看分区" class="headerlink" title="查看分区"></a>查看分区</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fdisk -l</span><br></pre></td></tr></table></figure><h3 id="解压缩"><a href="#解压缩" class="headerlink" title="解压缩"></a>解压缩</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#-z gzip压缩，-j bzip2压缩</span><br><span class="line">tar -zcvf [newfilename] filename </span><br><span class="line">tar -zxvf filename.tar.gz [-C 目录] 解压要到指定目录</span><br><span class="line">```  </span><br><span class="line">### 查看命令</span><br></pre></td></tr></table></figure><p>type name<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 命名别名</span><br></pre></td></tr></table></figure></p><p>alias rm=’rm -i’<br>alias st=’status’</p><p>unalias rm  #取消别名<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 数据流重定向</span><br><span class="line">&gt; 标准输入：&lt;或&lt;&lt; (将由键盘输入的数据由文件代替/**结束输入**)  </span><br><span class="line">&gt; 标准输出：&gt;或&gt;&gt; (覆盖/追加)  </span><br><span class="line">&gt; 标准错误输出：2&gt;或2&gt;&gt; (覆盖/追加)</span><br></pre></td></tr></table></figure></p><p>cat &gt; catfile &lt;&lt; eof</p><blockquote><p>This is a test.<br>Ok now stop<br>eof<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 命令执行判断：; || &amp;&amp;</span><br></pre></td></tr></table></figure></p></blockquote><p>#依次执行<br>echo 1; echo 2; echo 3 </p><p>#若cmd1正确执行，则开始执行cmd2</p><p>#若cmd1执行错误，则cmd2不执行<br>cmd1 &amp;&amp; cmd2   </p><p>#若cmd1正确执行，则不执行cmd2</p><p>#若cmd1执行错误，则开始执行cmd2<br>cmd1 || cmd2<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 选取命令：cut, grep  </span><br><span class="line">&gt; cut:  </span><br><span class="line">&gt;   -d：分割字符，与-f一起用  </span><br><span class="line">&gt;   -f：取出第几段  </span><br><span class="line">&gt;   -c：取出固定字符区间</span><br></pre></td></tr></table></figure></p><h1 id="列出第三段，第五段"><a href="#列出第三段，第五段" class="headerlink" title="列出第三段，第五段"></a>列出第三段，第五段</h1><p>echo $PATH | cut -d ‘:’ -f 3,5 </p><h1 id="取得第5字符之后"><a href="#取得第5字符之后" class="headerlink" title="取得第5字符之后"></a>取得第5字符之后</h1><p>echo $PATH | cut -c 5-<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 排序命令:sort, wc, uniq</span><br><span class="line">&gt; sort [-fbMnrtuk]    </span><br><span class="line">&gt; uniq [-ic]  </span><br><span class="line">&gt; -c：进行计数</span><br></pre></td></tr></table></figure></p><h1 id="每个人登录的次数"><a href="#每个人登录的次数" class="headerlink" title="每个人登录的次数"></a>每个人登录的次数</h1><p>last | cut -d ‘ ‘ -f 1 | sort | uniq -c<br>```</p><blockquote><p>wc [-lwm]<br>-l：仅列出行<br>-w：仅列出多少字<br>-m：多少字符</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;记录一些阅读《鸟哥的Linux私房菜-基础学习篇》中不太熟悉的命令  &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;软连接、硬链接&quot;&gt;&lt;a href=&quot;#软连接、硬链接&quot; class=&quot;headerlink&quot; title=&quot;软连接、硬链接&quot;
+      
+    
+    </summary>
+    
+      <category term="Linux" scheme="https://pengwenwu.github.io/categories/Linux/"/>
+    
+    
+      <category term="Linux" scheme="https://pengwenwu.github.io/tags/Linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>hexo + github搭建个人博客教程</title>
+    <link href="https://pengwenwu.github.io/2018/01/14/hexo%20+%20github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%95%99%E7%A8%8B/"/>
+    <id>https://pengwenwu.github.io/2018/01/14/hexo + github搭建个人博客教程/</id>
     <published>2018-01-14T08:09:07.000Z</published>
-    <updated>2018-01-14T10:45:53.241Z</updated>
+    <updated>2018-01-21T13:33:34.191Z</updated>
     
     <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>一年前，临近毕业。为了准备面试，才刻意去准备了<code>github</code>以及<code>blog</code>。<br>自从找到工作后，这两个基本没怎么维护过，想想未免太功利了点。</p><p>主要是前几天，又踩到坑了，想去找以前的记录，很麻烦。<br>之前虽然每天都会写工作总结，一些踩过的坑记在为知笔记上，没有<code>分类</code>、<code>标签</code>，后面再想去找很困难。<br>痛定思痛，该记的东西少不掉，索性优雅一点。</p><p>之前用的是博客园，但是那个账号密码老记不住，干脆自己搭建一个吧，好歹也是一个码农。<br>然后花了两个晚上加一个上午，通过<code>hexo</code>和<code>github</code>搭建了一个个人博客。<br>网上教程、文档那么多，为什么花这么久时间？当然是踩坑了啊。<br>所以下面会记录一些遇到的问题和坑。<br>如果你看完这边文章，那你只需要<code>两个小时</code>就能搭建成功。欢迎有兴趣的小伙伴尝试一下。</p><h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><ol><li><strong>node.js</strong></li><li><strong>git</strong></li></ol><p>这两个应用windows用户直接搜索下载安装就可以。<br>如果习惯了使用linux命令的朋友，推荐windows神器<code>cmder</code>。<br>可以直接在windows环境下使用linux命令，样式可调，再也不要用黑乎乎的cmd了，而且自带git，完全可以不用下载windows git。</p><h3 id="正式安装hexo"><a href="#正式安装hexo" class="headerlink" title="正式安装hexo"></a>正式安装hexo</h3><p><a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">hexo官方中文文档</a></p><p>在node.js安装好的前提下，全局安装hexo<br>如何判断node.js是否安装成功？执行以下命令，如果能够看到版本号则说明安装成功了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br></pre></td></tr></table></figure></p><p>安装<code>hexo</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure></p><p>自选合适的目录，新建文件夹&lt;folder&gt;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd &lt;folder&gt;</span><br><span class="line">hexo init</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure></p><p>不再赘述，直接看官方文档。</p><h3 id="配置github"><a href="#配置github" class="headerlink" title="配置github"></a>配置github</h3><p>新建仓库，仓库名必须为<strong>[your_name.github.io]</strong></p><blockquote><p>补充：本地配置github ssh连接，方便自动部署，以及clone你喜欢的主题(theme)</p></blockquote><p>windows用户直接在<code>c:/用户/youername/.ssh/</code>下查看是否有<code>id_rsa.pub</code>文件。<br>没有的话命令行执行命令<code>ssh-keygen -t rsa -C &quot;your eamil&quot;</code>，会自动生成<code>id_rsa.pub</code>文件，打开后复制。</p><p>github-&gt;头像-&gt;Settings→SSH kyes→Add SSH key，粘贴复制的内容。</p><p>配置本地账户<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name “your_username”  #设置用户名</span><br><span class="line">git config --global user.email “your_email”  #设置邮箱地址,最好使用注册邮箱地址</span><br></pre></td></tr></table></figure></p><p>测试是否配置成功<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure></p><h3 id="hexo配置以及使用"><a href="#hexo配置以及使用" class="headerlink" title="hexo配置以及使用"></a>hexo配置以及使用</h3><p>有两个配置文件：</p><ul><li>一个是根目录下的<code>_config.yml</code>称为<code>站点配置</code>文件</li><li>一个是<code>themes/landscape/_config.yml</code>称为<code>主题配置</code>文件(默认主题：landscape)</li></ul><p>站点配置如下：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">url: https://yourname.github.io/</span><br><span class="line">theme: landscape #选择你想用的主题，我用的是indigo</span><br><span class="line">deploy:</span><br><span class="line">    type: git   # 不要使用github</span><br><span class="line">    repo: git@github.com:pengwenwu/pengwenwu.github.io.git # 使用ssh连接</span><br><span class="line">    branch: master  # 默认master分支</span><br><span class="line">    message: add new blog # 自动部署commit备注，可不填</span><br></pre></td></tr></table></figure><h4 id="hexo常用命令"><a href="#hexo常用命令" class="headerlink" title="hexo常用命令"></a>hexo常用命令</h4><p><a href="https://segmentfault.com/a/1190000002632530" target="_blank" rel="noopener">hexo命令参考</a></p><p><code>hexo n &quot;我的博客&quot;</code> == <code>hexo new &quot;我的博客&quot;</code> #新建文章<br><code>hexo p</code> == <code>hexo publish</code><br><code>hexo g</code> == <code>hexo generate</code> #生成<br><code>hexo s</code> == <code>hexo server</code> #启动服务本地预览<br><code>hexo d</code> == <code>hexo deploy</code> #部署<br><code>hexo clean</code> #清除缓存 网页正常情况下可以忽略此条命令  </p><p><code>hexo server</code> #Hexo 会监视文件变动并自动更新，您无须重启服务器。<br><code>hexo server -s</code> #静态模式<br><code>hexo server -p 5000</code> #更改端口<br><code>hexo server -i 192.168.1.1</code> #自定义 IP</p><p>在执行之前，记得安装自动部署  (–save 加不加的区别在于是否写入到依赖文件package.json中)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure></p><p>正常本地预览，直接执行<code>hexo s</code>,如果要发布话最好执行<code>clean</code>命令，会去删除生成的public文件，完整部署命令:<code>hexo clean &amp;&amp; hexo g &amp;&amp; hexo d</code>。或者直接<code>hexo d -g</code></p><h3 id="注意问题"><a href="#注意问题" class="headerlink" title="注意问题"></a>注意问题</h3><p>安装完自动部署后，是不需要本地git init新建仓库的。执行<code>hexo g</code>会在根目录生成public文件夹，自动部署，<br>本质是将public文件夹内容全部提交到仓库中去，默认会访问编译好的index.html。</p><p>如果部署完，访问your_name.github.io 404,可能有下面几个原因</p><ol><li>首先检查仓库文件，是不是全都是public的文件内容，如果整个本地blog文件夹都提交了，首先清空<br>仓库，然后删除本地<code>.deploy_git</code>文件夹，再重新部署</li><li>文件有报错，本地<code>hexo s</code>观察是否有报错。</li></ol><p>不喜欢原主题的朋友，可以github去找喜欢的主题。执行命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone XXXX.next.git themes\next</span><br></pre></td></tr></table></figure></p><p>这个会将新的主题下载到themes下对应的next目录，next为主题的名字。</p><p>主题的配置，可以看文档，修改对应的<code>主题配置</code>文件。<br>我使用的主题是<code>indigo</code>,详细文档<a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank" rel="noopener">indigo</a></p><p><code>markdown</code>不会使用的朋友，参考链接<a href="https://www.appinn.com/markdown/" target="_blank" rel="noopener">markdown中文文档</a><br>如果没有ide的话，可以使用在线预览<a href="https://www.zybuluo.com/mdeditor" target="_blank" rel="noopener">Cmd Markdown</a></p>]]></content>
     
