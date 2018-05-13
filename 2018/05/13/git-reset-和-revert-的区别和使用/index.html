@@ -13,25 +13,25 @@
     
     
     
-    <title>阅读《微服务设计》笔记 | Pena&#39;s Blog</title>
+    <title>git reset 和 revert 的区别和使用 | Pena&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="微服务">
-    <meta name="description" content="记录阅读《微服务设计》收获的点    什么是微服务？一些协同工作的小而自治的服务 打破外键关系对于有外键关系的表如何做服务拆分？通过api调用访问    优点：数据表拆分，进而服务拆分 缺点：增加了数据库的调用，会影响性能。需要测试是否在可接受范围内，权衡拆分服务带来的好处  共享表拆分共享表拆分后，如何保证插入数据的一致性？设计之初为了减少数据库的调用，必然会建立基于外键的共享表。拆分之后，如">
-<meta name="keywords" content="微服务">
+    <meta name="keywords" content="Git">
+    <meta name="description" content="git revert 撤销某次提交, 保留之前的commit, 同时创建一个新的commit(可用于公共分支)git reset 撤销某个提交， 删除之前的commit, head回退 (多用于私有分支)区别: git revert 只是撤销某个commit, 保留该commit之前的提交结果  DEMO commit3: add log3commit2: add log2commit1: ad">
+<meta name="keywords" content="Git">
 <meta property="og:type" content="article">
-<meta property="og:title" content="阅读《微服务设计》笔记">
-<meta property="og:url" content="https://pengwenwu.github.io/2018/03/03/阅读《微服务设计》笔记/index.html">
+<meta property="og:title" content="git reset 和 revert 的区别和使用">
+<meta property="og:url" content="https://pengwenwu.github.io/2018/05/13/git-reset-和-revert-的区别和使用/index.html">
 <meta property="og:site_name" content="Pena&#39;s Blog">
-<meta property="og:description" content="记录阅读《微服务设计》收获的点    什么是微服务？一些协同工作的小而自治的服务 打破外键关系对于有外键关系的表如何做服务拆分？通过api调用访问    优点：数据表拆分，进而服务拆分 缺点：增加了数据库的调用，会影响性能。需要测试是否在可接受范围内，权衡拆分服务带来的好处  共享表拆分共享表拆分后，如何保证插入数据的一致性？设计之初为了减少数据库的调用，必然会建立基于外键的共享表。拆分之后，如">
+<meta property="og:description" content="git revert 撤销某次提交, 保留之前的commit, 同时创建一个新的commit(可用于公共分支)git reset 撤销某个提交， 删除之前的commit, head回退 (多用于私有分支)区别: git revert 只是撤销某个commit, 保留该commit之前的提交结果  DEMO commit3: add log3commit2: add log2commit1: ad">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-03-05T15:09:30.328Z">
+<meta property="og:updated_time" content="2018-05-13T06:22:41.234Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="阅读《微服务设计》笔记">
-<meta name="twitter:description" content="记录阅读《微服务设计》收获的点    什么是微服务？一些协同工作的小而自治的服务 打破外键关系对于有外键关系的表如何做服务拆分？通过api调用访问    优点：数据表拆分，进而服务拆分 缺点：增加了数据库的调用，会影响性能。需要测试是否在可接受范围内，权衡拆分服务带来的好处  共享表拆分共享表拆分后，如何保证插入数据的一致性？设计之初为了减少数据库的调用，必然会建立基于外键的共享表。拆分之后，如">
+<meta name="twitter:title" content="git reset 和 revert 的区别和使用">
+<meta name="twitter:description" content="git revert 撤销某次提交, 保留之前的commit, 同时创建一个新的commit(可用于公共分支)git reset 撤销某个提交， 删除之前的commit, head回退 (多用于私有分支)区别: git revert 只是撤销某个commit, 保留该commit之前的提交结果  DEMO commit3: add log3commit2: add log2commit1: ad">
     
         <link rel="alternate" type="application/atom+xml" title="Pena&#39;s Blog" href="/atom.xml">
     
@@ -112,7 +112,7 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">阅读《微服务设计》笔记</div>
+        <div class="flex-col header-title ellipsis">git reset 和 revert 的区别和使用</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -134,15 +134,15 @@
 <header class="content-header post-header">
 
     <div class="container fade-scale">
-        <h1 class="title">阅读《微服务设计》笔记</h1>
+        <h1 class="title">git reset 和 revert 的区别和使用</h1>
         <h5 class="subtitle">
             
-                <time datetime="2018-03-03T10:14:59.000Z" itemprop="datePublished" class="page-time">
-  2018-03-03
+                <time datetime="2018-05-13T06:17:37.000Z" itemprop="datePublished" class="page-time">
+  2018-05-13
 </time>
 
 
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/后端/">后端</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Git/">Git</a></li></ul>
 
             
         </h5>
@@ -159,20 +159,20 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#什么是微服务？"><span class="post-toc-number">1.</span> <span class="post-toc-text">什么是微服务？</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#打破外键关系"><span class="post-toc-number">2.</span> <span class="post-toc-text">打破外键关系</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#共享表拆分"><span class="post-toc-number">3.</span> <span class="post-toc-text">共享表拆分</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#DEMO"><span class="post-toc-number">1.</span> <span class="post-toc-text">DEMO</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#HEAD用法"><span class="post-toc-number">2.</span> <span class="post-toc-text">HEAD用法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#–soft、–mixed-默认-、–hard的区别"><span class="post-toc-number">3.</span> <span class="post-toc-text">–soft、–mixed(默认)、–hard的区别</span></a></li></ol>
         </nav>
     </aside>
     
-<article id="post-阅读《微服务设计》笔记"
+<article id="post-git-reset-和-revert-的区别和使用"
   class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">阅读《微服务设计》笔记</h1>
+        <h1 class="post-card-title">git reset 和 revert 的区别和使用</h1>
         <div class="post-meta">
-            <time class="post-time" title="2018-03-03 18:14:59" datetime="2018-03-03T10:14:59.000Z"  itemprop="datePublished">2018-03-03</time>
+            <time class="post-time" title="2018-05-13 14:17:37" datetime="2018-05-13T06:17:37.000Z"  itemprop="datePublished">2018-05-13</time>
 
             
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/后端/">后端</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Git/">Git</a></li></ul>
 
 
 
@@ -185,24 +185,20 @@
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
             <blockquote>
-<p>记录阅读《微服务设计》收获的点  </p>
+<p>git <code>revert</code> 撤销某次提交, 保留之前的commit, 同时创建一个新的commit(可用于<strong>公共分支</strong>)<br>git <code>reset</code> 撤销某个提交， 删除之前的commit, head回退 (多用于<strong>私有分支</strong>)<br><strong>区别</strong>: git revert 只是撤销某个commit, 保留该commit之前的提交结果</p>
 </blockquote>
-<h2 id="什么是微服务？"><a href="#什么是微服务？" class="headerlink" title="什么是微服务？"></a>什么是微服务？</h2><p><strong>一些协同工作的小而自治的服务</strong></p>
-<h2 id="打破外键关系"><a href="#打破外键关系" class="headerlink" title="打破外键关系"></a>打破外键关系</h2><p><strong>对于有外键关系的表如何做服务拆分？</strong><br>通过api调用访问  </p>
-<ul>
-<li>优点：数据表拆分，进而服务拆分</li>
-<li>缺点：增加了数据库的调用，会影响性能。需要测试是否在可接受范围内，权衡拆分服务带来的好处</li>
+<h3 id="DEMO"><a href="#DEMO" class="headerlink" title="DEMO"></a>DEMO</h3><blockquote>
+<p>commit3: add log3<br>commit2: add log2<br>commit1: add log1</p>
+</blockquote>
+<h3 id="HEAD用法"><a href="#HEAD用法" class="headerlink" title="HEAD用法"></a>HEAD用法</h3><ul>
+<li>HEAD^: 指向上一次commit</li>
+<li>HEAD~100: 指向前第一百个commit</li>
+<li>HEAD commit_id: 直接指向某个commit  </li>
 </ul>
-<h2 id="共享表拆分"><a href="#共享表拆分" class="headerlink" title="共享表拆分"></a>共享表拆分</h2><p><strong>共享表拆分后，如何保证插入数据的一致性？</strong><br>设计之初为了减少数据库的调用，必然会建立基于外键的共享表。拆分之后，如何保证同时插入多张表数据的一致性？（某张表插入失败）  </p>
-<ul>
-<li>通过<code>事务</code>处理  </li>
-<li>推荐对及时性较弱的操作，异常捕获后放入队列或者日志文件中进行延迟处理，保证<code>最终一致性</code>  </li>
-<li>终止整个操作，再发起<code>补偿事务</code>来抵消之前的操作（自动化处理）</li>
-<li><p><code>分布式事务</code>。通过专门的事务管理器工具来协调底层事务（不推荐，易出错，难扩展）</p>
-<blockquote>
-<p>阅读完感觉云里雾里，可能是自己的水平还没到达那个深度。收获大概是：了解了后端的架构，后期拓展可能会遇到的问题，以及解决这样问题的思路。</p>
-</blockquote>
-</li>
+<h3 id="–soft、–mixed-默认-、–hard的区别"><a href="#–soft、–mixed-默认-、–hard的区别" class="headerlink" title="–soft、–mixed(默认)、–hard的区别"></a>–soft、–mixed(默认)、–hard的区别</h3><ul>
+<li>–soft: 只是重置HEAD到某一个commit, 其余不会有任何变化(缓存区和工作目录都不会被改变)</li>
+<li>–mixed(默认): 重置HEAD, 文件修改都将保存到缓存区(缓存区和你指定的提交同步，但工作目录不受影响)</li>
+<li>–hard: 修改当前所有内容, 所有本地修改都将丢失(缓存区和工作目录都同步到你指定的提交). 找回执行命令: git reflow</li>
 </ul>
 
         </div>
@@ -211,12 +207,12 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2018-03-05T15:09:30.328Z" itemprop="dateUpdated">2018-03-05 23:09:30</time>
+    最后更新时间：<time datetime="2018-05-13T06:22:41.234Z" itemprop="dateUpdated">2018-05-13 14:22:41</time>
 </span><br>
 
 
         
-        原文链接：<a href="/2018/03/03/阅读《微服务设计》笔记/" target="_blank" rel="external">https://pengwenwu.github.io/2018/03/03/阅读《微服务设计》笔记/</a>
+        原文链接：<a href="/2018/05/13/git-reset-和-revert-的区别和使用/" target="_blank" rel="external">https://pengwenwu.github.io/2018/05/13/git-reset-和-revert-的区别和使用/</a>
         
     </div>
     <footer>
@@ -232,7 +228,7 @@
 
         <div class="post-footer">
             
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/微服务/">微服务</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li></ul>
 
 
             
@@ -242,7 +238,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://pengwenwu.github.io/2018/03/03/阅读《微服务设计》笔记/&title=《阅读《微服务设计》笔记》 — Pena's Blog&pic=https://pengwenwu.github.io/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://pengwenwu.github.io/2018/05/13/git-reset-和-revert-的区别和使用/&title=《git reset 和 revert 的区别和使用》 — Pena's Blog&pic=https://pengwenwu.github.io/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -252,22 +248,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://pengwenwu.github.io/2018/03/03/阅读《微服务设计》笔记/&title=《阅读《微服务设计》笔记》 — Pena's Blog&source=pengwenwu的个人博客" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://pengwenwu.github.io/2018/05/13/git-reset-和-revert-的区别和使用/&title=《git reset 和 revert 的区别和使用》 — Pena's Blog&source=pengwenwu的个人博客" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://pengwenwu.github.io/2018/03/03/阅读《微服务设计》笔记/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://pengwenwu.github.io/2018/05/13/git-reset-和-revert-的区别和使用/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《阅读《微服务设计》笔记》 — Pena's Blog&url=https://pengwenwu.github.io/2018/03/03/阅读《微服务设计》笔记/&via=https://pengwenwu.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《git reset 和 revert 的区别和使用》 — Pena's Blog&url=https://pengwenwu.github.io/2018/05/13/git-reset-和-revert-的区别和使用/&via=https://pengwenwu.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://pengwenwu.github.io/2018/03/03/阅读《微服务设计》笔记/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://pengwenwu.github.io/2018/05/13/git-reset-和-revert-的区别和使用/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -290,18 +286,18 @@
 <nav class="post-nav flex-row flex-justify-between">
   
     <div class="waves-block waves-effect prev">
-      <a href="/2018/05/13/git-pull更新指定文件/" id="post-prev" class="post-nav-link">
+      <a href="/2018/05/13/hexo常用命令/" id="post-prev" class="post-nav-link">
         <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">git pull更新指定文件</h4>
+        <h4 class="title">hexo常用命令</h4>
       </a>
     </div>
   
 
   
     <div class="waves-block waves-effect next">
-      <a href="/2018/01/21/Linux常用命令/" id="post-next" class="post-nav-link">
+      <a href="/2018/05/13/git-pull更新指定文件/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">Linux常用命令</h4>
+        <h4 class="title">git pull更新指定文件</h4>
       </a>
     </div>
   
@@ -393,7 +389,7 @@
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://pengwenwu.github.io/2018/03/03/阅读《微服务设计》笔记/&title=《阅读《微服务设计》笔记》 — Pena's Blog&pic=https://pengwenwu.github.io/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://pengwenwu.github.io/2018/05/13/git-reset-和-revert-的区别和使用/&title=《git reset 和 revert 的区别和使用》 — Pena's Blog&pic=https://pengwenwu.github.io/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -403,22 +399,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://pengwenwu.github.io/2018/03/03/阅读《微服务设计》笔记/&title=《阅读《微服务设计》笔记》 — Pena's Blog&source=pengwenwu的个人博客" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://pengwenwu.github.io/2018/05/13/git-reset-和-revert-的区别和使用/&title=《git reset 和 revert 的区别和使用》 — Pena's Blog&source=pengwenwu的个人博客" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://pengwenwu.github.io/2018/03/03/阅读《微服务设计》笔记/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://pengwenwu.github.io/2018/05/13/git-reset-和-revert-的区别和使用/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《阅读《微服务设计》笔记》 — Pena's Blog&url=https://pengwenwu.github.io/2018/03/03/阅读《微服务设计》笔记/&via=https://pengwenwu.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《git reset 和 revert 的区别和使用》 — Pena's Blog&url=https://pengwenwu.github.io/2018/05/13/git-reset-和-revert-的区别和使用/&via=https://pengwenwu.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://pengwenwu.github.io/2018/03/03/阅读《微服务设计》笔记/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://pengwenwu.github.io/2018/05/13/git-reset-和-revert-的区别和使用/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -429,7 +425,7 @@
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACvUlEQVR42u3a0W4bMQwEQP//T7tAn1ogPu+SJ9cFRk+BnZw0CiDxSD4e8Xj+Hu3nf45Xf/XqCa+e9jgx8PDw8EZLfzWS5V6Dc0wye75mPDw8vNO864W+mqA93JNv8/VEs+Dh4eH9U17Ovv4k2bLkqsDDw8P7X3jt9HliItkOPDw8vO/hJcmIfFn5cZ9sx4dyLXh4eHgxry2AfcPPB+t7eHh4eIuq+ixcnpXK2qM/mhcPDw/vAG+WKs3bBWahcBK+F41ZeHh4eLfyklRpi8wLYG3iOL9+/rr38PDw8I7x2gW1DQHXz7yrNeGHNwY8PDy8Y7x9KSvZoGJxo/D9zb2Hh4eHt+bNikzJpmwqcu02vZkFDw8P71ZeEvjmR3wecOfhck56c+/h4eHh3cRrD+K2uJWTZgnim+8ZPDw8vLJklSdVZ0f2viWr/k08PDy8A7zZWdo+elYAm7VnvUHi4eHhrXmzRqhNY8EsyB4W6vDw8PAO8PIFJY/OU715kD1LguDh4eGd4yVJh7aIdVejwKw89qa+h4eHh7fm5Qd9G0C3jVmbpEN97+Hh4eEtePvGqTbg3lwzbYCOh4eHd4K3KVBdg9uAOE83DGN2PDw8vJt4z3jkAfFmK/OkbbK5eHh4eOd4eWibL669DPYNWD/MiIeHh3eA15adPpliyDe0Tkbg4eHhLXhtQDwr+W/C8dVVhIeHh/cRXvGqH4Nn5f/NjHh4eHjneLOkQBsQt4WxfWoYDw8P7xzvWY5NIb9tHZg1FuDh4eGd5u1TD5v2qbYtICnX1TA8PDy8Ea+9DNqAOC+b3Zv2xcPDwzvNSy6DNq0wax1Ikr/DOw0PDw/v47xkKXnQ3G5EuzV4eHh438xrv223aRVw4+Hh4R3jbYpemxRD8m2+HT/8w/Dw8PAO8GZv9NeLSBj55m7aEfDw8PBu5f0CTfhpzuqv2t4AAAAASUVORK5CYII=" alt="微信分享二维码">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACvElEQVR42u3aQW4DMQgF0Nz/0u02UjKTD5gqld6sok4b87wwFPx4xM/P0/P8k9e3zz+/env1XH3z6+fDDx4eHt4g9Psle6FchXW1Efnm3seMh4eHt827Xz4P934L8nO79514eHh4/4V3FdB8y5K/xcPDw/t+3rxJkTQvTpXpeHh4eHu8ams1bw3kTd77xLPea8HDw8OLefkU6Xs+r8z38PDw8MZT9aQgnhzT+VWDZrR4eHh4C7xqC7V6NOejsl6pHcWJh4eHd5RXbaQmpfbGVaqk1H7zFg8PD2+ZlxfEk2I3SR69awfl/jQeHh5ei9cLLgmosHyxED8838PDw8Mbz9bzsjhPG5PfqZb1hZEYHh4e3oCXD6KSYVge0ORqVyE94OHh4S3wkoV7y1dL4WrCKGc/PDw8vDGvd9TmYSV/2yuyo4sIeHh4eAu86qHfG/lPrh3kRf+H7IeHh4d3iDcpnfO31cK9mlQu18XDw8Nb5vVaqFVSby7XHLbh4eHhLfOqaSAvmqtpoNrSLUz28PDw8Ma8/B/7+6O/N3PLOyXVFQvDMDw8PLwib3Ls5q3VfLN6g7cPzQg8PDy8o7xk+eqVgjwNbDQmCtM2PDw8vBavd/T30kBva6otDzw8PLy/51VH/tUNStoK+bZ++E48PDy8BV5+xJ9KEhst42gMhoeHh3eUly+fXCNI9jLfiCQlRJcG8PDw8BZ4veM7H0dVL12dihMPDw9vmzdZYN7efbSeD/Hg4eHhHeX9FJ9e4Zu0GO7xyXa8eYuHh4e3wKsevtWLBdXh2bzV20wweHh4eEXeRjKYXD6YJwY8PDy8v+Hl4fYuRfUYvWYEHh4e3rfxJhcOTm1ioR2Mh4eH9zW85jHdasiOin48PDy8NV5e+OYJoNqurSaDw70WPDw8vJg3Oe4nzd8JfnJJCw8PD2/A+wUUPpKXNdfDnwAAAABJRU5ErkJggg==" alt="微信分享二维码">
 </div>
 
 

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://pengwenwu.github.io/"/>
-  <updated>2018-03-05T15:09:30.328Z</updated>
+  <updated>2018-05-13T06:23:26.427Z</updated>
   <id>https://pengwenwu.github.io/</id>
   
   <author>
@@ -15,6 +15,86 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>hexo常用命令</title>
+    <link href="https://pengwenwu.github.io/2018/05/13/hexo%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
+    <id>https://pengwenwu.github.io/2018/05/13/hexo常用命令/</id>
+    <published>2018-05-13T06:21:59.000Z</published>
+    <updated>2018-05-13T06:23:26.427Z</updated>
+    
+    <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">hexo n &quot;博客名称&quot;  =&gt; hexo new &quot;博客名称&quot; </span><br><span class="line">hexo g  =&gt; hexo generate  #生成</span><br><span class="line">hexo p  =&gt; hexo publish # 发布</span><br><span class="line">hexo s  =&gt; hexo server  #启动服务预览</span><br><span class="line">hexo d  =&gt; hexo deploy  #部署</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class
+      
+    
+    </summary>
+    
+      <category term="Git" scheme="https://pengwenwu.github.io/categories/Git/"/>
+    
+    
+      <category term="Git" scheme="https://pengwenwu.github.io/tags/Git/"/>
+    
+      <category term="hexo" scheme="https://pengwenwu.github.io/tags/hexo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>git reset 和 revert 的区别和使用</title>
+    <link href="https://pengwenwu.github.io/2018/05/13/git-reset-%E5%92%8C-revert-%E7%9A%84%E5%8C%BA%E5%88%AB%E5%92%8C%E4%BD%BF%E7%94%A8/"/>
+    <id>https://pengwenwu.github.io/2018/05/13/git-reset-和-revert-的区别和使用/</id>
+    <published>2018-05-13T06:17:37.000Z</published>
+    <updated>2018-05-13T06:22:41.234Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>git <code>revert</code> 撤销某次提交, 保留之前的commit, 同时创建一个新的commit(可用于<strong>公共分支</strong>)<br>git <code>reset</code> 撤销某个提交， 删除之前的commit, head回退 (多用于<strong>私有分支</strong>)<br><strong>区别</strong>: git revert 只是撤销某个commit, 保留该commit之前的提交结果</p></blockquote><h3 id="DEMO"><a href="#DEMO" class="headerlink" title="DEMO"></a>DEMO</h3><blockquote><p>commit3: add log3<br>commit2: add log2<br>commit1: add log1</p></blockquote><h3 id="HEAD用法"><a href="#HEAD用法" class="headerlink" title="HEAD用法"></a>HEAD用法</h3><ul><li>HEAD^: 指向上一次commit</li><li>HEAD~100: 指向前第一百个commit</li><li>HEAD commit_id: 直接指向某个commit  </li></ul><h3 id="–soft、–mixed-默认-、–hard的区别"><a href="#–soft、–mixed-默认-、–hard的区别" class="headerlink" title="–soft、–mixed(默认)、–hard的区别"></a>–soft、–mixed(默认)、–hard的区别</h3><ul><li>–soft: 只是重置HEAD到某一个commit, 其余不会有任何变化(缓存区和工作目录都不会被改变)</li><li>–mixed(默认): 重置HEAD, 文件修改都将保存到缓存区(缓存区和你指定的提交同步，但工作目录不受影响)</li><li>–hard: 修改当前所有内容, 所有本地修改都将丢失(缓存区和工作目录都同步到你指定的提交). 找回执行命令: git reflow</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;git &lt;code&gt;revert&lt;/code&gt; 撤销某次提交, 保留之前的commit, 同时创建一个新的commit(可用于&lt;strong&gt;公共分支&lt;/strong&gt;)&lt;br&gt;git &lt;code&gt;reset&lt;/code&gt; 撤销某个提交， 删除之前
+      
+    
+    </summary>
+    
+      <category term="Git" scheme="https://pengwenwu.github.io/categories/Git/"/>
+    
+    
+      <category term="Git" scheme="https://pengwenwu.github.io/tags/Git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>git pull更新指定文件</title>
+    <link href="https://pengwenwu.github.io/2018/05/13/git-pull%E6%9B%B4%E6%96%B0%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6/"/>
+    <id>https://pengwenwu.github.io/2018/05/13/git-pull更新指定文件/</id>
+    <published>2018-05-13T06:07:42.000Z</published>
+    <updated>2018-05-13T06:17:02.552Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>经常会遇到，几个文件一起提交了，但是某些文件是要先执行的，不然一起pull下来会加载报错</p><h3 id="更新git指定文件"><a href="#更新git指定文件" class="headerlink" title="更新git指定文件"></a>更新git指定文件</h3><p>git fetch<br>git checkout origin/master – path/to/file</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;经常会遇到，几个文件一起提交了，但是某些文件是要先执行的，不然一起pull下来会加载报错&lt;/p&gt;
+&lt;h3 id=&quot;更新git指定文件&quot;&gt;&lt;a href=&quot;#更新git指定文件&quot; class=&quot;headerlink&quot; title=&quot;更新git指定文件
+      
+    
+    </summary>
+    
+      <category term="Git" scheme="https://pengwenwu.github.io/categories/Git/"/>
+    
+    
+      <category term="Git" scheme="https://pengwenwu.github.io/tags/Git/"/>
+    
+  </entry>
   
   <entry>
     <title>阅读《微服务设计》笔记</title>
