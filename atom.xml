@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://pengwenwu.github.io/"/>
-  <updated>2018-05-13T06:23:26.427Z</updated>
+  <updated>2018-05-13T08:13:21.915Z</updated>
   <id>https://pengwenwu.github.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>windows下cmd/powershell中文乱码解决方法</title>
+    <link href="https://pengwenwu.github.io/2018/05/13/windows%E4%B8%8Bcmd-powershell%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/"/>
+    <id>https://pengwenwu.github.io/2018/05/13/windows下cmd-powershell中文乱码解决方法/</id>
+    <published>2018-05-13T08:09:01.000Z</published>
+    <updated>2018-05-13T08:13:21.915Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>windows下cmd或者powershell运行php文件中文乱码  </p></blockquote><h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><p>执行下面的命令，切换成utf-8编码</p><pre><code>chcp 65001</code></pre><p>这个指标不治本，查了说是可以修改注册表，但是好像又会带来其他的坑（中文软件乱码、nodejs乱码），未测试过，不予评价。参考链接：<a href="https://www.zhihu.com/question/54724102" target="_blank" rel="noopener">https://www.zhihu.com/question/54724102</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;windows下cmd或者powershell运行php文件中文乱码  &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;解决方法&quot;&gt;&lt;a href=&quot;#解决方法&quot; class=&quot;headerlink&quot; title=&quot;解决方法&quot;&gt;&lt;/a&gt;解决方
+      
+    
+    </summary>
+    
+      <category term="环境配置" scheme="https://pengwenwu.github.io/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
+    
+    
+      <category term="中文乱码" scheme="https://pengwenwu.github.io/tags/%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/"/>
+    
+  </entry>
   
   <entry>
     <title>hexo常用命令</title>
