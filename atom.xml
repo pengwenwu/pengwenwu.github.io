@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://pengwenwu.github.io/"/>
-  <updated>2018-05-13T16:16:13.614Z</updated>
+  <updated>2018-05-13T16:19:13.177Z</updated>
   <id>https://pengwenwu.github.io/</id>
   
   <author>
@@ -21,12 +21,29 @@
     <link href="https://pengwenwu.github.io/2018/05/14/phpstorm%E6%88%96vscode%E4%BD%BF%E7%94%A8psr2%E8%A7%84%E8%8C%83/"/>
     <id>https://pengwenwu.github.io/2018/05/14/phpstorm或vscode使用psr2规范/</id>
     <published>2018-05-13T16:16:13.000Z</published>
-    <updated>2018-05-13T16:16:13.614Z</updated>
+    <updated>2018-05-13T16:19:13.177Z</updated>
+    
+    <content type="html"><![CDATA[<ul><li>安装composer</li><li>全局安装phpcs</li></ul><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">composer global require squizlabs/php_codesniffer</span><br></pre></td></tr></table></figure><h3 id="vscode直接插件搜索phpcs安装"><a href="#vscode直接插件搜索phpcs安装" class="headerlink" title="vscode直接插件搜索phpcs安装"></a>vscode直接插件搜索phpcs安装</h3><h3 id="phpstorm"><a href="#phpstorm" class="headerlink" title="phpstorm"></a>phpstorm</h3><p>全局安装phpcs后，会在<strong>C:\Users{user name}\AppData\Roaming\Composer\vendor\bin</strong>下生成一个<code>phpcs.bat</code>，后面会用到</p><ul><li>phpstorm -&gt; setting</li><li>languages &amp; Frameworks-&gt;PHP-&gt;Code Sniffer点击Configuration右侧的按钮</li><li>找到刚才的phpcs.bat，点击<code>Validate</code>，确认</li><li>Editor-&gt;Inspection-&gt;PHP</li><li>双击PHP Code Sniffer validation，点击Coding standard右侧的刷新按钮，然后选择psr2，确定</li></ul><p><strong>参考链接</strong>: <a href="https://laravel-china.org/topics/1692/how-to-use-phpstorm-gracefully" target="_blank" rel="noopener">如何优雅地使用phpstorm?</a></p>]]></content>
     
     <summary type="html">
     
+      
+      
+        &lt;ul&gt;
+&lt;li&gt;安装composer&lt;/li&gt;
+&lt;li&gt;全局安装phpcs&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/sp
+      
+    
     </summary>
     
+      <category term="PHP" scheme="https://pengwenwu.github.io/categories/PHP/"/>
+    
+    
+      <category term="PHP" scheme="https://pengwenwu.github.io/tags/PHP/"/>
+    
+      <category term="PSR" scheme="https://pengwenwu.github.io/tags/PSR/"/>
     
   </entry>
   

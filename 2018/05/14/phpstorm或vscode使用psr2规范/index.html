@@ -19,18 +19,19 @@
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="">
-    <meta name="description" content="pengwenwu的个人博客">
+    <meta name="keywords" content="PHP,PSR">
+    <meta name="description" content="安装composer 全局安装phpcs  1composer global require squizlabs/php_codesniffer vscode直接插件搜索phpcs安装phpstorm全局安装phpcs后，会在C:\Users{user name}\AppData\Roaming\Composer\vendor\bin下生成一个phpcs.bat，后面会用到  phpstorm">
+<meta name="keywords" content="PHP,PSR">
 <meta property="og:type" content="article">
 <meta property="og:title" content="phpstorm或vscode使用psr2规范">
 <meta property="og:url" content="https://pengwenwu.github.io/2018/05/14/phpstorm或vscode使用psr2规范/index.html">
 <meta property="og:site_name" content="Pena&#39;s Blog">
-<meta property="og:description" content="pengwenwu的个人博客">
+<meta property="og:description" content="安装composer 全局安装phpcs  1composer global require squizlabs/php_codesniffer vscode直接插件搜索phpcs安装phpstorm全局安装phpcs后，会在C:\Users{user name}\AppData\Roaming\Composer\vendor\bin下生成一个phpcs.bat，后面会用到  phpstorm">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-05-13T16:16:13.614Z">
+<meta property="og:updated_time" content="2018-05-13T16:19:13.177Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="phpstorm或vscode使用psr2规范">
-<meta name="twitter:description" content="pengwenwu的个人博客">
+<meta name="twitter:description" content="安装composer 全局安装phpcs  1composer global require squizlabs/php_codesniffer vscode直接插件搜索phpcs安装phpstorm全局安装phpcs后，会在C:\Users{user name}\AppData\Roaming\Composer\vendor\bin下生成一个phpcs.bat，后面会用到  phpstorm">
     
         <link rel="alternate" type="application/atom+xml" title="Pena&#39;s Blog" href="/atom.xml">
     
@@ -141,6 +142,8 @@
 </time>
 
 
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/PHP/">PHP</a></li></ul>
+
             
         </h5>
     </div>
@@ -153,6 +156,13 @@
 
 <div class="container body-wrap">
     
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#vscode直接插件搜索phpcs安装"><span class="post-toc-number">1.</span> <span class="post-toc-text">vscode直接插件搜索phpcs安装</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#phpstorm"><span class="post-toc-number">2.</span> <span class="post-toc-text">phpstorm</span></a></li></ol>
+        </nav>
+    </aside>
+    
 <article id="post-phpstorm或vscode使用psr2规范"
   class="post-article article-type-post fade" itemprop="blogPost">
 
@@ -162,6 +172,8 @@
             <time class="post-time" title="2018-05-14 00:16:13" datetime="2018-05-13T16:16:13.000Z"  itemprop="datePublished">2018-05-14</time>
 
             
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/PHP/">PHP</a></li></ul>
+
 
 
             
@@ -172,14 +184,28 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            
+            <ul>
+<li>安装composer</li>
+<li>全局安装phpcs</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">composer global require squizlabs/php_codesniffer</span><br></pre></td></tr></table></figure>
+<h3 id="vscode直接插件搜索phpcs安装"><a href="#vscode直接插件搜索phpcs安装" class="headerlink" title="vscode直接插件搜索phpcs安装"></a>vscode直接插件搜索phpcs安装</h3><h3 id="phpstorm"><a href="#phpstorm" class="headerlink" title="phpstorm"></a>phpstorm</h3><p>全局安装phpcs后，会在<strong>C:\Users{user name}\AppData\Roaming\Composer\vendor\bin</strong>下生成一个<code>phpcs.bat</code>，后面会用到</p>
+<ul>
+<li>phpstorm -&gt; setting</li>
+<li>languages &amp; Frameworks-&gt;PHP-&gt;Code Sniffer点击Configuration右侧的按钮</li>
+<li>找到刚才的phpcs.bat，点击<code>Validate</code>，确认</li>
+<li>Editor-&gt;Inspection-&gt;PHP</li>
+<li>双击PHP Code Sniffer validation，点击Coding standard右侧的刷新按钮，然后选择psr2，确定</li>
+</ul>
+<p><strong>参考链接</strong>: <a href="https://laravel-china.org/topics/1692/how-to-use-phpstorm-gracefully" target="_blank" rel="noopener">如何优雅地使用phpstorm?</a></p>
+
         </div>
 
         <blockquote class="post-copyright">
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2018-05-13T16:16:13.614Z" itemprop="dateUpdated">2018-05-14 00:16:13</time>
+    最后更新时间：<time datetime="2018-05-13T16:19:13.177Z" itemprop="dateUpdated">2018-05-14 00:19:13</time>
 </span><br>
 
 
@@ -200,6 +226,8 @@
 
         <div class="post-footer">
             
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PSR/">PSR</a></li></ul>
+
 
             
 <div class="page-share-wrap">
