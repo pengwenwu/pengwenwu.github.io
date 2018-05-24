@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>js和php闭包使用和区别 | Pena&#39;s Blog | 莫道君行早，更有早行人</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="js,php,闭包">
+    <meta name="description" content="匿名函数 如果只是省去函数名，单纯的当作一个函数式方法返回，只能称为匿名函数（闭包需要将匿名函数当作结果返回），比如：12345// jsvar foo = function(x, y) &amp;#123;    return x + y ;&amp;#125;;console.log(foo(1, 2));  // 3  12345678910111213141516171819202122232425&amp;lt">
+<meta name="keywords" content="js,php,闭包">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js和php闭包使用和区别">
+<meta property="og:url" content="https://pengwenwu.github.io/2018/05/25/js和php闭包使用和区别/index.html">
+<meta property="og:site_name" content="Pena&#39;s Blog">
+<meta property="og:description" content="匿名函数 如果只是省去函数名，单纯的当作一个函数式方法返回，只能称为匿名函数（闭包需要将匿名函数当作结果返回），比如：12345// jsvar foo = function(x, y) &amp;#123;    return x + y ;&amp;#125;;console.log(foo(1, 2));  // 3  12345678910111213141516171819202122232425&amp;lt">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-05-24T16:15:33.522Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="js和php闭包使用和区别">
+<meta name="twitter:description" content="匿名函数 如果只是省去函数名，单纯的当作一个函数式方法返回，只能称为匿名函数（闭包需要将匿名函数当作结果返回），比如：12345// jsvar foo = function(x, y) &amp;#123;    return x + y ;&amp;#125;;console.log(foo(1, 2));  // 3  12345678910111213141516171819202122232425&amp;lt">
+    
+        <link rel="alternate" type="application/atom+xml" title="Pena&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.jpg">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.1">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">pengwenwu</h5>
+          <a href="mailto:18751943608@163.com" title="18751943608@163.com" class="mail">18751943608@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/pengwenwu" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">js和php闭包使用和区别</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">js和php闭包使用和区别</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-05-24T16:14:40.000Z" itemprop="datePublished" class="page-time">
+  2018-05-25
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/PHP/">PHP</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#匿名函数"><span class="post-toc-number">1.</span> <span class="post-toc-text">匿名函数</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#php闭包"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">php闭包</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#php回调函数"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">php回调函数</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#基本用法"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">基本用法</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#php-Closure-类"><span class="post-toc-number">1.1.3.</span> <span class="post-toc-text">php Closure 类</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#共同点"><span class="post-toc-number">2.</span> <span class="post-toc-text">共同点</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#区别"><span class="post-toc-number">3.</span> <span class="post-toc-text">区别</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#应用场景"><span class="post-toc-number">4.</span> <span class="post-toc-text">应用场景</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-js和php闭包使用和区别"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">js和php闭包使用和区别</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-05-25 00:14:40" datetime="2018-05-24T16:14:40.000Z"  itemprop="datePublished">2018-05-25</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/PHP/">PHP</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="匿名函数"><a href="#匿名函数" class="headerlink" title="匿名函数"></a>匿名函数</h3><blockquote>
+<p>如果只是省去函数名，单纯的当作一个函数式方法返回，只能称为匿名函数（闭包需要将匿名函数当作结果返回），比如：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// js</span></span><br><span class="line"><span class="keyword">var</span> foo = <span class="function"><span class="keyword">function</span>(<span class="params">x, y</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x + y ;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(foo(<span class="number">1</span>, <span class="number">2</span>));  <span class="comment">// 3</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">// php</span></span><br><span class="line">$foo = <span class="function"><span class="keyword">function</span><span class="params">($a, $b)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> $a + $b;</span><br><span class="line">&#125;; <span class="comment">// 一定要加分号</span></span><br><span class="line"><span class="keyword">echo</span> $foo(<span class="number">1</span>, <span class="number">2</span>); <span class="comment">// 3</span></span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line"><span class="comment">### 闭包</span></span><br><span class="line">&gt; 闭包通常是用来创建内部变量，使得这些变量不得被外部随意修改，而只能通过指定的函数接口去修改  </span><br><span class="line"></span><br><span class="line"><span class="comment">#### js闭包</span></span><br><span class="line">这里举一个阮老师博客里的例子，[阮老师博客：学习Javascript闭包（Closure）](http:<span class="comment">//www.ruanyifeng.com/blog/2009/08/learning_javascript_closures.html?20120612141317#comments)  </span></span><br><span class="line"></span><br><span class="line"><span class="comment">##### js基础</span></span><br><span class="line">参考链接：[深入理解JS中声明提升、作用域（链）和`this`关键字](https:<span class="comment">//github.com/creeperyang/blog/issues/16)  </span></span><br><span class="line"></span><br><span class="line">- js比较特殊的一点是：函数内部可以直接读取到全局变量（对于阮老师的这句话不是很能理解，大概是想表达的意思：父作用域的变量可以在子作用域直接访问，而不需要去声明访问真正的全局变量？） </span><br><span class="line">    - 大部分语言，变量都是先声明在使用，而对于js，具有声明提升的特性（不管在哪里声明，都会在代码执行前处理）</span><br><span class="line">    - 函数和变量的声明总是会隐式地被移动到当前作用域的顶部，函数的声明优先级高于变量的声明</span><br><span class="line">    - <span class="keyword">var</span> 会在当前作用域声明一个变量，而未声明的变量，会隐式地创建一个全局变量</span><br><span class="line">```JavaScript</span><br><span class="line"><span class="comment">// 声明提升</span></span><br><span class="line">console.log(a);  <span class="comment">// 1, 未报错</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 上文链接中的例子</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">testOrder</span>(<span class="params">arg</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(arg); <span class="comment">// arg是形参，不会被重新定义</span></span><br><span class="line">    <span class="built_in">console</span>.log(a); <span class="comment">// 因为函数声明比变量声明优先级高，所以这里a是函数</span></span><br><span class="line">    <span class="keyword">var</span> arg = <span class="string">'hello'</span>; <span class="comment">// var arg;变量声明被忽略， arg = 'hello'被执行</span></span><br><span class="line">    <span class="keyword">var</span> a = <span class="number">10</span>; <span class="comment">// var a;被忽视; a = 10被执行，a变成number</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'fun'</span>);</span><br><span class="line">    &#125; <span class="comment">// 被提升到作用域顶部</span></span><br><span class="line">    <span class="built_in">console</span>.log(a); <span class="comment">// 输出10</span></span><br><span class="line">    <span class="built_in">console</span>.log(arg); <span class="comment">// 输出hello</span></span><br><span class="line">&#125;; </span><br><span class="line">testOrder(<span class="string">'hi'</span>);</span><br><span class="line"><span class="comment">/* 输出：</span></span><br><span class="line"><span class="comment">hi </span></span><br><span class="line"><span class="comment">function a() &#123;</span></span><br><span class="line"><span class="comment">        console.log('fun');</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment">10 </span></span><br><span class="line"><span class="comment">hello </span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 全局作用域</span></span><br><span class="line"><span class="keyword">var</span> foo = <span class="number">42</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 局部作用域</span></span><br><span class="line">    foo = <span class="number">21</span>;</span><br><span class="line">&#125;</span><br><span class="line">test();</span><br><span class="line">foo; <span class="comment">// 21</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 全局作用域</span></span><br><span class="line">foo = <span class="number">42</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 局部作用域</span></span><br><span class="line">    <span class="keyword">var</span> foo = <span class="number">21</span>;</span><br><span class="line">&#125;</span><br><span class="line">test();</span><br><span class="line">foo; <span class="comment">// 42</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>js变量的查找是从里往外的，直到最顶层（全局作用域），并且一旦找到，即停止向上查找。所有内部函数可以访问函数外部的变量，反之无效<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">a</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> b = a * <span class="number">2</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params">c</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(a, b, c);</span><br><span class="line">    &#125;</span><br><span class="line">    bar(b * <span class="number">3</span>);</span><br><span class="line">&#125;</span><br><span class="line">foo(<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(a);  <span class="comment">//a is not defined</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo1</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> num = <span class="number">0</span>;</span><br><span class="line">    addNum = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;  <span class="comment">// 这里未通过var去声明，默认是全局变量</span></span><br><span class="line">        num += <span class="number">1</span>;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">foo2</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(num);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> foo2;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> tmp = foo1();</span><br><span class="line">tmp();  <span class="comment">// 0</span></span><br><span class="line"></span><br><span class="line">addNum();</span><br><span class="line">tmp(); <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>这里第二次调用foo2函数，foo1函数的局部变量num并没有被初始化为0，说明打印的是内存中的num。正常函数在每次调用结束后都会销毁局部变量，在重新调用的时候会再次声明变量；而这边没有重新声明的原因是：把foo2函数赋值给了一个全局变量tmp，导致foo2函数一直存在内存中，而foo2函数依赖于foo1函数存在，所以foo1函数也存在内存中，并没有被销毁，所以foo1的局部变量也是存在内存中。  </p>
+</blockquote>
+<ul>
+<li><code>this</code>的上下文基于函数调用的情况。和函数在哪定义无关，而和函数怎么调用有关。<ul>
+<li>在全局上下文（任何函数以外），this指向全局对象(windows)</li>
+<li>在函数内部时，this由函数怎么调用来确定<ul>
+<li>当函数作为对象方法调用时，this指向该对象  </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>下面是阮老师博客里的两个思考题：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">"The Window"</span>;</span><br><span class="line"><span class="keyword">var</span> object = &#123;</span><br><span class="line">　　name : <span class="string">"My Object"</span>,</span><br><span class="line">　　getNameFunc : <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">　　　　<span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">　　　　　　<span class="keyword">return</span> <span class="keyword">this</span>.name;</span><br><span class="line">　　　　&#125;;</span><br><span class="line">　　&#125;</span><br><span class="line">&#125;;</span><br><span class="line">alert(object.getNameFunc()()); <span class="comment">// The Window</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">"The Window"</span>;</span><br><span class="line"><span class="keyword">var</span> object = &#123;</span><br><span class="line">    name : <span class="string">"My Object"</span>,</span><br><span class="line">　　getNameFunc : <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">　　    <span class="keyword">var</span> that = <span class="keyword">this</span>;</span><br><span class="line">　　　　<span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">　　　　    <span class="keyword">return</span> that.name;</span><br><span class="line">　　　　&#125;;</span><br><span class="line">　　&#125;</span><br><span class="line">&#125;;</span><br><span class="line">alert(object.getNameFunc()());<span class="comment">// My Object</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>this</code>的作用域好像一直是个比较奇怪的东西，对于上面两个例子，我的理解是：第一个例子，是在方法里调用的<code>this</code>，而这个<code>this</code>并没有<code>声明</code>，会隐式地创建一个全局变量，所以调用的全局的name；第二个，调用的<code>that</code>的时候，会向顶级链式查找是否声明<code>that</code>，而这个that有this赋值，这里的this又是通过对象方法调用，则该this指向这个object对象，所有最终调用的是object作用域内的name。不知道这么理解是不是有问题，还望大神指正。</p>
+</blockquote>
+<p><strong>那其实js闭包的主要目的：访问函数内部的局部变量，即延长作用域链</strong><br>参考链接：<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures" target="_blank" rel="noopener">js闭包MDN文档</a></p>
+<h4 id="php闭包"><a href="#php闭包" class="headerlink" title="php闭包"></a>php闭包</h4><h5 id="php回调函数"><a href="#php回调函数" class="headerlink" title="php回调函数"></a>php回调函数</h5><p><a href="http://php.net/manual/zh/function.call-user-func.php" target="_blank" rel="noopener">mixed call_user_func ( callable $callback [, mixed $parameter [, mixed $… ]] )</a><br><a href="http://php.net/manual/zh/function.call-user-func-array.php" target="_blank" rel="noopener">mixed call_user_func_array ( callable $callback , array $param_arr )</a>  </p>
+<p>这两个函数都是把第一个参数作为回调函数d调用，后面接收参数，区别就是第二个函数第二参数接收数组；在使用上唯一的区别就是，<code>call_user_func</code>函数无法接收<code>引用传递</code>; 个人觉得同样是使用，call_user_func 相比call_user_func_array完全可以被替代，不知道是不是有一些性能上的优势。具体使用样例，请参考官方文档。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">// 引用传递</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span><span class="params">(&amp;$a, &amp;$b)</span> </span>&#123;</span><br><span class="line">    $a ++;</span><br><span class="line">    $b --;</span><br><span class="line">&#125;;</span><br><span class="line">$a = $b = <span class="number">10</span>;</span><br><span class="line">call_user_func_array(<span class="string">'foo'</span>, [&amp;$a, &amp;$b]);</span><br><span class="line"><span class="keyword">echo</span> $a.<span class="string">"\n"</span>, $b; <span class="comment">// 11, 9</span></span><br></pre></td></tr></table></figure></p>
+<h5 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h5><p>基本用法，跟js的闭包类似</p>
+<ul>
+<li>普通调用<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">global</span> $tmp = <span class="string">'hello world'</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    var_dump(<span class="keyword">global</span> $tmp);</span><br><span class="line">&#125;</span><br><span class="line">foo(); <span class="comment">// null, 函数内部无法直接调用上级作用域的变量，除非声明为全局变量</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$foo1 = <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    $a = <span class="number">10</span>;</span><br><span class="line">    $foo2 = <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        var_dump($a);</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">return</span> $foo2;</span><br><span class="line">&#125;;</span><br><span class="line">$tmp = $foo1();</span><br><span class="line">$tmp();  <span class="comment">// null，原因同上</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>php想要能够获取上级作用域的变量，需要通过use传递<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$foo1 = <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    $a = <span class="number">10</span>;</span><br><span class="line">    $foo2 = <span class="function"><span class="keyword">function</span> <span class="params">()</span> <span class="title">use</span> <span class="params">($a)</span> </span>&#123;</span><br><span class="line">        var_dump($a);</span><br><span class="line">        $a ++;</span><br><span class="line">    &#125;;</span><br><span class="line">    $foo2();</span><br><span class="line">    <span class="keyword">return</span> $foo2;</span><br><span class="line">&#125;;</span><br><span class="line">$tmp = $foo1();</span><br><span class="line">$tmp();  <span class="comment">// 10, 10,  use并不能实际改变变量的值，只是值传递</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$foo1 = <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    $a = <span class="number">10</span>;</span><br><span class="line">    $foo2 = <span class="function"><span class="keyword">function</span> <span class="params">()</span> <span class="title">use</span> <span class="params">(&amp;$a)</span> </span>&#123;</span><br><span class="line">        var_dump($a);</span><br><span class="line">        $a ++;</span><br><span class="line">    &#125;;</span><br><span class="line">    $foo2();</span><br><span class="line">    <span class="keyword">return</span> $foo2;</span><br><span class="line">&#125;;</span><br><span class="line">$tmp = $foo1();</span><br><span class="line">$tmp();  <span class="comment">// 10, 11,  通过值传递改变变量的值</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>下面两段代码的区别，不是很明白，望大佬指点，为什么后一个值传递就可以获取到已经改变后变量的值。好像都是在调用方法之前，已经执行过变量的递增了吧？<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">// 值传递</span></span><br><span class="line">$foo1 = <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    $a = <span class="number">10</span>;</span><br><span class="line">    $foo2 = <span class="function"><span class="keyword">function</span> <span class="params">()</span> <span class="title">use</span> <span class="params">($a)</span> </span>&#123;</span><br><span class="line">        var_dump($a);</span><br><span class="line">    &#125;;</span><br><span class="line">    $a ++;</span><br><span class="line">    <span class="keyword">return</span> $foo2;</span><br><span class="line">&#125;;</span><br><span class="line">$tmp = $foo1();</span><br><span class="line">$tmp();  <span class="comment">// 10</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">// 引用传递</span></span><br><span class="line">$foo1 = <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    $a = <span class="number">10</span>;</span><br><span class="line">    $foo2 = <span class="function"><span class="keyword">function</span> <span class="params">()</span> <span class="title">use</span> <span class="params">(&amp;$a)</span> </span>&#123;</span><br><span class="line">        var_dump($a);</span><br><span class="line">    &#125;;</span><br><span class="line">    $a ++;</span><br><span class="line">    <span class="keyword">return</span> $foo2;</span><br><span class="line">&#125;;</span><br><span class="line">$tmp = $foo1();</span><br><span class="line">$tmp();  <span class="comment">// 11</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>正确使用  <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">// 值传递</span></span><br><span class="line">$foo = <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    $a = <span class="number">10</span>;</span><br><span class="line">    $foo2 = <span class="function"><span class="keyword">function</span> <span class="params">($num)</span> <span class="title">use</span> <span class="params">($a)</span> </span>&#123;</span><br><span class="line">        var_dump($num + $a);</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">return</span> $foo2;</span><br><span class="line">&#125;;</span><br><span class="line">$tmp = $foo();</span><br><span class="line">$tmp(<span class="number">100</span>); <span class="comment">// 110</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">// 引用传递</span></span><br><span class="line">$foo = <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    $a = <span class="number">10</span>;</span><br><span class="line">    $foo2 = <span class="function"><span class="keyword">function</span> <span class="params">($num)</span> <span class="title">use</span> <span class="params">(&amp;$a)</span> </span>&#123;</span><br><span class="line">        var_dump($num + $a);</span><br><span class="line">		$a ++;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">return</span> $foo2;</span><br><span class="line">&#125;;</span><br><span class="line">$tmp = $foo();</span><br><span class="line">$tmp(<span class="number">100</span>); <span class="comment">// 110</span></span><br><span class="line">$tmp(<span class="number">100</span>); <span class="comment">// 111</span></span><br><span class="line">$tmp(<span class="number">100</span>); <span class="comment">// 112  跟js类似，保证变量常驻内存</span></span><br></pre></td></tr></table></figure>
+<h5 id="php-Closure-类"><a href="#php-Closure-类" class="headerlink" title="php Closure 类"></a>php Closure 类</h5><ul>
+<li><p><a href="http://php.net/manual/zh/closure.bind.php" target="_blank" rel="noopener">Closure::bind — 复制一个闭包，绑定指定的$this对象和类作用域</a><br>public static Closure Closure::bind ( Closure $closure , object $newthis [, mixed $newscope = ‘static’ ] )</p>
+</li>
+<li><p><a href="http://php.net/manual/zh/closure.bindto.php" target="_blank" rel="noopener">Closure::bindTo — 复制当前闭包对象，绑定指定的$this对象和类作用域</a><br>public Closure Closure::bindTo ( object $newthis [, mixed $newscope = ‘static’ ] )<br>对这两个方法不是很能理解。。。求指教</p>
+</li>
+</ul>
+<h3 id="共同点"><a href="#共同点" class="headerlink" title="共同点"></a>共同点</h3><p>都是为了扩展作用域，获取内部变量</p>
+<h3 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h3><p>js能够在方法内部直接获取到父级作用域的变量，而php需要通过use声明，并且默认是值传递</p>
+<h3 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h3><ul>
+<li>不是很能理解应用场景，搜索了一下，很多只是写了一个闭包实现的购物车，感觉并不是那么的实用。</li>
+<li>如果只是单纯的使用匿名函数，感觉还不如封装成一个私有方法  <blockquote>
+<p>这些个人只是粗鄙的理解，望指正.</p>
+</blockquote>
+</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-05-24T16:15:33.522Z" itemprop="dateUpdated">2018-05-25 00:15:33</time>
+</span><br>
+
+
+        
+        原文链接：<a href="/2018/05/25/js和php闭包使用和区别/" target="_blank" rel="external">https://pengwenwu.github.io/2018/05/25/js和php闭包使用和区别/</a>
+        
+    </div>
+    <footer>
+        <a href="https://pengwenwu.github.io">
+            <img src="/img/avatar.jpg" alt="pengwenwu">
+            pengwenwu
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/php/">php</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/闭包/">闭包</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://pengwenwu.github.io/2018/05/25/js和php闭包使用和区别/&title=《js和php闭包使用和区别》 — Pena's Blog&pic=https://pengwenwu.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://pengwenwu.github.io/2018/05/25/js和php闭包使用和区别/&title=《js和php闭包使用和区别》 — Pena's Blog&source=pengwenwu的个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://pengwenwu.github.io/2018/05/25/js和php闭包使用和区别/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《js和php闭包使用和区别》 — Pena's Blog&url=https://pengwenwu.github.io/2018/05/25/js和php闭包使用和区别/&via=https://pengwenwu.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://pengwenwu.github.io/2018/05/25/js和php闭包使用和区别/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/05/14/phpstorm或vscode使用psr2规范/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">phpstorm或vscode使用psr2规范</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'true' == 'true',
+            appId: "U2qzDNI480QyyzN2kDGB7bGu-gzGzoHsz",
+            appKey: "6o2PFFkLctFMxXg3qBrhr0CF",
+            avatar: "retro",
+            placeholder: "要不要说点什么？",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>pengwenwu &copy; 2017 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://pengwenwu.github.io/2018/05/25/js和php闭包使用和区别/&title=《js和php闭包使用和区别》 — Pena's Blog&pic=https://pengwenwu.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://pengwenwu.github.io/2018/05/25/js和php闭包使用和区别/&title=《js和php闭包使用和区别》 — Pena's Blog&source=pengwenwu的个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://pengwenwu.github.io/2018/05/25/js和php闭包使用和区别/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《js和php闭包使用和区别》 — Pena's Blog&url=https://pengwenwu.github.io/2018/05/25/js和php闭包使用和区别/&via=https://pengwenwu.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://pengwenwu.github.io/2018/05/25/js和php闭包使用和区别/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACuUlEQVR42u3awU7DMBAE0Pz/T8MVCSWd8dotSC+nqqTFz0jxMrvXFV9fP67nn/6+5+c7v1/f3X93XScuPDw8vMHS777u7p3nnyaAdm31FuDh4eEd49199fM9z59KPvu8ce168PDw8P4mLz9I2o3I78fDw8P7X7y2yG4L7nyL8fDw8D7Lax/0baCQbEESbRzMWvDw8PAOdJH+zusj/T08PDy8cVc9eeC2DarJsEK9Wjw8PLwDvDZyTcaq8rghv2dtnXh4eHjneHktutaaah/l7chXvRF4eHh4Y14OmJTayaGSNNXqvxgeHh7eVl7yi/OW/ySYSBpv+ZGDh4eHd46XF6zJo/z5EZ8zNnf28PDw8Lby2oWubcGutlm9Njw8PLwDvOelJKVtUoi3S1/buBdZCx4eHt5WXt52SqhtwNFGyWsjCHh4eHjnePl/9/k9STjbls55kIGHh4e3l7c2DpUPH0wGBSZhLh4eHt5pXlLULrbtY9gkDo7OOjw8PLy38CZhRBvO1uFCcj8eHh7eMV7bjE+C2pax1k57scV4eHh4B3hJibw2WDAZlto1koWHh4d3gtdGqPmxkbe+ih5dW1jj4eHhHeDlUekaqb3aMawoUMbDw8M7wJuMAkyOkLUAN99oPDw8vHO8SZSwtuj8SJh8Cg8PD+89vPZx32bG7Rm1djhdu04zPDw8vIC3N3TIW/uTYjqKHvDw8PCO8daaTJODISnHr8mFh4eHt5U3aVDlY1h5Mb02qvUiwMXDw8Pbyps/Y/Nmf3uoTF7XVDw8PLyS1wYKkxGBfGu2HQx4eHh4x3hrJfKuMaxJQbwY4+Lh4eG9kbc2CNU2/vPtixIXPDw8vI/y2vA0L46/xte2cw8PDw8v4OWF79rDPY93J9tad/nw8PDwlnhr//BPCui8qdaW+KPRATw8PLzXvG97UOQp4CZKLAAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.1"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.1" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
