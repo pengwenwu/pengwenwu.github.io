@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>使用laradock配置LNMP环境 | Pena&#39;s Blog | 莫道君行早，更有早行人</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Docker,PHP">
+    <meta name="description" content="介绍laradock是一个为php配置的完整的docker环境，可以通过修改配置文件，完成对不同版本、不同扩展、不同框架的php docker环境配置。从此对虚拟机说再见   使用clone到项目的同级目录或者使用Git 子模块1git clone https://github.com/Laradock/laradock.git laradock 这里使用CodeIgniter框架举个例子，目录结">
+<meta name="keywords" content="Docker,PHP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用laradock配置LNMP环境">
+<meta property="og:url" content="https://pengwenwu.github.io/2018/06/10/使用laradock配置LNMP环境/index.html">
+<meta property="og:site_name" content="Pena&#39;s Blog">
+<meta property="og:description" content="介绍laradock是一个为php配置的完整的docker环境，可以通过修改配置文件，完成对不同版本、不同扩展、不同框架的php docker环境配置。从此对虚拟机说再见   使用clone到项目的同级目录或者使用Git 子模块1git clone https://github.com/Laradock/laradock.git laradock 这里使用CodeIgniter框架举个例子，目录结">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-06-10T13:55:22.531Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用laradock配置LNMP环境">
+<meta name="twitter:description" content="介绍laradock是一个为php配置的完整的docker环境，可以通过修改配置文件，完成对不同版本、不同扩展、不同框架的php docker环境配置。从此对虚拟机说再见   使用clone到项目的同级目录或者使用Git 子模块1git clone https://github.com/Laradock/laradock.git laradock 这里使用CodeIgniter框架举个例子，目录结">
+    
+        <link rel="alternate" type="application/atom+xml" title="Pena&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.jpg">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.1">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">pengwenwu</h5>
+          <a href="mailto:18751943608@163.com" title="18751943608@163.com" class="mail">18751943608@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/pengwenwu" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">使用laradock配置LNMP环境</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">使用laradock配置LNMP环境</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-06-10T13:53:22.000Z" itemprop="datePublished" class="page-time">
+  2018-06-10
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Docker/">Docker</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#介绍"><span class="post-toc-number">1.</span> <span class="post-toc-text">介绍</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#使用"><span class="post-toc-number">2.</span> <span class="post-toc-text">使用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#clone到项目的同级目录"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">clone到项目的同级目录</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#复制配置文件"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">复制配置文件</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#增加配置参数"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">增加配置参数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#修改nginx默认挂在目录"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">修改nginx默认挂在目录</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#启动容器"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">启动容器</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#查看"><span class="post-toc-number">2.6.</span> <span class="post-toc-text">查看</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-使用laradock配置LNMP环境"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">使用laradock配置LNMP环境</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-06-10 21:53:22" datetime="2018-06-10T13:53:22.000Z"  itemprop="datePublished">2018-06-10</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Docker/">Docker</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p><code>laradock</code>是一个为php配置的完整的docker环境，可以通过修改配置文件，完成对不同版本、不同扩展、不同框架的php docker环境配置。从此对虚拟机说再见  </p>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><h2 id="clone到项目的同级目录"><a href="#clone到项目的同级目录" class="headerlink" title="clone到项目的同级目录"></a>clone到项目的同级目录</h2><p>或者使用<code>Git 子模块</code><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/Laradock/laradock.git laradock</span><br></pre></td></tr></table></figure></p>
+<p>这里使用CodeIgniter框架举个例子，目录结构是这样<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">|--- CodeIgniter</span><br><span class="line">|--- laradock</span><br></pre></td></tr></table></figure></p>
+<h2 id="复制配置文件"><a href="#复制配置文件" class="headerlink" title="复制配置文件"></a>复制配置文件</h2><p><code>.env</code> 才是配置文件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入laradockm目录</span></span><br><span class="line"><span class="built_in">cd</span> laradock</span><br><span class="line">cp env-example .env</span><br></pre></td></tr></table></figure></p>
+<h2 id="增加配置参数"><a href="#增加配置参数" class="headerlink" title="增加配置参数"></a>增加配置参数</h2><p>如果需要使用mysql，redis等，<code>.env</code>需要新增配置HOST地址<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># .env 末尾新增</span></span><br><span class="line">DB_HOST=mysql</span><br><span class="line">REDIS_HOST=redis</span><br><span class="line">QUEUE_HOST=rabbitmq</span><br></pre></td></tr></table></figure></p>
+<h2 id="修改nginx默认挂在目录"><a href="#修改nginx默认挂在目录" class="headerlink" title="修改nginx默认挂在目录"></a>修改nginx默认挂在目录</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim laradock/nginx/sites/default.conf</span><br></pre></td></tr></table></figure>
+<p>修改<code>default.conf</code>配置文件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 原配置</span></span><br><span class="line"><span class="comment"># root /var/www/public</span></span><br><span class="line">root /var/www/CodeIgniter</span><br></pre></td></tr></table></figure></p>
+<h2 id="启动容器"><a href="#启动容器" class="headerlink" title="启动容器"></a>启动容器</h2><p>这里有个坑，由于最近更新了mysql8，而laradoc的mysql中的Dockerfile默认是from latest拉去最新镜像，会导致mysql无法后台运行，秒退，应该是挂载问题<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose up -d nginx mysql phpmyadmin redis workspace</span><br></pre></td></tr></table></figure></p>
+<h2 id="查看"><a href="#查看" class="headerlink" title="查看"></a>查看</h2><p>可以通过<code>docker-compose ps</code>查看各个容器运行状态，以及暴露的端口<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">        Name                      Command               State                    Ports</span><br><span class="line">--------------------------------------------------------------------------------------------------------</span><br><span class="line">laradoc_mysql_1        docker-entrypoint.sh mysqld      Up      0.0.0.0:3306-&gt;3306/tcp</span><br><span class="line">laradoc_nginx_1        nginx                            Up      0.0.0.0:443-&gt;443/tcp, 0.0.0.0:80-&gt;80/tcp</span><br><span class="line">laradoc_php-fpm_1      docker-php-entrypoint php-fpm    Up      9000/tcp</span><br><span class="line">laradoc_phpmyadmin_1   /run.sh phpmyadmin               Up      0.0.0.0:8080-&gt;80/tcp, 9000/tcp</span><br><span class="line">laradoc_redis_1        docker-entrypoint.sh redis ...   Up      0.0.0.0:6379-&gt;6379/tcp</span><br><span class="line">laradoc_workspace_1    /sbin/my_init                    Up      0.0.0.0:2222-&gt;22/tcp</span><br></pre></td></tr></table></figure></p>
+<p>这里看到，nginx默认80端口，打开浏览器，输入localhost即可访问，正常返回的是CI框架的默认首页  </p>
+<blockquote>
+<p>Welcome to CodeIgniter!  </p>
+</blockquote>
+<p>phpmyadmin的端口是8080，浏览器输入localhost:8080，则可以访问phpmyadmin。<br>服务器地址是之前配置的 DB_HOST = <code>mysql</code>，账号密码可以查看<code>.env</code>配置文件，默认是<code>root</code> <code>root</code>。<br>这些都是可以在启动命令的参数里设置。</p>
+<p>参考链接：<a href="http://laradock.io/" target="_blank" rel="noopener">《Laradock》</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-06-10T13:55:22.531Z" itemprop="dateUpdated">2018-06-10 21:55:22</time>
+</span><br>
+
+
+        
+        原文链接：<a href="/2018/06/10/使用laradock配置LNMP环境/" target="_blank" rel="external">https://pengwenwu.github.io/2018/06/10/使用laradock配置LNMP环境/</a>
+        
+    </div>
+    <footer>
+        <a href="https://pengwenwu.github.io">
+            <img src="/img/avatar.jpg" alt="pengwenwu">
+            pengwenwu
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Docker/">Docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://pengwenwu.github.io/2018/06/10/使用laradock配置LNMP环境/&title=《使用laradock配置LNMP环境》 — Pena's Blog&pic=https://pengwenwu.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://pengwenwu.github.io/2018/06/10/使用laradock配置LNMP环境/&title=《使用laradock配置LNMP环境》 — Pena's Blog&source=pengwenwu的个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://pengwenwu.github.io/2018/06/10/使用laradock配置LNMP环境/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《使用laradock配置LNMP环境》 — Pena's Blog&url=https://pengwenwu.github.io/2018/06/10/使用laradock配置LNMP环境/&via=https://pengwenwu.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://pengwenwu.github.io/2018/06/10/使用laradock配置LNMP环境/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/06/10/git子模块/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">git子模块</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'true' == 'true',
+            appId: "U2qzDNI480QyyzN2kDGB7bGu-gzGzoHsz",
+            appKey: "6o2PFFkLctFMxXg3qBrhr0CF",
+            avatar: "retro",
+            placeholder: "要不要说点什么？",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>pengwenwu &copy; 2017 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://pengwenwu.github.io/2018/06/10/使用laradock配置LNMP环境/&title=《使用laradock配置LNMP环境》 — Pena's Blog&pic=https://pengwenwu.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://pengwenwu.github.io/2018/06/10/使用laradock配置LNMP环境/&title=《使用laradock配置LNMP环境》 — Pena's Blog&source=pengwenwu的个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://pengwenwu.github.io/2018/06/10/使用laradock配置LNMP环境/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《使用laradock配置LNMP环境》 — Pena's Blog&url=https://pengwenwu.github.io/2018/06/10/使用laradock配置LNMP环境/&via=https://pengwenwu.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://pengwenwu.github.io/2018/06/10/使用laradock配置LNMP环境/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACuUlEQVR42u3a0W7iQAwFUP7/p3dfW6lJru0xpdLJE0KBzAlSxlz79YqPf1+Or+9cvb565+q4utb9mccOPDw8vMHSr74u4d2T7m9K8k5+y/Dw8PDew7t6oiaY5GZVt418PQ8WPDw8vI/h3X/2vr7tLRcPDw/v7/J6+N4NwsPDw/tkXlIKTz6VBxZ5iHw4a8HDw8Nb6CJ9zuuV/h4eHh7euKvea2LlS8lHB5qrxcPDw1vgTZaSLG4ydtDbGPDw8PC2eXmAm28GZ0e1qhHJt/fx8PDwFniTplcSW/TijHmrrJyp4OHh4cXX3Wg+5YOt+bXyDemH/wp4eHh4C7y8kZ9Hrr0AN9+iml07PDw8vENDA/lwVV5q37Mn5XV59AoPDw9vjVeNXKsL7QW1eRSCh4eH97u8/GLJ+afOaZb1eHh4eEd5eWN+HvXmj/K8ZI8GBfDw8PAWeNX2UlJeT76nF0b8sBI8PDy8t/DyVlYeN+RxcHWE6+Hb8PDw8BZ488fxJLotRLHFzQYPDw9vj9d77CaP/iSEzWOIvHz/dj4eHh7eAi9vKU22gfk51dC53DHDw8PDi3n50EC+iGppXg0mCuU4Hh4e3gKvF7wWytn4nLw0z28lHh4e3gZv8uc/aji1SuEcP/qvgIeHhzft0ZeXMh8X6G1I1W/Dw8PD2+BVa/CkubW3/TR/MTw8PLw38iajVJMhqnzTelgJHh4e3jKv2shPlpsnA6/W8fBZPDw8vKO83qO2V4LnAwfVSGI0GYGHh4d3sr4tt/zzzaYaEOevyy0xPDw8vBavuhnMSb1NKB/GwsPDw3sPbxJS5EFD9Vq9MAIPDw/vb/GSmGBe++fjCHh4eHifwOu1+ZOgdjQiUO2P4eHh4Y15yeO790CvNsN6W8vDxoCHh4d3lDf5w99r8CeLHs2R4eHh4W3x/gP6Q2nOJDwOLQAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.1"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.1" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
