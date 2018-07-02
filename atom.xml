@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://pengwenwu.github.io/"/>
-  <updated>2018-06-27T15:40:12.264Z</updated>
+  <updated>2018-07-02T14:28:16.986Z</updated>
   <id>https://pengwenwu.github.io/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>CI框架源码阅读笔记-1</title>
+    <link href="https://pengwenwu.github.io/2018/07/02/CI%E6%A1%86%E6%9E%B6%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/"/>
+    <id>https://pengwenwu.github.io/2018/07/02/CI框架源码阅读笔记-1/</id>
+    <published>2018-07-02T14:27:08.000Z</published>
+    <updated>2018-07-02T14:28:16.986Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>当前框架版本define(‘CI_VERSION’, ‘3.0.2’);</p><h1 id="入口文件index-php"><a href="#入口文件index-php" class="headerlink" title="入口文件index.php"></a>入口文件index.php</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 对比项目跟原框架增加下列代码</span></span><br><span class="line"><span class="keyword">include_once</span> dirname(<span class="keyword">__FILE__</span>) . <span class="string">'/../etc/environment.php'</span>;</span><br><span class="line">...</span><br><span class="line">...</span><br><span class="line">...</span><br><span class="line"><span class="keyword">include_once</span> dirname(<span class="keyword">__FILE__</span>) . <span class="string">'/../vendor/autoload.php'</span>;</span><br><span class="line"><span class="keyword">include_once</span> dirname(<span class="keyword">__FILE__</span>) . <span class="string">'/../etc/load_all.php'</span>;</span><br></pre></td></tr></table></figure></blockquote><h2 id="加载环境配置文件"><a href="#加载环境配置文件" class="headerlink" title="加载环境配置文件"></a>加载环境配置文件</h2><p>通过environment文件判断并设置当前的环境<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">include_once</span> dirname(<span class="keyword">__FILE__</span>) . <span class="string">'/../etc/environment.php'</span>;</span><br></pre></td></tr></table></figure></p><ul><li><p>通过修改apache或nginx配置，设置环境变量</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># apache</span></span><br><span class="line"><span class="comment"># SetEnv key=value</span></span><br><span class="line">SetEnv CI_ENV development_beta</span><br><span class="line"></span><br><span class="line"><span class="comment"># nginx</span></span><br><span class="line"><span class="comment"># key value</span></span><br><span class="line">fastcgi_param CI_ENV beta;</span><br></pre></td></tr></table></figure></li><li><p>在通过<code>cli</code>运行时，通过<code>$_SERVER[&#39;argv&#39;]</code>获取传递给脚本的参数<code>数组</code>，第一个肯定为当前脚本名。  </p></li></ul><h2 id="加载composer"><a href="#加载composer" class="headerlink" title="加载composer"></a>加载composer</h2><p>各种包的加载<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">include_once</span> dirname(<span class="keyword">__FILE__</span>) . <span class="string">'/../vendor/autoload.php'</span>;</span><br></pre></td></tr></table></figure></p><h2 id="其余初始化的文件加载"><a href="#其余初始化的文件加载" class="headerlink" title="其余初始化的文件加载"></a>其余初始化的文件加载</h2><p>包括一些监控、报警、调用链追踪<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">include_once</span> dirname(<span class="keyword">__FILE__</span>) . <span class="string">'/../etc/load_all.php'</span>;</span><br></pre></td></tr></table></figure></p><h2 id="加载核心文件"><a href="#加载核心文件" class="headerlink" title="加载核心文件"></a>加载核心文件</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">require_once</span> BASEPATH.<span class="string">'core/CodeIgniter.php'</span>;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;当前框架版本define(‘CI_VERSION’, ‘3.0.2’);&lt;/p&gt;
+&lt;h1 id=&quot;入口文件index-php&quot;&gt;&lt;a href=&quot;#入口文件index-php&quot; class=&quot;headerlink&quot; title=&quot;入口文件index
+      
+    
+    </summary>
+    
+      <category term="后端" scheme="https://pengwenwu.github.io/categories/%E5%90%8E%E7%AB%AF/"/>
+    
+    
+      <category term="PHP" scheme="https://pengwenwu.github.io/tags/PHP/"/>
+    
+      <category term="CodeIgniter" scheme="https://pengwenwu.github.io/tags/CodeIgniter/"/>
+    
+  </entry>
   
   <entry>
     <title>workerman入门</title>
