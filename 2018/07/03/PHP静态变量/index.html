@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>PHP静态变量 | Pena&#39;s Blog | 莫道君行早，更有早行人</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="PHP">
+    <meta name="description" content="通常意义上的静态变量是静态分配，他们的生命周期和程序的生命周期一样，只有在程序退出的时候才结束生命周期。   php的静态变量可以分为：    静态全局变量：php中的全局变量也可以理解为静态全局变量，因为除非明确unset释放，在程序运行过程中始终存在   静态局部变量：即函数内定义的静态变量，函数在执行时对变量的操作会保持到下一次函数执行，直到程序终止   静态成员变量：在类中定义的静态变量，">
+<meta name="keywords" content="PHP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP静态变量">
+<meta property="og:url" content="https://pengwenwu.github.io/2018/07/03/PHP静态变量/index.html">
+<meta property="og:site_name" content="Pena&#39;s Blog">
+<meta property="og:description" content="通常意义上的静态变量是静态分配，他们的生命周期和程序的生命周期一样，只有在程序退出的时候才结束生命周期。   php的静态变量可以分为：    静态全局变量：php中的全局变量也可以理解为静态全局变量，因为除非明确unset释放，在程序运行过程中始终存在   静态局部变量：即函数内定义的静态变量，函数在执行时对变量的操作会保持到下一次函数执行，直到程序终止   静态成员变量：在类中定义的静态变量，">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-07-03T15:33:14.417Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PHP静态变量">
+<meta name="twitter:description" content="通常意义上的静态变量是静态分配，他们的生命周期和程序的生命周期一样，只有在程序退出的时候才结束生命周期。   php的静态变量可以分为：    静态全局变量：php中的全局变量也可以理解为静态全局变量，因为除非明确unset释放，在程序运行过程中始终存在   静态局部变量：即函数内定义的静态变量，函数在执行时对变量的操作会保持到下一次函数执行，直到程序终止   静态成员变量：在类中定义的静态变量，">
+    
+        <link rel="alternate" type="application/atom+xml" title="Pena&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.jpg">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.1">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">pengwenwu</h5>
+          <a href="mailto:pww932589183@163.com" title="pww932589183@163.com" class="mail">pww932589183@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/pengwenwu" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">PHP静态变量</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">PHP静态变量</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-07-03T15:31:53.000Z" itemprop="datePublished" class="page-time">
+  2018-07-03
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/后端/">后端</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+<article id="post-PHP静态变量"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">PHP静态变量</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-07-03 23:31:53" datetime="2018-07-03T15:31:53.000Z"  itemprop="datePublished">2018-07-03</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/后端/">后端</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>通常意义上的静态变量是静态分配，他们的生命周期和程序的生命周期一样，只有在程序退出的时候才结束生命周期。  </p>
+<p>php的静态变量可以分为：  </p>
+<ul>
+<li>静态全局变量：php中的全局变量也可以理解为静态全局变量，因为除非明确unset释放，在程序运行过程中始终存在  </li>
+<li>静态局部变量：即函数内定义的静态变量，函数在执行时对变量的操作会保持到下一次函数执行，直到程序终止  </li>
+<li>静态成员变量：在类中定义的静态变量，和实例变量相对应，静态成员变量可以在所有实例中共享  </li>
+</ul>
+<p>静态局部变量<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">static</span> $b = <span class="number">0</span>;</span><br><span class="line">    $b = $b + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">echo</span> $b;</span><br><span class="line">    <span class="keyword">return</span> $b;</span><br><span class="line">&#125;</span><br><span class="line">test(); <span class="comment">// 1</span></span><br><span class="line">test(); <span class="comment">// 2</span></span><br><span class="line">test(); <span class="comment">// 3</span></span><br></pre></td></tr></table></figure></p>
+<p>静态变量只能被初始化一次：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">static</span> $a = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">$a = <span class="number">10</span>;</span><br><span class="line">var_dump($a); <span class="comment">// 10</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> $a = <span class="number">0</span>;</span><br><span class="line">var_dump($a); <span class="comment">// 10</span></span><br></pre></td></tr></table></figure></p>
+<p>静态成员变量<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> $a = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$foo1 = <span class="keyword">new</span> Foo();</span><br><span class="line"><span class="keyword">echo</span> $foo1::$a; <span class="comment">// 1</span></span><br><span class="line"></span><br><span class="line">$foo2 = <span class="keyword">new</span> Foo();</span><br><span class="line"><span class="keyword">echo</span> $foo2::$a; <span class="comment">// 1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> FOO::$a; <span class="comment">// 1</span></span><br></pre></td></tr></table></figure></p>
+<p>修改静态成员变量<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> $a = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$foo1 = <span class="keyword">new</span> Foo();</span><br><span class="line"><span class="keyword">echo</span> $foo1::$a; <span class="comment">// 1</span></span><br><span class="line"></span><br><span class="line">$foo1::$a = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">echo</span> $foo1::$a; <span class="comment">// 2</span></span><br><span class="line"></span><br><span class="line">$foo2 = <span class="keyword">new</span> Foo();</span><br><span class="line"><span class="keyword">echo</span> $foo2::$a; <span class="comment">// 2</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> FOO::$a; <span class="comment">// 2</span></span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>参考链接：<a href="http://www.php-internals.com/book/?p=chapt03/03-04-static-var" target="_blank" rel="noopener">《深入理解PHP内核 - 静态变量》</a></p>
+</blockquote>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-07-03T15:33:14.417Z" itemprop="dateUpdated">2018-07-03 23:33:14</time>
+</span><br>
+
+
+        
+        原文链接：<a href="/2018/07/03/PHP静态变量/" target="_blank" rel="external">https://pengwenwu.github.io/2018/07/03/PHP静态变量/</a>
+        
+    </div>
+    <footer>
+        <a href="https://pengwenwu.github.io">
+            <img src="/img/avatar.jpg" alt="pengwenwu">
+            pengwenwu
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://pengwenwu.github.io/2018/07/03/PHP静态变量/&title=《PHP静态变量》 — Pena's Blog&pic=https://pengwenwu.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://pengwenwu.github.io/2018/07/03/PHP静态变量/&title=《PHP静态变量》 — Pena's Blog&source=pengwenwu的个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://pengwenwu.github.io/2018/07/03/PHP静态变量/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《PHP静态变量》 — Pena's Blog&url=https://pengwenwu.github.io/2018/07/03/PHP静态变量/&via=https://pengwenwu.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://pengwenwu.github.io/2018/07/03/PHP静态变量/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/07/02/CI框架3.x源码阅读笔记-1/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">CI框架3.x源码阅读笔记-1</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'true' == 'true',
+            appId: "U2qzDNI480QyyzN2kDGB7bGu-gzGzoHsz",
+            appKey: "6o2PFFkLctFMxXg3qBrhr0CF",
+            avatar: "retro",
+            placeholder: "要不要说点什么？",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>pengwenwu &copy; 2017 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://pengwenwu.github.io/2018/07/03/PHP静态变量/&title=《PHP静态变量》 — Pena's Blog&pic=https://pengwenwu.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://pengwenwu.github.io/2018/07/03/PHP静态变量/&title=《PHP静态变量》 — Pena's Blog&source=pengwenwu的个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://pengwenwu.github.io/2018/07/03/PHP静态变量/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《PHP静态变量》 — Pena's Blog&url=https://pengwenwu.github.io/2018/07/03/PHP静态变量/&via=https://pengwenwu.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://pengwenwu.github.io/2018/07/03/PHP静态变量/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACJklEQVR42u3aS5LCMAxF0ex/02EB3UnukwJVtq5HFASck4GwPseB1/lnXV2TXn/1reMbS4YMGcsyzttFrrn/1j2ss68MGTKmMUgATV+Td0gIvr83GTJkyEiv4e/w92XIkCGjE3DT5DMNxDJkyJCRJrH8OEjKbSnytVxchgwZCzL4Br9//ZX+hgwZMpZi1Mr9aZuTNCnPxpIhQ8beDB7gOmnqfer72i4yZMjYlJGGP/JppxnJH0Hw5GTIkLE4o3ZbtW06R0Z0vQwZMjZl1MYsyGa8uJ/udaB+pgwZMvZhpMkkOSyS7V8eCJMhQ8bWjDRBJa0CcuBLj5sPZTgZMmQMYPDjXZwfg4eVHjr/+VSGDBljGCTh7B/7OCl4EDJkyBjA4ENg6U2koZmXAlFnQ4YMGVsw+Jad8HrgxUtsMmTImMmowfhNv5viBo9JhgwZWzBq6WXazkwB8UORIUPGAEaaQJKSfWfwi+NlyJAxh5GOgvGUMm2OFvEyZMgYwEiLXOlIWaf0j0qBMmTIGMCoJZm1cFkLyg+/I0OGjDGM2uEvHYnoUFHAlSFDxkaMM1y8I9oZs4gDtwwZMrZm1AIoSW77TQU+5CFDhowJjH6QrYXIFPzwCzJkyBjAIMc10jaoDYrxf4BLpAwZMmSUTpe82ZC2K+L4LUOGjGGMWqMxDalpMU6GDBkTGOkgBW989gcvXi63yZAhY0FGrcXY2Zi0GeIBVhkyZOzJ+ACjBCLgheUD4QAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.1"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.1" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

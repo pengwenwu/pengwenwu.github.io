@@ -150,7 +150,59 @@
     <ul class="post-list">
     
         <li class="post-list-item fade">
-            <article id="post-CI框架源码阅读笔记-1"
+            <article id="post-PHP静态变量"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2018-07-03 23:31:53" datetime="2018-07-03T15:31:53.000Z"  itemprop="datePublished">2018-07-03</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/后端/">后端</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2018/07/03/PHP静态变量/">PHP静态变量</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        通常意义上的静态变量是静态分配，他们的生命周期和程序的生命周期一样，只有在程序退出的时候才结束生命周期。  
+php的静态变量可以分为：  
+
+静态全局变量：php中的全局变量也可以理解为静态全局变量，因为除非明确unset释放，在程序运行过程中始终存在  
+静态局部变量：即函数内定义的静态变量，函数在执行时对变量的操作会保持到下一次函数执行，直到程序终止  
+静态成员变量：在类中定义的静态...
+    
+
+        <a href="/2018/07/03/PHP静态变量/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-CI框架3.x源码阅读笔记-1"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
@@ -168,7 +220,7 @@
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2018/07/02/CI框架源码阅读笔记-1/">CI框架源码阅读笔记-1</a>
+      <a class="post-title-link" href="/2018/07/02/CI框架3.x源码阅读笔记-1/">CI框架3.x源码阅读笔记-1</a>
     </h3>
   
 
@@ -179,11 +231,12 @@
 
     
         
-当前框架版本define(‘CI_VERSION’, ‘3.0.2’);
-入口文件index.php1234567# 对比项目跟原框架增加下列代码include_once dirname(__FILE__) . '/../etc/environment.php';.........include_once dirname(__FILE__) . '/../vendor/autoload.p...
+当前框架版本define(‘CI_VERSION’, ‘3.0.2’);  
+
+入口文件index.php1234567# 对比项目跟原框架增加下列代码include_once dirname(__FILE__) . '/../etc/environment.php';.........include_once dirname(__FILE__) . '/../vendor/autoloa...
     
 
-        <a href="/2018/07/02/CI框架源码阅读笔记-1/" class="post-more waves-effect waves-button">
+        <a href="/2018/07/02/CI框架3.x源码阅读笔记-1/" class="post-more waves-effect waves-button">
             阅读全文…
         </a>
     </div>
@@ -603,59 +656,6 @@ array_map, array_walk, array_filter的区别及使用
     <div class="post-footer">
         
 	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-windows下cmd-powershell中文乱码解决方法"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2018-05-13 16:09:01" datetime="2018-05-13T08:09:01.000Z"  itemprop="datePublished">2018-05-13</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/环境配置/">环境配置</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2018/05/13/windows下cmd-powershell中文乱码解决方法/">windows下cmd/powershell中文乱码解决方法</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        
-windows下cmd或者powershell运行php文件中文乱码  
-
-解决方法执行下面的命令，切换成utf-8编码
-chcp 65001
-这个指标不治本，查了说是可以修改注册表，但是好像又会带来其他的坑（中文软件乱码、nodejs乱码），未测试过，不予评价。参考链接：https://www.zhihu.com/question/54724102
-
-    
-
-        <a href="/2018/05/13/windows下cmd-powershell中文乱码解决方法/" class="post-more waves-effect waves-button">
-            阅读全文…
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/中文乱码/">中文乱码</a></li></ul>
 
     </div>
     
