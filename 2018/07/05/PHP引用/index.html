@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>PHP引用 | Pena&#39;s Blog | 莫道君行早，更有早行人</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="PHP">
+    <meta name="description" content="官方文档 引用是什么   引用不是什么   引用做什么   引用传递   引用返回     php引用1. 变量的引用php的引用允许两个变量指向同一个内容1234567&amp;lt;?php$a = 10;$b =&amp;amp; $a;echo $a, $b;  // 10, 10$b = 20;echo $a, $b; // 20, 20 2. 函数的引用传递1234567891011&amp;lt;?phpf">
+<meta name="keywords" content="PHP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP引用">
+<meta property="og:url" content="https://pengwenwu.github.io/2018/07/05/PHP引用/index.html">
+<meta property="og:site_name" content="Pena&#39;s Blog">
+<meta property="og:description" content="官方文档 引用是什么   引用不是什么   引用做什么   引用传递   引用返回     php引用1. 变量的引用php的引用允许两个变量指向同一个内容1234567&amp;lt;?php$a = 10;$b =&amp;amp; $a;echo $a, $b;  // 10, 10$b = 20;echo $a, $b; // 20, 20 2. 函数的引用传递1234567891011&amp;lt;?phpf">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-07-05T15:35:58.714Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PHP引用">
+<meta name="twitter:description" content="官方文档 引用是什么   引用不是什么   引用做什么   引用传递   引用返回     php引用1. 变量的引用php的引用允许两个变量指向同一个内容1234567&amp;lt;?php$a = 10;$b =&amp;amp; $a;echo $a, $b;  // 10, 10$b = 20;echo $a, $b; // 20, 20 2. 函数的引用传递1234567891011&amp;lt;?phpf">
+    
+        <link rel="alternate" type="application/atom+xml" title="Pena&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.jpg">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.1">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">pengwenwu</h5>
+          <a href="mailto:pww932589183@163.com" title="pww932589183@163.com" class="mail">pww932589183@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/pengwenwu" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">PHP引用</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">PHP引用</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-07-05T15:35:27.000Z" itemprop="datePublished" class="page-time">
+  2018-07-05
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/后端/">后端</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#官方文档"><span class="post-toc-number">1.</span> <span class="post-toc-text">官方文档</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#php引用"><span class="post-toc-number">2.</span> <span class="post-toc-text">php引用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-变量的引用"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">1. 变量的引用</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-函数的引用传递"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">2. 函数的引用传递</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-函数的引用返回"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">3. 函数的引用返回</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#写时复制"><span class="post-toc-number">3.</span> <span class="post-toc-text">写时复制</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#性能优化"><span class="post-toc-number">4.</span> <span class="post-toc-text">性能优化</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-PHP引用"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">PHP引用</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-07-05 23:35:27" datetime="2018-07-05T15:35:27.000Z"  itemprop="datePublished">2018-07-05</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/后端/">后端</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="官方文档"><a href="#官方文档" class="headerlink" title="官方文档"></a>官方文档</h3><ol>
+<li><a href="http://www.php.net/manual/zh/language.references.whatare.php" target="_blank" rel="noopener">引用是什么</a>  </li>
+<li><a href="http://php.net/manual/zh/language.references.arent.php" target="_blank" rel="noopener">引用不是什么</a>  </li>
+<li><a href="http://www.php.net/manual/zh/language.references.whatdo.php" target="_blank" rel="noopener">引用做什么</a>  </li>
+<li><a href="http://php.net/manual/zh/language.references.pass.php" target="_blank" rel="noopener">引用传递</a>  </li>
+<li><a href="http://php.net/manual/zh/language.references.return.php" target="_blank" rel="noopener">引用返回</a>   </li>
+</ol>
+<h3 id="php引用"><a href="#php引用" class="headerlink" title="php引用"></a>php引用</h3><h4 id="1-变量的引用"><a href="#1-变量的引用" class="headerlink" title="1. 变量的引用"></a>1. 变量的引用</h4><p>php的引用允许两个变量指向同一个内容<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$a = <span class="number">10</span>;</span><br><span class="line">$b =&amp; $a;</span><br><span class="line"><span class="keyword">echo</span> $a, $b;  <span class="comment">// 10, 10</span></span><br><span class="line"></span><br><span class="line">$b = <span class="number">20</span>;</span><br><span class="line"><span class="keyword">echo</span> $a, $b; <span class="comment">// 20, 20</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="2-函数的引用传递"><a href="#2-函数的引用传递" class="headerlink" title="2. 函数的引用传递"></a>2. 函数的引用传递</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span><span class="params">(&amp;$var)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    $var++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$a=<span class="number">5</span>;</span><br><span class="line">foo($a); <span class="comment">// 6</span></span><br><span class="line">foo($a); <span class="comment">// 7</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> $a; <span class="comment">// 7</span></span><br></pre></td></tr></table></figure>
+<h4 id="3-函数的引用返回"><a href="#3-函数的引用返回" class="headerlink" title="3. 函数的引用返回"></a>3. 函数的引用返回</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> &amp;<span class="title">test</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">static</span> $b = <span class="number">0</span>;<span class="comment">//申明一个静态变量</span></span><br><span class="line">    $b = $b + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">echo</span> $b;</span><br><span class="line">    <span class="keyword">return</span> $b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$a = test();<span class="comment">//这条语句会输出　$b的值　为１</span></span><br><span class="line">$a = <span class="number">5</span>;</span><br><span class="line">$a = test();<span class="comment">//这条语句会输出　$b的值　为2</span></span><br><span class="line"></span><br><span class="line">$a =&amp; test();<span class="comment">//这条语句会输出　$b的值　为3</span></span><br><span class="line">$a = <span class="number">5</span>;</span><br><span class="line">$a = test();<span class="comment">//这条语句会输出　$b的值　为6</span></span><br></pre></td></tr></table></figure>
+<p>没有加&amp;, 跟普通的函数调用没有区别。  </p>
+<p>而引用返回的作用，相当于把$b的内存地址返回，赋值给$a，使得$a, $b的内存地址指向同一个地方，即相当于执行了($a =&amp; $b;)  </p>
+<p>更多的是使用在对象中：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $value = <span class="number">42</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> &amp;<span class="title">getValue</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;value;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$obj     = <span class="keyword">new</span> Foo;</span><br><span class="line">$myValue = &amp;$obj-&gt;getValue();</span><br><span class="line"><span class="keyword">echo</span> $myValue; <span class="comment">// 42;</span></span><br><span class="line"></span><br><span class="line">$obj2        = <span class="keyword">new</span> Foo;</span><br><span class="line">$obj2-&gt;value = <span class="number">2</span>;</span><br><span class="line">$myValue     =&amp; $obj2-&gt;getValue();</span><br><span class="line"><span class="keyword">echo</span> $myValue; <span class="comment">// 2</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="写时复制"><a href="#写时复制" class="headerlink" title="写时复制"></a>写时复制</h3><p>php一个比较重要的内部机制是写时复制<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$a = <span class="number">10</span>;</span><br><span class="line">$b = $a; <span class="comment">// 此时$b, $a 指向同一地方</span></span><br><span class="line"></span><br><span class="line">$b = <span class="number">20</span>; <span class="comment">// 在写入时，才会给$b 额外分配存储空间</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="性能优化"><a href="#性能优化" class="headerlink" title="性能优化"></a>性能优化</h3><p>本来之前了解的，使用引用传递能够提高运行效率，本机测试也是能提高30%左右。不过看这篇文章，介绍引用坑大于利，所以不再推荐。文章地址：<a href="https://zhuanlan.zhihu.com/p/35107602" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/35107602</a>  </p>
+<blockquote>
+<p>参考文章：<a href="https://www.cnblogs.com/xiaochaohuashengmi/archive/2011/09/10/2173092.html" target="_blank" rel="noopener">https://www.cnblogs.com/xiaochaohuashengmi/archive/2011/09/10/2173092.html</a>  </p>
+</blockquote>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-07-05T15:35:58.714Z" itemprop="dateUpdated">2018-07-05 23:35:58</time>
+</span><br>
+
+
+        
+        原文链接：<a href="/2018/07/05/PHP引用/" target="_blank" rel="external">https://pengwenwu.github.io/2018/07/05/PHP引用/</a>
+        
+    </div>
+    <footer>
+        <a href="https://pengwenwu.github.io">
+            <img src="/img/avatar.jpg" alt="pengwenwu">
+            pengwenwu
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://pengwenwu.github.io/2018/07/05/PHP引用/&title=《PHP引用》 — Pena's Blog&pic=https://pengwenwu.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://pengwenwu.github.io/2018/07/05/PHP引用/&title=《PHP引用》 — Pena's Blog&source=pengwenwu的个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://pengwenwu.github.io/2018/07/05/PHP引用/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《PHP引用》 — Pena's Blog&url=https://pengwenwu.github.io/2018/07/05/PHP引用/&via=https://pengwenwu.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://pengwenwu.github.io/2018/07/05/PHP引用/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/07/03/PHP静态变量/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">PHP静态变量</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'true' == 'true',
+            appId: "U2qzDNI480QyyzN2kDGB7bGu-gzGzoHsz",
+            appKey: "6o2PFFkLctFMxXg3qBrhr0CF",
+            avatar: "retro",
+            placeholder: "要不要说点什么？",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>pengwenwu &copy; 2017 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://pengwenwu.github.io/2018/07/05/PHP引用/&title=《PHP引用》 — Pena's Blog&pic=https://pengwenwu.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://pengwenwu.github.io/2018/07/05/PHP引用/&title=《PHP引用》 — Pena's Blog&source=pengwenwu的个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://pengwenwu.github.io/2018/07/05/PHP引用/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《PHP引用》 — Pena's Blog&url=https://pengwenwu.github.io/2018/07/05/PHP引用/&via=https://pengwenwu.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://pengwenwu.github.io/2018/07/05/PHP引用/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACPElEQVR42u3aS46DMBBFUfa/abfUo0gIeLcMUShfjyIagQ+Datdn2+I1/tfn788r+zvpX8dubU8sGTJkvJYxTteecQSj2zr6NOfXD58pQ4aMBRjJa87voQH6fNP4vTJkyJARB8TzT5CEZhkyZMiYD7gjWDMblSFDhoyZJDYJrEmxLIc9kovLkCHjhYxaY+A7vx/vb8iQIePnGaO08qLbXQ2Ai/3IkCGjNYMe6WjJLCn65wfNix3KkCGjKWOmiDbTdKwV5g6fKUOGjNaMmRfkDNpCSP4NXPQ3ZMiQ0Y5B00haOMuv5GH9htKbDBkyXsU4D3xJ2KWhmW4XlNtkyJDRmkGL9XR0bKZdmgRuGTJkdGXQg2CSrOYButYqkCFDxpqMvOCVbIUGzdpnAmdbGTJkNGLUgiNNesEMSP40GTJktGYk4Ywe6fLN1ZqaeERMhgwZL2fkYxB4qBSOiOUFONx9lSFDRjtGkhXSA1+ttQCOjzJkyFiGUTv80XQ3GfPCqa8MGTJaM+hD57cyU9S7eLsMGTIWYORpJy3J0VS29jQZMmSswEgGwvJRibwYV9x03h6QIUNGCwZtKCbbTYIpbXlO9TpkyJDxWsaAizYVaJAthngZMmS0ZtTCXD4QhmfTSsmtDBkyVmDQEQpaSpvpNoLvLUOGjAUYtGFQO0rmGMyTIUOGDBhAabCupbUyZMiQgR90a+EMB2gZMmQswKAjF/TO+UGKYg9WhgwZLRh3NQZqRb1a9ezBFqYMGTJ+i/EHIvx/rbwhLDoAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.1"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.1" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
