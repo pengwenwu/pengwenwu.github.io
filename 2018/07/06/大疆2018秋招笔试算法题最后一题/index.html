@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>大疆2018秋招笔试算法题最后一题 | Pena&#39;s Blog | 莫道君行早，更有早行人</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="算法，最短路径">
+    <meta name="description" content="题目给定一个非负整数数组，最初位于数组的第一个位置。数组中的元素代表你在该位置可以跳跃的最大长度，你的目的是到达数组的最后一个位置。（假设你总是可以到达数组的最后一个位置，即除了最后一个位置，其他值不能为0）   例如：输入：[2,3,1,1,4]输出：2解释：跳到最后一个位置的最小跳跃数是 2。从下标0跳到下标为1的位置，跳一步，然后跳3步达到数组的最后一个位置。   思路即在跳跃距离内，选择一">
+<meta name="keywords" content="算法，最短路径">
+<meta property="og:type" content="article">
+<meta property="og:title" content="大疆2018秋招笔试算法题最后一题">
+<meta property="og:url" content="https://pengwenwu.github.io/2018/07/06/大疆2018秋招笔试算法题最后一题/index.html">
+<meta property="og:site_name" content="Pena&#39;s Blog">
+<meta property="og:description" content="题目给定一个非负整数数组，最初位于数组的第一个位置。数组中的元素代表你在该位置可以跳跃的最大长度，你的目的是到达数组的最后一个位置。（假设你总是可以到达数组的最后一个位置，即除了最后一个位置，其他值不能为0）   例如：输入：[2,3,1,1,4]输出：2解释：跳到最后一个位置的最小跳跃数是 2。从下标0跳到下标为1的位置，跳一步，然后跳3步达到数组的最后一个位置。   思路即在跳跃距离内，选择一">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-07-06T15:34:34.130Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="大疆2018秋招笔试算法题最后一题">
+<meta name="twitter:description" content="题目给定一个非负整数数组，最初位于数组的第一个位置。数组中的元素代表你在该位置可以跳跃的最大长度，你的目的是到达数组的最后一个位置。（假设你总是可以到达数组的最后一个位置，即除了最后一个位置，其他值不能为0）   例如：输入：[2,3,1,1,4]输出：2解释：跳到最后一个位置的最小跳跃数是 2。从下标0跳到下标为1的位置，跳一步，然后跳3步达到数组的最后一个位置。   思路即在跳跃距离内，选择一">
+    
+        <link rel="alternate" type="application/atom+xml" title="Pena&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.jpg">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.1">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">pengwenwu</h5>
+          <a href="mailto:pww932589183@163.com" title="pww932589183@163.com" class="mail">pww932589183@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/pengwenwu" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">大疆2018秋招笔试算法题最后一题</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">大疆2018秋招笔试算法题最后一题</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-07-06T15:31:22.000Z" itemprop="datePublished" class="page-time">
+  2018-07-06
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法/">算法</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#题目"><span class="post-toc-number">1.</span> <span class="post-toc-text">题目</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#思路"><span class="post-toc-number">2.</span> <span class="post-toc-text">思路</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#实现"><span class="post-toc-number">3.</span> <span class="post-toc-text">实现</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-大疆2018秋招笔试算法题最后一题"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">大疆2018秋招笔试算法题最后一题</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-07-06 23:31:22" datetime="2018-07-06T15:31:22.000Z"  itemprop="datePublished">2018-07-06</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法/">算法</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p>给定一个非负整数数组，最初位于数组的第一个位置。数组中的元素代表你在该位置可以跳跃的最大长度，你的目的是到达数组的最后一个位置。（假设你总是可以到达数组的最后一个位置，即除了最后一个位置，其他值不能为0）  </p>
+<p>例如：<br>输入：[2,3,1,1,4]<br>输出：2<br>解释：跳到最后一个位置的最小跳跃数是 2。<br>从下标0跳到下标为1的位置，跳一步，然后跳3步达到数组的最后一个位置。  </p>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>即在跳跃距离内，选择一个下一次跳的最远的地方。  </p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>作为一个算法渣渣，这种是第一时间能想到的方法，肯定不是最优解。这种最差情况的时间复杂度是<code>n^2</code>，最好情况是<code>n</code>，所以总体时间复杂度是<code>nlogn</code>么。。。不知道怎么算~~~<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getShortestValue</span><span class="params">(array $arr)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    $count = <span class="number">0</span>;</span><br><span class="line">    $length = count($arr);</span><br><span class="line">    <span class="keyword">for</span> ($i = <span class="number">0</span>; $i &lt; $length;) &#123;</span><br><span class="line">        $count++;</span><br><span class="line"></span><br><span class="line">        $current_value = $i + $arr[$i];</span><br><span class="line">        <span class="comment">// 一步到位，跳出循环</span></span><br><span class="line">        <span class="keyword">if</span> ($current_value &gt;= $length - <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> $count;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        $max_value = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> ($j = $i + <span class="number">1</span>; $j &lt;= $current_value; $j++) &#123;</span><br><span class="line">            $count++;</span><br><span class="line"></span><br><span class="line">            $tmp = $j + $arr[$j];</span><br><span class="line">            <span class="keyword">if</span> ($tmp &gt;= $length - <span class="number">1</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> $count;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> ($tmp &gt;= $max_value) &#123;</span><br><span class="line">                $max_value = $tmp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        $i = $max_value;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> $count;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">1</span>, <span class="number">2</span>];</span><br><span class="line">$arr2 = [<span class="number">2</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">4</span>];</span><br><span class="line"><span class="keyword">echo</span> getShortestValue($arr), <span class="string">"\n"</span>; <span class="comment">// 5</span></span><br><span class="line"><span class="keyword">echo</span> getShortestValue($arr2), <span class="string">"\n"</span>; <span class="comment">// 2</span></span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>总结：好久不接触算法，已经忘光了，这种算是简单的，却需要花这么久时间，反思。<br>解完才想起来，应该是要用最短路径方法去解的</p>
+</blockquote>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-07-06T15:34:34.130Z" itemprop="dateUpdated">2018-07-06 23:34:34</time>
+</span><br>
+
+
+        
+        原文链接：<a href="/2018/07/06/大疆2018秋招笔试算法题最后一题/" target="_blank" rel="external">https://pengwenwu.github.io/2018/07/06/大疆2018秋招笔试算法题最后一题/</a>
+        
+    </div>
+    <footer>
+        <a href="https://pengwenwu.github.io">
+            <img src="/img/avatar.jpg" alt="pengwenwu">
+            pengwenwu
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法，最短路径/">算法，最短路径</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://pengwenwu.github.io/2018/07/06/大疆2018秋招笔试算法题最后一题/&title=《大疆2018秋招笔试算法题最后一题》 — Pena's Blog&pic=https://pengwenwu.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://pengwenwu.github.io/2018/07/06/大疆2018秋招笔试算法题最后一题/&title=《大疆2018秋招笔试算法题最后一题》 — Pena's Blog&source=pengwenwu的个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://pengwenwu.github.io/2018/07/06/大疆2018秋招笔试算法题最后一题/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《大疆2018秋招笔试算法题最后一题》 — Pena's Blog&url=https://pengwenwu.github.io/2018/07/06/大疆2018秋招笔试算法题最后一题/&via=https://pengwenwu.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://pengwenwu.github.io/2018/07/06/大疆2018秋招笔试算法题最后一题/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/07/05/PHP引用/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">PHP引用</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'true' == 'true',
+            appId: "U2qzDNI480QyyzN2kDGB7bGu-gzGzoHsz",
+            appKey: "6o2PFFkLctFMxXg3qBrhr0CF",
+            avatar: "retro",
+            placeholder: "要不要说点什么？",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>pengwenwu &copy; 2017 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://pengwenwu.github.io/2018/07/06/大疆2018秋招笔试算法题最后一题/&title=《大疆2018秋招笔试算法题最后一题》 — Pena's Blog&pic=https://pengwenwu.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://pengwenwu.github.io/2018/07/06/大疆2018秋招笔试算法题最后一题/&title=《大疆2018秋招笔试算法题最后一题》 — Pena's Blog&source=pengwenwu的个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://pengwenwu.github.io/2018/07/06/大疆2018秋招笔试算法题最后一题/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《大疆2018秋招笔试算法题最后一题》 — Pena's Blog&url=https://pengwenwu.github.io/2018/07/06/大疆2018秋招笔试算法题最后一题/&via=https://pengwenwu.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://pengwenwu.github.io/2018/07/06/大疆2018秋招笔试算法题最后一题/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACt0lEQVR42u3aUW5bMQwEQN//0ukBUj/vklKaAuOvArYjzSsg0Uu+XvHr69vr3bvJ5/NvfX/3deOFh4eHt97688ItKXkcySeTB/GXR4CHh4d3jffuRE0+87zR5wM92mK5Hzw8PLzfxkuoSfnblst4eHh4/y+vjSdmUcXmEePh4eH9DK+NUNtgYhYB7/8+Hh4e3g1e3kX6Pf++0t/Dw8PDW3fVZ9HqrFzeDBa8XRcPDw/vAq+NUJ9L7fahzIYV8n3i4eHh3eadjQlmle1slQ97wMPDw7vAm/2JvPBt44ZZq+zV3hh4eHh4I15eHCdRwr7UbscCPvwH4OHh4V3g7THtUd6OJuzjYDw8PLwbvP0o1SzG3ZTXsysHDw8Pb8/btKyS8nfW/i+aW88r4uHh4V3gtS2rIgJYTJDmVXFxPeDh4eEd4u2j23zhGXg4KHAqmcbDw8M7dGQ/N6Jm4e8G/xxq4OHh4d3mzZpkszbVrIBezZTh4eHh/QivHQKYFeuzfl0Ri+Dh4eEd5SVb2WwxX6stzSMkHh4e3gVee5TPRg1mD7F999XeIXh4eHgL3nMZnRzZeftqtlYb+OLh4eHd49VTWjFm09DKy+UPe8DDw8M7yssHAtqyeBM9zAr06FcCHh4e3pqXb2I/JpUX7qeuHDw8PLzbvPzL7chUUgTng1nD2w8PDw/vAm92xCclddTaL6+KfJgADw8P7x5vVsLOxg7aEYTk+nn7eTw8PLyjvK/y1V4kxTMeDV19WB0PDw/vAm820pQc3+21kY8OtK07PDw8vBu8U5dBHt1uIoYDYQQeHh7eIV6dYZSH9WZ4Kw8j6gYYHh4e3j/i7Rtg+XhB/SsBDw8P79fw2rB1E8jOynE8PDy827xN82kT1+YXSTv+hYeHh3eP1/7gz8vZ58VmAcQmtsDDw8Nbf+sPA0YiFhtPqL4AAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.1"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.1" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://pengwenwu.github.io/"/>
-  <updated>2018-07-05T15:35:58.714Z</updated>
+  <updated>2018-07-06T15:34:34.130Z</updated>
   <id>https://pengwenwu.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>大疆2018秋招笔试算法题最后一题</title>
+    <link href="https://pengwenwu.github.io/2018/07/06/%E5%A4%A7%E7%96%862018%E7%A7%8B%E6%8B%9B%E7%AC%94%E8%AF%95%E7%AE%97%E6%B3%95%E9%A2%98%E6%9C%80%E5%90%8E%E4%B8%80%E9%A2%98/"/>
+    <id>https://pengwenwu.github.io/2018/07/06/大疆2018秋招笔试算法题最后一题/</id>
+    <published>2018-07-06T15:31:22.000Z</published>
+    <updated>2018-07-06T15:34:34.130Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p>给定一个非负整数数组，最初位于数组的第一个位置。数组中的元素代表你在该位置可以跳跃的最大长度，你的目的是到达数组的最后一个位置。（假设你总是可以到达数组的最后一个位置，即除了最后一个位置，其他值不能为0）  </p><p>例如：<br>输入：[2,3,1,1,4]<br>输出：2<br>解释：跳到最后一个位置的最小跳跃数是 2。<br>从下标0跳到下标为1的位置，跳一步，然后跳3步达到数组的最后一个位置。  </p><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>即在跳跃距离内，选择一个下一次跳的最远的地方。  </p><h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>作为一个算法渣渣，这种是第一时间能想到的方法，肯定不是最优解。这种最差情况的时间复杂度是<code>n^2</code>，最好情况是<code>n</code>，所以总体时间复杂度是<code>nlogn</code>么。。。不知道怎么算~~~<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getShortestValue</span><span class="params">(array $arr)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    $count = <span class="number">0</span>;</span><br><span class="line">    $length = count($arr);</span><br><span class="line">    <span class="keyword">for</span> ($i = <span class="number">0</span>; $i &lt; $length;) &#123;</span><br><span class="line">        $count++;</span><br><span class="line"></span><br><span class="line">        $current_value = $i + $arr[$i];</span><br><span class="line">        <span class="comment">// 一步到位，跳出循环</span></span><br><span class="line">        <span class="keyword">if</span> ($current_value &gt;= $length - <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> $count;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        $max_value = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> ($j = $i + <span class="number">1</span>; $j &lt;= $current_value; $j++) &#123;</span><br><span class="line">            $count++;</span><br><span class="line"></span><br><span class="line">            $tmp = $j + $arr[$j];</span><br><span class="line">            <span class="keyword">if</span> ($tmp &gt;= $length - <span class="number">1</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> $count;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> ($tmp &gt;= $max_value) &#123;</span><br><span class="line">                $max_value = $tmp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        $i = $max_value;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> $count;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">1</span>, <span class="number">2</span>];</span><br><span class="line">$arr2 = [<span class="number">2</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">4</span>];</span><br><span class="line"><span class="keyword">echo</span> getShortestValue($arr), <span class="string">"\n"</span>; <span class="comment">// 5</span></span><br><span class="line"><span class="keyword">echo</span> getShortestValue($arr2), <span class="string">"\n"</span>; <span class="comment">// 2</span></span><br></pre></td></tr></table></figure></p><blockquote><p>总结：好久不接触算法，已经忘光了，这种算是简单的，却需要花这么久时间，反思。<br>解完才想起来，应该是要用最短路径方法去解的</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;题目&quot;&gt;&lt;a href=&quot;#题目&quot; class=&quot;headerlink&quot; title=&quot;题目&quot;&gt;&lt;/a&gt;题目&lt;/h3&gt;&lt;p&gt;给定一个非负整数数组，最初位于数组的第一个位置。数组中的元素代表你在该位置可以跳跃的最大长度，你的目的是到达数组的最后一个位置。（假设你总是
+      
+    
+    </summary>
+    
+      <category term="算法" scheme="https://pengwenwu.github.io/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="算法，最短路径" scheme="https://pengwenwu.github.io/tags/%E7%AE%97%E6%B3%95%EF%BC%8C%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/"/>
+    
+  </entry>
   
   <entry>
     <title>PHP引用</title>
@@ -541,27 +566,6 @@
       <category term="PHP" scheme="https://pengwenwu.github.io/tags/PHP/"/>
     
       <category term="算法" scheme="https://pengwenwu.github.io/tags/%E7%AE%97%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="https://pengwenwu.github.io/2018/01/10/hello-world/"/>
-    <id>https://pengwenwu.github.io/2018/01/10/hello-world/</id>
-    <published>2018-01-10T15:18:30.173Z</published>
-    <updated>2018-01-10T15:18:30.173Z</updated>
-    
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
-      
-    
-    </summary>
-    
     
   </entry>
   
