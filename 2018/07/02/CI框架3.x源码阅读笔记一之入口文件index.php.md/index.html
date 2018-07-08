@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>CI框架3.x源码阅读笔记一之入口文件index.php | Pena&#39;s Blog | 莫道君行早，更有早行人</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="PHP,CodeIgniter">
+    <meta name="description" content="当前框架版本define(‘CI_VERSION’, ‘3.0.2’);    入口文件index.php12345678&amp;lt;?php# 对比项目跟原框架增加下列代码include_once dirname(__FILE__) . &apos;/../etc/environment.php&apos;;.........include_once dirname(__FILE__) . &apos;/../vendor/a">
+<meta name="keywords" content="PHP,CodeIgniter">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CI框架3.x源码阅读笔记一之入口文件index.php">
+<meta property="og:url" content="https://pengwenwu.github.io/2018/07/02/CI框架3.x源码阅读笔记一之入口文件index.php.md/index.html">
+<meta property="og:site_name" content="Pena&#39;s Blog">
+<meta property="og:description" content="当前框架版本define(‘CI_VERSION’, ‘3.0.2’);    入口文件index.php12345678&amp;lt;?php# 对比项目跟原框架增加下列代码include_once dirname(__FILE__) . &apos;/../etc/environment.php&apos;;.........include_once dirname(__FILE__) . &apos;/../vendor/a">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-07-08T09:21:19.113Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CI框架3.x源码阅读笔记一之入口文件index.php">
+<meta name="twitter:description" content="当前框架版本define(‘CI_VERSION’, ‘3.0.2’);    入口文件index.php12345678&amp;lt;?php# 对比项目跟原框架增加下列代码include_once dirname(__FILE__) . &apos;/../etc/environment.php&apos;;.........include_once dirname(__FILE__) . &apos;/../vendor/a">
+    
+        <link rel="alternate" type="application/atom+xml" title="Pena&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.jpg">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.1">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">pengwenwu</h5>
+          <a href="mailto:pww932589183@163.com" title="pww932589183@163.com" class="mail">pww932589183@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/pengwenwu" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">CI框架3.x源码阅读笔记一之入口文件index.php</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">CI框架3.x源码阅读笔记一之入口文件index.php</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-07-02T14:27:08.000Z" itemprop="datePublished" class="page-time">
+  2018-07-02
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/后端/">后端</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#入口文件index-php"><span class="post-toc-number">1.</span> <span class="post-toc-text">入口文件index.php</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#加载环境配置文件"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">加载环境配置文件</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#设置报警级别"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">设置报警级别</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#配置系统、应用、视图等程序目录"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">配置系统、应用、视图等程序目录</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#cli目录设置"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">cli目录设置</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#系统、应用、视图等目录的正确性验证"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">系统、应用、视图等目录的正确性验证</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#系统-system-文件目录的正确性验证"><span class="post-toc-number">1.5.1.</span> <span class="post-toc-text">系统(system)文件目录的正确性验证</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#定义主要的路径常量"><span class="post-toc-number">1.5.2.</span> <span class="post-toc-text">定义主要的路径常量</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#应用-application-文件目录的正确性验证"><span class="post-toc-number">1.5.3.</span> <span class="post-toc-text">应用(application)文件目录的正确性验证</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#视图-view-文件目录的正确性验证"><span class="post-toc-number">1.5.4.</span> <span class="post-toc-text">视图(view)文件目录的正确性验证</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#加载composer"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">加载composer</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#其余初始化的文件加载"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">其余初始化的文件加载</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#加载核心文件"><span class="post-toc-number">1.8.</span> <span class="post-toc-text">加载核心文件</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-CI框架3.x源码阅读笔记一之入口文件index.php.md"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">CI框架3.x源码阅读笔记一之入口文件index.php</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-07-02 22:27:08" datetime="2018-07-02T14:27:08.000Z"  itemprop="datePublished">2018-07-02</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/后端/">后端</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <blockquote>
+<p>当前框架版本define(‘CI_VERSION’, ‘3.0.2’);  </p>
+</blockquote>
+<h1 id="入口文件index-php"><a href="#入口文件index-php" class="headerlink" title="入口文件index.php"></a>入口文件index.php</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment"># 对比项目跟原框架增加下列代码</span></span><br><span class="line"><span class="keyword">include_once</span> dirname(<span class="keyword">__FILE__</span>) . <span class="string">'/../etc/environment.php'</span>;</span><br><span class="line">...</span><br><span class="line">...</span><br><span class="line">...</span><br><span class="line"><span class="keyword">include_once</span> dirname(<span class="keyword">__FILE__</span>) . <span class="string">'/../vendor/autoload.php'</span>;</span><br><span class="line"><span class="keyword">include_once</span> dirname(<span class="keyword">__FILE__</span>) . <span class="string">'/../etc/load_all.php'</span>;</span><br></pre></td></tr></table></figure>
+<p>主要完成下列工作：</p>
+<h2 id="加载环境配置文件"><a href="#加载环境配置文件" class="headerlink" title="加载环境配置文件"></a>加载环境配置文件</h2><p>通过environment文件判断并设置当前的环境<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include_once</span> dirname(<span class="keyword">__FILE__</span>) . <span class="string">'/../etc/environment.php'</span>;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><p>通过修改apache或nginx配置，设置环境变量</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># apache</span></span><br><span class="line"><span class="comment"># SetEnv key=value</span></span><br><span class="line">SetEnv CI_ENV development_beta</span><br><span class="line"></span><br><span class="line"><span class="comment"># nginx</span></span><br><span class="line"><span class="comment"># key value</span></span><br><span class="line">fastcgi_param CI_ENV beta;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在通过<code>cli</code>运行时，通过<code>$_SERVER[&#39;argv&#39;]</code>获取传递给脚本的参数<code>数组</code>，第一个肯定为当前脚本名。  </p>
+</li>
+</ul>
+<h2 id="设置报警级别"><a href="#设置报警级别" class="headerlink" title="设置报警级别"></a>设置报警级别</h2><p>通过不同的环境变量，设置不同级别的报警。<br>CI默认会有三个级别：development（开发），testing（测试），production（生产）<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">switch</span> (ENVIRONMENT)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">case</span> <span class="string">'development'</span>:</span><br><span class="line">		error_reporting(E_ALL &amp; ~E_NOTICE);</span><br><span class="line">		ini_set(<span class="string">'display_errors'</span>, <span class="number">1</span>);</span><br><span class="line">	    <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">'development_beta'</span>:</span><br><span class="line">        error_reporting(E_ALL &amp; ~E_NOTICE &amp; ~E_WARNING);</span><br><span class="line">        ini_set(<span class="string">'display_errors'</span>, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">	<span class="keyword">case</span> <span class="string">'testing'</span>:</span><br><span class="line">	<span class="keyword">case</span> <span class="string">'production'</span>:</span><br><span class="line">		ini_set(<span class="string">'display_errors'</span>, <span class="number">0</span>);</span><br><span class="line">		<span class="keyword">if</span> (version_compare(PHP_VERSION, <span class="string">'5.3'</span>, <span class="string">'&gt;='</span>))</span><br><span class="line">		&#123;</span><br><span class="line">			error_reporting(E_ALL &amp; ~E_NOTICE &amp; ~E_DEPRECATED &amp; ~E_STRICT &amp; ~E_USER_NOTICE &amp; ~E_USER_DEPRECATED);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			error_reporting(E_ALL &amp; ~E_NOTICE &amp; ~E_STRICT &amp; ~E_USER_NOTICE);</span><br><span class="line">		&#125;</span><br><span class="line">	<span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">default</span>:</span><br><span class="line">		header(<span class="string">'HTTP/1.1 503 Service Unavailable.'</span>, <span class="keyword">TRUE</span>, <span class="number">503</span>);</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">'The application environment is not set correctly.'</span>;</span><br><span class="line">		<span class="keyword">exit</span>(<span class="number">1</span>); <span class="comment">// EXIT_ERROR</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="配置系统、应用、视图等程序目录"><a href="#配置系统、应用、视图等程序目录" class="headerlink" title="配置系统、应用、视图等程序目录"></a>配置系统、应用、视图等程序目录</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">// 定义系统目录名称</span></span><br><span class="line">$system_path = <span class="string">'../system'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义应用目录名称</span></span><br><span class="line">$application_folder = <span class="string">'../application'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 视图文件存放目录</span></span><br><span class="line"><span class="comment">// 如果为空，则默认到应用程序文件夹内的标准位置</span></span><br><span class="line">$view_folder = <span class="string">''</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="cli目录设置"><a href="#cli目录设置" class="headerlink" title="cli目录设置"></a>cli目录设置</h2><p>bool chdir ( string $directory )<br>将 PHP 的当前目录改为 directory  </p>
+<p>string dirname ( string $path )<br>给出一个包含有指向一个文件的全路径的字符串，本函数返回去掉文件名后的目录名。  </p>
+<p>string realpath ( string $path )<br>realpath() 扩展所有的符号连接并且处理输入的 path 中的 ‘/./‘, ‘/../‘ 以及多余的 ‘/‘ 并返回规范化后的绝对路径名。返回的路径中没有符号连接，’/./‘ 或 ‘/../‘ 成分。  </p>
+<p>STDIN、STDOUT、STDERR是PHP以 CLI（Command Line Interface）模式运行而定义的三个常量，这三个常量类似于Shell的stdin,stdout,stdout,分别是PHP CLI模式下的标准输入、标准输出和标准错误流。  </p>
+<p>这三行代码是为了保证命令行模式下，CI框架可以正常运行<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span> (defined(<span class="string">'STDIN'</span>))</span><br><span class="line">&#123;</span><br><span class="line">    chdir(dirname(<span class="keyword">__FILE__</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="系统、应用、视图等目录的正确性验证"><a href="#系统、应用、视图等目录的正确性验证" class="headerlink" title="系统、应用、视图等目录的正确性验证"></a>系统、应用、视图等目录的正确性验证</h2><h3 id="系统-system-文件目录的正确性验证"><a href="#系统-system-文件目录的正确性验证" class="headerlink" title="系统(system)文件目录的正确性验证"></a>系统(system)文件目录的正确性验证</h3><p>用于校验生成system系统文件目录, 得到规范化的绝对路径名<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span> (($_temp = realpath($system_path)) !== <span class="keyword">FALSE</span>)</span><br><span class="line">&#123;</span><br><span class="line">    $system_path = $_temp.<span class="string">'/'</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 确保后面有斜线</span></span><br><span class="line">    $system_path = rtrim($system_path, <span class="string">'/'</span>).<span class="string">'/'</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果$system_path所指向的文件目录不存在，则die</span></span><br><span class="line"><span class="keyword">if</span> ( ! is_dir($system_path))</span><br><span class="line">&#123;</span><br><span class="line">    header(<span class="string">'HTTP/1.1 503 Service Unavailable.'</span>, <span class="keyword">TRUE</span>, <span class="number">503</span>);</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">'Your system folder path does not appear to be set correctly. Please open the following file and correct this: '</span>.pathinfo(<span class="keyword">__FILE__</span>, PATHINFO_BASENAME);</span><br><span class="line">    <span class="keyword">exit</span>(<span class="number">3</span>); <span class="comment">// EXIT_CONFIG</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="定义主要的路径常量"><a href="#定义主要的路径常量" class="headerlink" title="定义主要的路径常量"></a>定义主要的路径常量</h3><p>mixed pathinfo ( string $path [, int $options = PATHINFO_DIRNAME | PATHINFO_BASENAME | PATHINFO_EXTENSION | PATHINFO_FILENAME ] )<br>pathinfo() 返回一个关联数组包含有 path 的信息。返回关联数组还是字符串取决于 options。  </p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">// The name of THIS file</span></span><br><span class="line">define(<span class="string">'SELF'</span>, pathinfo(<span class="keyword">__FILE__</span>, PATHINFO_BASENAME));</span><br><span class="line"></span><br><span class="line"><span class="comment">// Path to the system folder</span></span><br><span class="line">define(<span class="string">'BASEPATH'</span>, str_replace(<span class="string">'\\'</span>, <span class="string">'/'</span>, $system_path));</span><br><span class="line"></span><br><span class="line"><span class="comment">// Path to the front controller (this file)</span></span><br><span class="line">define(<span class="string">'FCPATH'</span>, dirname(<span class="keyword">__FILE__</span>).<span class="string">'/'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Name of the "system folder"</span></span><br><span class="line">define(<span class="string">'SYSDIR'</span>, trim(strrchr(trim(BASEPATH, <span class="string">'/'</span>), <span class="string">'/'</span>), <span class="string">'/'</span>));</span><br></pre></td></tr></table></figure>
+<h3 id="应用-application-文件目录的正确性验证"><a href="#应用-application-文件目录的正确性验证" class="headerlink" title="应用(application)文件目录的正确性验证"></a>应用(application)文件目录的正确性验证</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span> (is_dir($application_folder))</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (($_temp = realpath($application_folder)) !== <span class="keyword">FALSE</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        $application_folder = $_temp;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    define(<span class="string">'APPPATH'</span>, $application_folder.DIRECTORY_SEPARATOR);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> ( ! is_dir(BASEPATH.$application_folder.DIRECTORY_SEPARATOR))</span><br><span class="line">    &#123;</span><br><span class="line">        header(<span class="string">'HTTP/1.1 503 Service Unavailable.'</span>, <span class="keyword">TRUE</span>, <span class="number">503</span>);</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'Your application folder path does not appear to be set correctly. Please open the following file and correct this: '</span>.<span class="keyword">SELF</span>;</span><br><span class="line">        <span class="keyword">exit</span>(<span class="number">3</span>); <span class="comment">// EXIT_CONFIG</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    define(<span class="string">'APPPATH'</span>, BASEPATH.$application_folder.DIRECTORY_SEPARATOR);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="视图-view-文件目录的正确性验证"><a href="#视图-view-文件目录的正确性验证" class="headerlink" title="视图(view)文件目录的正确性验证"></a>视图(view)文件目录的正确性验证</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span> ( ! is_dir($view_folder))</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> ( ! <span class="keyword">empty</span>($view_folder) &amp;&amp; is_dir(APPPATH.$view_folder.DIRECTORY_SEPARATOR))</span><br><span class="line">    &#123;</span><br><span class="line">        $view_folder = APPPATH.$view_folder;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">elseif</span> ( ! is_dir(APPPATH.<span class="string">'views'</span>.DIRECTORY_SEPARATOR))</span><br><span class="line">    &#123;</span><br><span class="line">        header(<span class="string">'HTTP/1.1 503 Service Unavailable.'</span>, <span class="keyword">TRUE</span>, <span class="number">503</span>);</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'Your view folder path does not appear to be set correctly. Please open the following file and correct this: '</span>.<span class="keyword">SELF</span>;</span><br><span class="line">        <span class="keyword">exit</span>(<span class="number">3</span>); <span class="comment">// EXIT_CONFIG</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        $view_folder = APPPATH.<span class="string">'views'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (($_temp = realpath($view_folder)) !== <span class="keyword">FALSE</span>)</span><br><span class="line">&#123;</span><br><span class="line">    $view_folder = $_temp.DIRECTORY_SEPARATOR;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">    $view_folder = rtrim($view_folder, <span class="string">'/\\'</span>).DIRECTORY_SEPARATOR;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">define(<span class="string">'VIEWPATH'</span>, $view_folder);</span><br></pre></td></tr></table></figure>
+<h2 id="加载composer"><a href="#加载composer" class="headerlink" title="加载composer"></a>加载composer</h2><p>各种包的加载<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include_once</span> dirname(<span class="keyword">__FILE__</span>) . <span class="string">'/../vendor/autoload.php'</span>;</span><br></pre></td></tr></table></figure></p>
+<h2 id="其余初始化的文件加载"><a href="#其余初始化的文件加载" class="headerlink" title="其余初始化的文件加载"></a>其余初始化的文件加载</h2><p>包括一些监控、报警、调用链追踪<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include_once</span> dirname(<span class="keyword">__FILE__</span>) . <span class="string">'/../etc/load_all.php'</span>;</span><br></pre></td></tr></table></figure></p>
+<h2 id="加载核心文件"><a href="#加载核心文件" class="headerlink" title="加载核心文件"></a>加载核心文件</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">require_once</span> BASEPATH.<span class="string">'core/CodeIgniter.php'</span>;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>defined() - 检查某个名称的常量是否存在<br>get_loaded_extensions() - 返回所有编译并加载模块名的 array<br>get_defined_functions() - 返回所有已定义函数的数组<br>get_defined_vars() - 返回由所有已定义变量所组成的数组  </p>
+</blockquote>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-07-08T09:21:19.113Z" itemprop="dateUpdated">2018-07-08 17:21:19</time>
+</span><br>
+
+
+        
+        原文链接：<a href="/2018/07/02/CI框架3.x源码阅读笔记一之入口文件index.php.md/" target="_blank" rel="external">https://pengwenwu.github.io/2018/07/02/CI框架3.x源码阅读笔记一之入口文件index.php.md/</a>
+        
+    </div>
+    <footer>
+        <a href="https://pengwenwu.github.io">
+            <img src="/img/avatar.jpg" alt="pengwenwu">
+            pengwenwu
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CodeIgniter/">CodeIgniter</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://pengwenwu.github.io/2018/07/02/CI框架3.x源码阅读笔记一之入口文件index.php.md/&title=《CI框架3.x源码阅读笔记一之入口文件index.php》 — Pena's Blog&pic=https://pengwenwu.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://pengwenwu.github.io/2018/07/02/CI框架3.x源码阅读笔记一之入口文件index.php.md/&title=《CI框架3.x源码阅读笔记一之入口文件index.php》 — Pena's Blog&source=pengwenwu的个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://pengwenwu.github.io/2018/07/02/CI框架3.x源码阅读笔记一之入口文件index.php.md/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《CI框架3.x源码阅读笔记一之入口文件index.php》 — Pena's Blog&url=https://pengwenwu.github.io/2018/07/02/CI框架3.x源码阅读笔记一之入口文件index.php.md/&via=https://pengwenwu.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://pengwenwu.github.io/2018/07/02/CI框架3.x源码阅读笔记一之入口文件index.php.md/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/07/03/PHP静态变量/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">PHP静态变量</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/06/27/workerman入门/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">workerman入门</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'true' == 'true',
+            appId: "U2qzDNI480QyyzN2kDGB7bGu-gzGzoHsz",
+            appKey: "6o2PFFkLctFMxXg3qBrhr0CF",
+            avatar: "retro",
+            placeholder: "要不要说点什么？",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>pengwenwu &copy; 2017 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://pengwenwu.github.io/2018/07/02/CI框架3.x源码阅读笔记一之入口文件index.php.md/&title=《CI框架3.x源码阅读笔记一之入口文件index.php》 — Pena's Blog&pic=https://pengwenwu.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://pengwenwu.github.io/2018/07/02/CI框架3.x源码阅读笔记一之入口文件index.php.md/&title=《CI框架3.x源码阅读笔记一之入口文件index.php》 — Pena's Blog&source=pengwenwu的个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://pengwenwu.github.io/2018/07/02/CI框架3.x源码阅读笔记一之入口文件index.php.md/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《CI框架3.x源码阅读笔记一之入口文件index.php》 — Pena's Blog&url=https://pengwenwu.github.io/2018/07/02/CI框架3.x源码阅读笔记一之入口文件index.php.md/&via=https://pengwenwu.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://pengwenwu.github.io/2018/07/02/CI框架3.x源码阅读笔记一之入口文件index.php.md/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADK0lEQVR42u3aQW4jMQwEQP//094HZG13UxPAw9ScgsAZqeQDQ7Yej/h5/nh+/v7V59+/c7Zu+57hg42NjX0T9vPtk3wmOY5XR9Pu5/178r/CxsbG3sd+XxjeA/KiMqO+P7hkb9jY2NjYsyOYlcYcho2NjY19wm4bleRo2q1jY2NjY5+3AbMx/WzcnxfUi2dp2NjY2F/Pzjf6/T//Sr6NjY2N/cXsZ/nkBay94pM3ORcosLGxsRex2+B2xjgZJJ1EAh+aH2xsbOyl7DwGyDcxw7fDoPYyKDY2NvYmdv5P/+xocuSsXcn3VlRmbGxs7Juw8+0mC+ctwaz4JetGjQo2Njb2UnY7+p+FrLNm4+Ryz3/WwsbGxl7KzstDvuk2PJ5FEfXXgI2Njb2OfTKCz4+mHTbl76xLKTY2NvYidl7Y2qFSco2ypc7apOKrxcbGxr4t+6qYNi9vs5bm4q8KGxsbewW7LUV5Ecrbj9layZFFFy6xsbGxV7PbwjOLAa4KFYrrO9jY2Njr2OfhwUmLMjvQZLcvmxNsbGzsdeyrwtd2fJ9fl2zf8KHsYWNjYy9i50WoHeIk2y1KTvD5/DPY2NjYm9h5iWoj4dnFzfbq5zBgxsbGxl7EztuPpDlpC96sBLYx8IfDxcbGxl7BnkWz54XqqmHTLDDAxsbG3sGeDZLyMpaXrna8dfFQCRsbG/u27LzknAex7TWd2cWgZC1sbGzsTex8i7NNt5eB2rii3TM2Njb2Vna+5Hl5ywdDLbIYUWFjY2MvYp8ErtcOp646jpOYGRsbG/u+7Flommw3OYKcehJFF7M0bGxs7Nuy28s0bdCbrJKXn6S8RTeVsLGxsRexZ1HBY/S0K55cAHpZs7CxsbFXsJ/lM5vM1EHsr0XFUeeEjY2NfSv2SclJFjsPX08GSbMvBhsbG/uO7Nlwf9au5Ftv4+R6CIWNjY29jt2GpnkNbC8AtUVu+FfY2NjYf56dFK12VJQHA/m6Hy5fYmNjY/9Jdj7ob8vVSaNSR8vY2NjY69hJw5DHvTkvKUUn8cDLY8XGxsZexJ4NaJIh/rXH2h7xBdd3sLGxsb+d/Q8+UO05R/ipdAAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.1"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.1" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
