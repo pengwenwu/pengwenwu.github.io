@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>CI框架3.x源码阅读笔记二之核心文件CodeIgniter.php | Pena&#39;s Blog | 莫道君行早，更有早行人</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="PHP,CodeIgniter">
+    <meta name="description" content="核心文件CodeIgniter.php文件地址: system/core/CodeIgniter.php   加载框架常量、函数库以及框架初始化加载框架常量constants.php文件1234567&amp;lt;?phpif (file_exists(APPPATH.&apos;config/&apos;.ENVIRONMENT.&apos;/constants.php&apos;))&amp;#123;    require_once(APPPA">
+<meta name="keywords" content="PHP,CodeIgniter">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CI框架3.x源码阅读笔记二之核心文件CodeIgniter.php">
+<meta property="og:url" content="https://pengwenwu.github.io/2018/07/13/CI框架3-x源码阅读笔记二之核心文件CodeIgniter-php/index.html">
+<meta property="og:site_name" content="Pena&#39;s Blog">
+<meta property="og:description" content="核心文件CodeIgniter.php文件地址: system/core/CodeIgniter.php   加载框架常量、函数库以及框架初始化加载框架常量constants.php文件1234567&amp;lt;?phpif (file_exists(APPPATH.&apos;config/&apos;.ENVIRONMENT.&apos;/constants.php&apos;))&amp;#123;    require_once(APPPA">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-07-12T16:15:10.617Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CI框架3.x源码阅读笔记二之核心文件CodeIgniter.php">
+<meta name="twitter:description" content="核心文件CodeIgniter.php文件地址: system/core/CodeIgniter.php   加载框架常量、函数库以及框架初始化加载框架常量constants.php文件1234567&amp;lt;?phpif (file_exists(APPPATH.&apos;config/&apos;.ENVIRONMENT.&apos;/constants.php&apos;))&amp;#123;    require_once(APPPA">
+    
+        <link rel="alternate" type="application/atom+xml" title="Pena&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.jpg">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.1">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">pengwenwu</h5>
+          <a href="mailto:pww932589183@163.com" title="pww932589183@163.com" class="mail">pww932589183@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/pengwenwu" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">CI框架3.x源码阅读笔记二之核心文件CodeIgniter.php</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">CI框架3.x源码阅读笔记二之核心文件CodeIgniter.php</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-07-12T16:14:42.000Z" itemprop="datePublished" class="page-time">
+  2018-07-13
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/后端/">后端</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#核心文件CodeIgniter-php"><span class="post-toc-number">1.</span> <span class="post-toc-text">核心文件CodeIgniter.php</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#加载框架常量、函数库以及框架初始化"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">加载框架常量、函数库以及框架初始化</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#加载框架常量constants-php文件"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">加载框架常量constants.php文件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#加载全局函数库Common-php"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">加载全局函数库Common.php</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#进行全局变量安全处理"><span class="post-toc-number">1.1.3.</span> <span class="post-toc-text">进行全局变量安全处理</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#自定义错误、异常和程序完成的函数"><span class="post-toc-number">1.1.4.</span> <span class="post-toc-text">自定义错误、异常和程序完成的函数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#检查核心class是否被扩展"><span class="post-toc-number">1.1.5.</span> <span class="post-toc-text">检查核心class是否被扩展</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#加载composer"><span class="post-toc-number">1.1.6.</span> <span class="post-toc-text">加载composer</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#加载核心类组件"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">加载核心类组件</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#BenchMark-gt-BM"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">BenchMark-&gt;BM</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#钩子类-gt-EXT"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">钩子类-&gt;EXT</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#配置类-gt-CFG"><span class="post-toc-number">1.2.3.</span> <span class="post-toc-text">配置类-&gt;CFG</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#字符集设置相关扩展开启"><span class="post-toc-number">1.2.4.</span> <span class="post-toc-text">字符集设置相关扩展开启</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#加载兼容性特性包"><span class="post-toc-number">1.2.5.</span> <span class="post-toc-text">加载兼容性特性包</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Utf8类-gt-UNI"><span class="post-toc-number">1.2.6.</span> <span class="post-toc-text">Utf8类-&gt;UNI</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#URI类"><span class="post-toc-number">1.2.7.</span> <span class="post-toc-text">URI类</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#路由类-gt-RTR"><span class="post-toc-number">1.2.8.</span> <span class="post-toc-text">路由类-&gt;RTR</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#OUTPUT类-gt-OUT"><span class="post-toc-number">1.2.9.</span> <span class="post-toc-text">OUTPUT类-&gt;OUT</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#安全类-gt-SEC"><span class="post-toc-number">1.2.10.</span> <span class="post-toc-text">安全类-&gt;SEC</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#输入及过滤类-gt-IN"><span class="post-toc-number">1.2.11.</span> <span class="post-toc-text">输入及过滤类-&gt;IN</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#语言类-gt-LANG"><span class="post-toc-number">1.2.12.</span> <span class="post-toc-text">语言类-&gt;LANG</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#加载app应用控制器和本地system控制器"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">加载app应用控制器和本地system控制器</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#路由的设置与判断"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">路由的设置与判断</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#解析请求的类，并调用请求的方法"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">解析请求的类，并调用请求的方法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#输出"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">输出</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-CI框架3-x源码阅读笔记二之核心文件CodeIgniter-php"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">CI框架3.x源码阅读笔记二之核心文件CodeIgniter.php</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-07-13 00:14:42" datetime="2018-07-12T16:14:42.000Z"  itemprop="datePublished">2018-07-13</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/后端/">后端</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="核心文件CodeIgniter-php"><a href="#核心文件CodeIgniter-php" class="headerlink" title="核心文件CodeIgniter.php"></a>核心文件CodeIgniter.php</h1><p>文件地址: system/core/CodeIgniter.php  </p>
+<h2 id="加载框架常量、函数库以及框架初始化"><a href="#加载框架常量、函数库以及框架初始化" class="headerlink" title="加载框架常量、函数库以及框架初始化"></a>加载框架常量、函数库以及框架初始化</h2><h3 id="加载框架常量constants-php文件"><a href="#加载框架常量constants-php文件" class="headerlink" title="加载框架常量constants.php文件"></a>加载框架常量constants.php文件</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span> (file_exists(APPPATH.<span class="string">'config/'</span>.ENVIRONMENT.<span class="string">'/constants.php'</span>))</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">require_once</span>(APPPATH.<span class="string">'config/'</span>.ENVIRONMENT.<span class="string">'/constants.php'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">require_once</span>(APPPATH.<span class="string">'config/constants.php'</span>);</span><br></pre></td></tr></table></figure>
+<p>通过<code>ENVIRONMENT</code>常量去加载不同目录的constants.php，内容主要是一些<code>常量的定义</code>  </p>
+<h3 id="加载全局函数库Common-php"><a href="#加载全局函数库Common-php" class="headerlink" title="加载全局函数库Common.php"></a>加载全局函数库Common.php</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">require_once</span>(BASEPATH.<span class="string">'core/Common.php'</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="进行全局变量安全处理"><a href="#进行全局变量安全处理" class="headerlink" title="进行全局变量安全处理"></a>进行全局变量安全处理</h3><p>如果低于php5.4版本，将进行全局变量安全处理。  </p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span> ( ! is_php(<span class="string">'5.4'</span>))</span><br><span class="line">&#123;</span><br><span class="line">	ini_set(<span class="string">'magic_quotes_runtime'</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> ((bool) ini_get(<span class="string">'register_globals'</span>))</span><br><span class="line">	&#123;</span><br><span class="line">		$_protected = <span class="keyword">array</span>(</span><br><span class="line">			<span class="string">'_SERVER'</span>,</span><br><span class="line">			<span class="string">'_GET'</span>,</span><br><span class="line">			<span class="string">'_POST'</span>,</span><br><span class="line">			<span class="string">'_FILES'</span>,</span><br><span class="line">			<span class="string">'_REQUEST'</span>,</span><br><span class="line">			<span class="string">'_SESSION'</span>,</span><br><span class="line">			<span class="string">'_ENV'</span>,</span><br><span class="line">			<span class="string">'_COOKIE'</span>,</span><br><span class="line">			<span class="string">'GLOBALS'</span>,</span><br><span class="line">			<span class="string">'HTTP_RAW_POST_DATA'</span>,</span><br><span class="line">			<span class="string">'system_path'</span>,</span><br><span class="line">			<span class="string">'application_folder'</span>,</span><br><span class="line">			<span class="string">'view_folder'</span>,</span><br><span class="line">			<span class="string">'_protected'</span>,</span><br><span class="line">			<span class="string">'_registered'</span></span><br><span class="line">		);</span><br><span class="line"></span><br><span class="line">		$_registered = ini_get(<span class="string">'variables_order'</span>);</span><br><span class="line">		<span class="keyword">foreach</span> (<span class="keyword">array</span>(<span class="string">'E'</span> =&gt; <span class="string">'_ENV'</span>, <span class="string">'G'</span> =&gt; <span class="string">'_GET'</span>, <span class="string">'P'</span> =&gt; <span class="string">'_POST'</span>, <span class="string">'C'</span> =&gt; <span class="string">'_COOKIE'</span>, <span class="string">'S'</span> =&gt; <span class="string">'_SERVER'</span>) <span class="keyword">as</span> $key =&gt; $superglobal)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (strpos($_registered, $key) === <span class="keyword">FALSE</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">continue</span>;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			<span class="keyword">foreach</span> (array_keys($$superglobal) <span class="keyword">as</span> $var)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">if</span> (<span class="keyword">isset</span>($GLOBALS[$var]) &amp;&amp; ! in_array($var, $_protected, <span class="keyword">TRUE</span>))</span><br><span class="line">				&#123;</span><br><span class="line">					$GLOBALS[$var] = <span class="keyword">NULL</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="自定义错误、异常和程序完成的函数"><a href="#自定义错误、异常和程序完成的函数" class="headerlink" title="自定义错误、异常和程序完成的函数"></a>自定义错误、异常和程序完成的函数</h3><p>定义一个自定义错误处理程序，以便记录PHP错误</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">set_error_handler(<span class="string">'_error_handler'</span>);</span><br><span class="line">set_exception_handler(<span class="string">'_exception_handler'</span>);</span><br><span class="line">register_shutdown_function(<span class="string">'_shutdown_handler'</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="检查核心class是否被扩展"><a href="#检查核心class是否被扩展" class="headerlink" title="检查核心class是否被扩展"></a>检查核心class是否被扩展</h3><p><code>$assign_to_config</code>是定义在入口文件Index.php中的配置数组，被注释掉了。  </p>
+<p>这里的<code>subclass_prefix</code>配置默认项是在APPPATH/Config/config.php目录。  </p>
+<p>即index.php文件中的<code>subclass_prefix</code>配置项具有优先权，会覆盖config中的配置。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span> (!<span class="keyword">empty</span>($assign_to_config[<span class="string">'subclass_prefix'</span>]))</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">// 这里的get_config是全局函数，主要用于新增或替换原有配置</span></span><br><span class="line">	get_config(<span class="keyword">array</span>(<span class="string">'subclass_prefix'</span> =&gt; $assign_to_config[<span class="string">'subclass_prefix'</span>]));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="加载composer"><a href="#加载composer" class="headerlink" title="加载composer"></a>加载composer</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span> ($composer_autoload = config_item(<span class="string">'composer_autoload'</span>))</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span> ($composer_autoload === <span class="keyword">TRUE</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		file_exists(APPPATH.<span class="string">'vendor/autoload.php'</span>)</span><br><span class="line">			? <span class="keyword">require_once</span>(APPPATH.<span class="string">'vendor/autoload.php'</span>)</span><br><span class="line">			: log_message(<span class="string">'error'</span>, <span class="string">'$config[\'composer_autoload\'] is set to TRUE but '</span>.APPPATH.<span class="string">'vendor/autoload.php was not found.'</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">elseif</span> (file_exists($composer_autoload))</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">require_once</span>($composer_autoload);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		log_message(<span class="string">'error'</span>, <span class="string">'Could not find the specified $config[\'composer_autoload\'] path: '</span>.$composer_autoload);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="加载核心类组件"><a href="#加载核心类组件" class="headerlink" title="加载核心类组件"></a>加载核心类组件</h2><h3 id="BenchMark-gt-BM"><a href="#BenchMark-gt-BM" class="headerlink" title="BenchMark-&gt;BM"></a>BenchMark-&gt;BM</h3><p>指BenchMark，是CI的基准点组件，主要用于mark各种时间点、记录内存使用等参数，便于性能测试和追踪  </p>
+<p>只是用来计算程序运行消耗的时间和内存  </p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$BM =&amp; load_class(<span class="string">'Benchmark'</span>, <span class="string">'core'</span>);</span><br><span class="line">$BM-&gt;mark(<span class="string">'total_execution_time_start'</span>);</span><br><span class="line">$BM-&gt;mark(<span class="string">'loading_time:_base_classes_start'</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="钩子类-gt-EXT"><a href="#钩子类-gt-EXT" class="headerlink" title="钩子类-&gt;EXT"></a>钩子类-&gt;EXT</h3><p>Hooks钩子类 - 提供一种机制来扩展基本系统而不进行黑客攻击。</p>
+<p>用于在不改变CI核心的基础上改变或者增加系统的核心运行功能。Hook钩子允许你在系统运行的各个挂钩点（hook point）添加自定义的功能和跟踪，如pre_system，pre_controller，post_controller等预定义的挂钩点。以下所有的$EXT-&gt;_call_hook(“xxx”); 均是call特定挂钩点的程序（如果有的话）。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * ------------------------------------------------------</span></span><br><span class="line"><span class="comment"> *  Instantiate the hooks class</span></span><br><span class="line"><span class="comment"> * ------------------------------------------------------</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">$EXT =&amp; load_class(<span class="string">'Hooks'</span>, <span class="string">'core'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * ------------------------------------------------------</span></span><br><span class="line"><span class="comment"> *  Is there a "pre_system" hook?</span></span><br><span class="line"><span class="comment"> * ------------------------------------------------------</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">$EXT-&gt;call_hook(<span class="string">'pre_system'</span>);</span><br></pre></td></tr></table></figure></p>
+<h3 id="配置类-gt-CFG"><a href="#配置类-gt-CFG" class="headerlink" title="配置类-&gt;CFG"></a>配置类-&gt;CFG</h3><p>Config配置管理组件。主要用于加载配置文件、获取和设置配置项等<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$CFG =&amp; load_class(<span class="string">'Config'</span>, <span class="string">'core'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Do we have any manually set config items in the index.php file?</span></span><br><span class="line"><span class="comment">// 上文提到过，在index.php入口文件中，配置项具有优先权，会替换替他文件内的配置</span></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($assign_to_config) &amp;&amp; is_array($assign_to_config))</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">foreach</span> ($assign_to_config <span class="keyword">as</span> $key =&gt; $value)</span><br><span class="line">	&#123;</span><br><span class="line">		$CFG-&gt;set_item($key, $value);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="字符集设置相关扩展开启"><a href="#字符集设置相关扩展开启" class="headerlink" title="字符集设置相关扩展开启"></a>字符集设置相关扩展开启</h3><p>bool extension_loaded ( string $name )<br>检查一个扩展是否已经加载。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">// 获取配置项里的charset字符集配置</span></span><br><span class="line"><span class="comment">// config类的构造函数，会去获取APP应用目录下的配置</span></span><br><span class="line">$charset = strtoupper(config_item(<span class="string">'charset'</span>));</span><br><span class="line">ini_set(<span class="string">'default_charset'</span>, $charset);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 检查mbstring扩展项是否开启</span></span><br><span class="line"><span class="keyword">if</span> (extension_loaded(<span class="string">'mbstring'</span>))</span><br><span class="line">&#123;</span><br><span class="line">	define(<span class="string">'MB_ENABLED'</span>, <span class="keyword">TRUE</span>);</span><br><span class="line">	<span class="comment">// mbstring.internal_encoding is deprecated starting with PHP 5.6</span></span><br><span class="line">	<span class="comment">// and it's usage triggers E_DEPRECATED messages.</span></span><br><span class="line">	@ini_set(<span class="string">'mbstring.internal_encoding'</span>, $charset);</span><br><span class="line">	<span class="comment">// This is required for mb_convert_encoding() to strip invalid characters.</span></span><br><span class="line">	<span class="comment">// That's utilized by CI_Utf8, but it's also done for consistency with iconv.</span></span><br><span class="line">	mb_substitute_character(<span class="string">'none'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">	define(<span class="string">'MB_ENABLED'</span>, <span class="keyword">FALSE</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 开启字符集转换扩展</span></span><br><span class="line"><span class="comment">// There's an ICONV_IMPL constant, but the PHP manual says that using</span></span><br><span class="line"><span class="comment">// iconv's predefined constants is "strongly discouraged".</span></span><br><span class="line"><span class="keyword">if</span> (extension_loaded(<span class="string">'iconv'</span>))</span><br><span class="line">&#123;</span><br><span class="line">	define(<span class="string">'ICONV_ENABLED'</span>, <span class="keyword">TRUE</span>);</span><br><span class="line">	<span class="comment">// iconv.internal_encoding is deprecated starting with PHP 5.6</span></span><br><span class="line">	<span class="comment">// and it's usage triggers E_DEPRECATED messages.</span></span><br><span class="line">	@ini_set(<span class="string">'iconv.internal_encoding'</span>, $charset);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">	define(<span class="string">'ICONV_ENABLED'</span>, <span class="keyword">FALSE</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置内部编码</span></span><br><span class="line"><span class="keyword">if</span> (is_php(<span class="string">'5.6'</span>))</span><br><span class="line">&#123;</span><br><span class="line">	ini_set(<span class="string">'php.internal_encoding'</span>, $charset);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="加载兼容性特性包"><a href="#加载兼容性特性包" class="headerlink" title="加载兼容性特性包"></a>加载兼容性特性包</h3><p><code>重写</code>系统组件的一些方法  </p>
+<ul>
+<li><p>mbstring<br>  mb_strlen - 字符串长度<br>  mb_strpos - 字符串查找<br>  mb_substr - 字符串截取  </p>
+</li>
+<li><p>hash<br>  hash - 生成哈希值<br>  hash_equals - 可防止时序攻击的字符串比较<br>  hash_pbkdf2 - 生成所提供密码的 PBKDF2 密钥导出  </p>
+</li>
+<li><p>password<br>  password_hash - 创建密码的散列，兼容<code>crypt()</code>，PHP7.0.0后已废弃<code>salt</code><br>  password_get_info - 返回指定散列（hash）的相关信息<br>  password_needs_rehash - 检测散列值是否匹配指定的选项<br>  password_verify - 验证密码是否和散列值匹配</p>
+</li>
+<li><p>standard<br>  array_column - 返回数组中指定的一列<br>  hex2bin - 转换十六进制字符串为二进制字符串<br>  array_replace - 使用传递的数组替换第一个数组的元素<br>  array_replace_recursive - 使用传递的数组递归替换第一个数组的元素<br>  quoted_printable_encode - 将 8-bit 字符串转换成 quoted-printable 字符串  </p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">// 中文字符串处理</span></span><br><span class="line"><span class="keyword">require_once</span>(BASEPATH.<span class="string">'core/compat/mbstring.php'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// hash处理</span></span><br><span class="line"><span class="keyword">require_once</span>(BASEPATH.<span class="string">'core/compat/hash.php'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 加密兼容处理</span></span><br><span class="line"><span class="keyword">require_once</span>(BASEPATH.<span class="string">'core/compat/password.php'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 标准兼容处理</span></span><br><span class="line"><span class="keyword">require_once</span>(BASEPATH.<span class="string">'core/compat/standard.php'</span>);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="Utf8类-gt-UNI"><a href="#Utf8类-gt-UNI" class="headerlink" title="Utf8类-&gt;UNI"></a>Utf8类-&gt;UNI</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$UNI =&amp; load_class(<span class="string">'Utf8'</span>, <span class="string">'core'</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="URI类"><a href="#URI类" class="headerlink" title="URI类"></a>URI类</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$URI =&amp; load_class(<span class="string">'URI'</span>, <span class="string">'core'</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="路由类-gt-RTR"><a href="#路由类-gt-RTR" class="headerlink" title="路由类-&gt;RTR"></a>路由类-&gt;RTR</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$RTR =&amp; load_class(<span class="string">'Router'</span>, <span class="string">'core'</span>, <span class="keyword">isset</span>($routing) ? $routing : <span class="keyword">NULL</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="OUTPUT类-gt-OUT"><a href="#OUTPUT类-gt-OUT" class="headerlink" title="OUTPUT类-&gt;OUT"></a>OUTPUT类-&gt;OUT</h3><p>最终输出管理组件<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$OUT =&amp; load_class(<span class="string">'Output'</span>, <span class="string">'core'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 判断是否有有效的缓存文件，有的话执行结束</span></span><br><span class="line"><span class="keyword">if</span> ($EXT-&gt;call_hook(<span class="string">'cache_override'</span>) === <span class="keyword">FALSE</span> &amp;&amp; $OUT-&gt;_display_cache($CFG, $URI) === <span class="keyword">TRUE</span>)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">exit</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="安全类-gt-SEC"><a href="#安全类-gt-SEC" class="headerlink" title="安全类-&gt;SEC"></a>安全类-&gt;SEC</h3><p>为xss和csrf支持加载安全类<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$SEC =&amp; load_class(<span class="string">'Security'</span>, <span class="string">'core'</span>);</span><br></pre></td></tr></table></figure></p>
+<h3 id="输入及过滤类-gt-IN"><a href="#输入及过滤类-gt-IN" class="headerlink" title="输入及过滤类-&gt;IN"></a>输入及过滤类-&gt;IN</h3><p>用于获取输入以及表单验证<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$IN	=&amp; load_class(<span class="string">'Input'</span>, <span class="string">'core'</span>);</span><br></pre></td></tr></table></figure></p>
+<h3 id="语言类-gt-LANG"><a href="#语言类-gt-LANG" class="headerlink" title="语言类-&gt;LANG"></a>语言类-&gt;LANG</h3><p>用于设置框架语言<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$LANG =&amp; load_class(<span class="string">'Lang'</span>, <span class="string">'core'</span>);</span><br></pre></td></tr></table></figure></p>
+<h2 id="加载app应用控制器和本地system控制器"><a href="#加载app应用控制器和本地system控制器" class="headerlink" title="加载app应用控制器和本地system控制器"></a>加载app应用控制器和本地system控制器</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">// 加载本地system原始控制器</span></span><br><span class="line"><span class="comment">// 这里没有用load_class()；的原因是我们最终并不会直接使用该基类，都是针对继承后新的类</span></span><br><span class="line"><span class="keyword">require_once</span> BASEPATH.<span class="string">'core/Controller.php'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 定义get_instance();方法，通过调用CI_Controller::get_instance()可以实现单例化</span></span><br><span class="line"><span class="comment">* 调用此函数可方便以后直接取得当前应用控制器</span></span><br><span class="line"><span class="comment">* Reference to the CI_Controller method.</span></span><br><span class="line"><span class="comment">*</span></span><br><span class="line"><span class="comment">* Returns current CI instance object</span></span><br><span class="line"><span class="comment">*</span></span><br><span class="line"><span class="comment">* <span class="doctag">@return</span> object</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> &amp;<span class="title">get_instance</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> CI_Controller::get_instance();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 加载app应用的自定义控制器</span></span><br><span class="line"><span class="keyword">if</span> (file_exists(APPPATH.<span class="string">'core/'</span>.$CFG-&gt;config[<span class="string">'subclass_prefix'</span>].<span class="string">'Controller.php'</span>))</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">require_once</span> APPPATH.<span class="string">'core/'</span>.$CFG-&gt;config[<span class="string">'subclass_prefix'</span>].<span class="string">'Controller.php'</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 为基准设置一个标记点，记录时间</span></span><br><span class="line">$BM-&gt;mark(<span class="string">'loading_time:_base_classes_end'</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="路由的设置与判断"><a href="#路由的设置与判断" class="headerlink" title="路由的设置与判断"></a>路由的设置与判断</h2><p>会有下面几种情况认为是404：  </p>
+<ul>
+<li>访问的文件不存在</li>
+<li>请求的class不存在  </li>
+<li>请求私有方法</li>
+<li>请求原始基类</li>
+<li>请求的方法不存在</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$e404 = <span class="keyword">FALSE</span>;</span><br><span class="line">$class = ucfirst($RTR-&gt;class);</span><br><span class="line">$method = $RTR-&gt;method;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 文件不存在</span></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">empty</span>($class) <span class="keyword">OR</span> ! file_exists(APPPATH.<span class="string">'controllers/'</span>.$RTR-&gt;directory.$class.<span class="string">'.php'</span>))</span><br><span class="line">&#123;</span><br><span class="line">	$e404 = <span class="keyword">TRUE</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">// 加载该class文件</span></span><br><span class="line">	<span class="keyword">require_once</span>(APPPATH.<span class="string">'controllers/'</span>.$RTR-&gt;directory.$class.<span class="string">'.php'</span>);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 该class不存在 || 请求私有方法 || 请求原始基类</span></span><br><span class="line">	<span class="keyword">if</span> ( ! class_exists($class, <span class="keyword">FALSE</span>) <span class="keyword">OR</span> $method[<span class="number">0</span>] === <span class="string">'_'</span> <span class="keyword">OR</span> method_exists(<span class="string">'CI_Controller'</span>, $method))</span><br><span class="line">	&#123;</span><br><span class="line">		$e404 = <span class="keyword">TRUE</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">elseif</span> (method_exists($class, <span class="string">'_remap'</span>))</span><br><span class="line">	&#123;</span><br><span class="line">		$params = <span class="keyword">array</span>($method, array_slice($URI-&gt;rsegments, <span class="number">2</span>));</span><br><span class="line">		$method = <span class="string">'_remap'</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 请求的方法不存在</span></span><br><span class="line">	<span class="keyword">elseif</span> ( ! in_array(strtolower($method), array_map(<span class="string">'strtolower'</span>, get_class_methods($class)), <span class="keyword">TRUE</span>))</span><br><span class="line">	&#123;</span><br><span class="line">		$e404 = <span class="keyword">TRUE</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 针对404的处理</span></span><br><span class="line"><span class="keyword">if</span> ($e404)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span> ( ! <span class="keyword">empty</span>($RTR-&gt;routes[<span class="string">'404_override'</span>]))</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (sscanf($RTR-&gt;routes[<span class="string">'404_override'</span>], <span class="string">'%[^/]/%s'</span>, $error_class, $error_method) !== <span class="number">2</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			$error_method = <span class="string">'index'</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		$error_class = ucfirst($error_class);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> ( ! class_exists($error_class, <span class="keyword">FALSE</span>))</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (file_exists(APPPATH.<span class="string">'controllers/'</span>.$RTR-&gt;directory.$error_class.<span class="string">'.php'</span>))</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">require_once</span>(APPPATH.<span class="string">'controllers/'</span>.$RTR-&gt;directory.$error_class.<span class="string">'.php'</span>);</span><br><span class="line">				$e404 = ! class_exists($error_class, <span class="keyword">FALSE</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="comment">// Were we in a directory? If so, check for a global override</span></span><br><span class="line">			<span class="keyword">elseif</span> ( ! <span class="keyword">empty</span>($RTR-&gt;directory) &amp;&amp; file_exists(APPPATH.<span class="string">'controllers/'</span>.$error_class.<span class="string">'.php'</span>))</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">require_once</span>(APPPATH.<span class="string">'controllers/'</span>.$error_class.<span class="string">'.php'</span>);</span><br><span class="line">				<span class="keyword">if</span> (($e404 = ! class_exists($error_class, <span class="keyword">FALSE</span>)) === <span class="keyword">FALSE</span>)</span><br><span class="line">				&#123;</span><br><span class="line">					$RTR-&gt;directory = <span class="string">''</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			$e404 = <span class="keyword">FALSE</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Did we reset the $e404 flag? If so, set the rsegments, starting from index 1</span></span><br><span class="line">	<span class="keyword">if</span> ( ! $e404)</span><br><span class="line">	&#123;</span><br><span class="line">		$class = $error_class;</span><br><span class="line">		$method = $error_method;</span><br><span class="line"></span><br><span class="line">		$URI-&gt;rsegments = <span class="keyword">array</span>(</span><br><span class="line">			<span class="number">1</span> =&gt; $class,</span><br><span class="line">			<span class="number">2</span> =&gt; $method</span><br><span class="line">		);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		show_404($RTR-&gt;directory.$class.<span class="string">'/'</span>.$method);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> ($method !== <span class="string">'_remap'</span>)</span><br><span class="line">&#123;</span><br><span class="line">	$params = array_slice($URI-&gt;rsegments, <span class="number">2</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="解析请求的类，并调用请求的方法"><a href="#解析请求的类，并调用请求的方法" class="headerlink" title="解析请求的类，并调用请求的方法"></a>解析请求的类，并调用请求的方法</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">// 新的钩子pre_controller</span></span><br><span class="line">$EXT-&gt;call_hook(<span class="string">'pre_controller'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Mark a start point so we can benchmark the controller</span></span><br><span class="line">$BM-&gt;mark(<span class="string">'controller_execution_time_( '</span>.$class.<span class="string">' / '</span>.$method.<span class="string">' )_start'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 实例化这个类</span></span><br><span class="line">$CI = <span class="keyword">new</span> $class();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 新的钩子post_controller_constructor</span></span><br><span class="line">$EXT-&gt;call_hook(<span class="string">'post_controller_constructor'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 调用方法</span></span><br><span class="line">call_user_func_array(<span class="keyword">array</span>(&amp;$CI, $method), $params);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Mark a benchmark end point</span></span><br><span class="line">$BM-&gt;mark(<span class="string">'controller_execution_time_( '</span>.$class.<span class="string">' / '</span>.$method.<span class="string">' )_end'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 新的钩子post_controller</span></span><br><span class="line">$EXT-&gt;call_hook(<span class="string">'post_controller'</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span> ($EXT-&gt;call_hook(<span class="string">'display_override'</span>) === <span class="keyword">FALSE</span>)</span><br><span class="line">&#123;</span><br><span class="line">	$OUT-&gt;_display();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* ------------------------------------------------------</span></span><br><span class="line"><span class="comment">*  Is there a "post_system" hook?</span></span><br><span class="line"><span class="comment">* ------------------------------------------------------</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">$EXT-&gt;call_hook(<span class="string">'post_system'</span>);</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-07-12T16:15:10.617Z" itemprop="dateUpdated">2018-07-13 00:15:10</time>
+</span><br>
+
+
+        
+        原文链接：<a href="/2018/07/13/CI框架3-x源码阅读笔记二之核心文件CodeIgniter-php/" target="_blank" rel="external">https://pengwenwu.github.io/2018/07/13/CI框架3-x源码阅读笔记二之核心文件CodeIgniter-php/</a>
+        
+    </div>
+    <footer>
+        <a href="https://pengwenwu.github.io">
+            <img src="/img/avatar.jpg" alt="pengwenwu">
+            pengwenwu
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CodeIgniter/">CodeIgniter</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://pengwenwu.github.io/2018/07/13/CI框架3-x源码阅读笔记二之核心文件CodeIgniter-php/&title=《CI框架3.x源码阅读笔记二之核心文件CodeIgniter.php》 — Pena's Blog&pic=https://pengwenwu.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://pengwenwu.github.io/2018/07/13/CI框架3-x源码阅读笔记二之核心文件CodeIgniter-php/&title=《CI框架3.x源码阅读笔记二之核心文件CodeIgniter.php》 — Pena's Blog&source=pengwenwu的个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://pengwenwu.github.io/2018/07/13/CI框架3-x源码阅读笔记二之核心文件CodeIgniter-php/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《CI框架3.x源码阅读笔记二之核心文件CodeIgniter.php》 — Pena's Blog&url=https://pengwenwu.github.io/2018/07/13/CI框架3-x源码阅读笔记二之核心文件CodeIgniter-php/&via=https://pengwenwu.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://pengwenwu.github.io/2018/07/13/CI框架3-x源码阅读笔记二之核心文件CodeIgniter-php/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/07/06/大疆2018秋招笔试算法题最后一题/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">大疆2018秋招笔试算法题最后一题</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'true' == 'true',
+            appId: "U2qzDNI480QyyzN2kDGB7bGu-gzGzoHsz",
+            appKey: "6o2PFFkLctFMxXg3qBrhr0CF",
+            avatar: "retro",
+            placeholder: "要不要说点什么？",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>pengwenwu &copy; 2017 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://pengwenwu.github.io/2018/07/13/CI框架3-x源码阅读笔记二之核心文件CodeIgniter-php/&title=《CI框架3.x源码阅读笔记二之核心文件CodeIgniter.php》 — Pena's Blog&pic=https://pengwenwu.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://pengwenwu.github.io/2018/07/13/CI框架3-x源码阅读笔记二之核心文件CodeIgniter-php/&title=《CI框架3.x源码阅读笔记二之核心文件CodeIgniter.php》 — Pena's Blog&source=pengwenwu的个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://pengwenwu.github.io/2018/07/13/CI框架3-x源码阅读笔记二之核心文件CodeIgniter-php/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《CI框架3.x源码阅读笔记二之核心文件CodeIgniter.php》 — Pena's Blog&url=https://pengwenwu.github.io/2018/07/13/CI框架3-x源码阅读笔记二之核心文件CodeIgniter-php/&via=https://pengwenwu.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://pengwenwu.github.io/2018/07/13/CI框架3-x源码阅读笔记二之核心文件CodeIgniter-php/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADK0lEQVR42u3a227qMBAF0P7/T9PXSi2wt210kjkrTxUQ7OVIHeby9RVfjx/Xz1def/L3Xe2VfM/O92NjY2PPYD9eXslnfi+cvPts02tr5RZsbGzsqezXgaH9TL715N3kgPJ9YmNjY2Mnyzzb1uvttjBsbGxs7FPBKX99v1z1jwMYNjY29oXZeUrQpit5YDsVUA/X0rCxsbEvz843ev2/P9LfxsbGxr4w+1Fe+6WitbQkvytSYGNjYw9i5wGgTVdOFZJ2WgJvkh9sbGzscew2bLRt3Ra/s3oUOLGxsbHHsc8WldrAsxP88hWjLgQ2Njb2bdn7wzdtMEuSiryYVScq2NjY2OPYOwlAy9gZDFp7/U0qgo2NjX1z9lri0R7EqUNJAtgH55KwsbGxL8ZuU4s8gVlrA+y0kIvnjI2NjT2O3S6/tvBaMShZJT9QbGxs7HnsPA1ol1lLe06F2KKohI2NjT2CnQeSzxWbkiDaFv2LSSVsbGzs27LXlsl/z58d2UyCWdR4xsbGxh7HboPKTtrQBq18D0WIxcbGxh7KTkLUTrknGdk5W72PuiLY2NjYN2e3Ddo8UdkZA8ofSTsehI2NjT2VnfzTb8di8oCXN4Yf8VU0obGxsbFvzs4/mjcG2mZAe/T7zQxsbGzsSez8SrayljbsFLPaR1IfBDY2Nvbl2a83faq5uxY1dspMbw4UGxsbexx7rbC+P1gT1bri4ygeHjY2NvZQdtuO3dl6O/R56vuxsbGxp7Lbgvtaa7YtDOUlpzz0/lFUwsbGxr45u/2hnx/K2bJ+0r5dC3jY2NjYM9hrTdZ2i20S0h5H21rAxsbGnsdObtgpyuehaK1hUDc8sLGxscex82J9/nM/L05tAZaGgbCxsbFnsB/llaQHSaDKSTvp0NOdY2NjYw9it//6W0DOTr6zLSTl34CNjY19d3YStNYCQ7vpnQGdOinCxsbGHsf+xBBPfm9eA8tjbzGjhI2Njf2fsde6EHk4bNvJ9bAONjY2NvZGktCO4OTlrfoubGxs7HHspKjUhrSzAezU48HGxsaex14r0OQjPqeGONugeGB8BxsbG/vq7G+PooaSF+SRcAAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.1"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.1" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
