@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://pengwenwu.github.io/"/>
-  <updated>2018-07-19T17:00:28.019Z</updated>
+  <updated>2018-07-21T10:31:35.364Z</updated>
   <id>https://pengwenwu.github.io/</id>
   
   <author>
@@ -15,6 +15,59 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>vagrant常用命令.md</title>
+    <link href="https://pengwenwu.github.io/2018/07/21/vagrant%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4-md/"/>
+    <id>https://pengwenwu.github.io/2018/07/21/vagrant常用命令-md/</id>
+    <published>2018-07-21T10:30:18.000Z</published>
+    <updated>2018-07-21T10:31:35.364Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Vagrant常用命令"><a href="#Vagrant常用命令" class="headerlink" title="Vagrant常用命令"></a>Vagrant常用命令</h1><p>在安装配置中，使用了一些基础命令  </p><ul><li><code>vagrant box add</code>：添加box  </li><li><code>vagrant init</code>：初始化  </li><li><code>vagrant up</code>：启动虚拟机  </li><li><code>vagrant ssh</code>：登录虚拟机  </li><li><code>vagrant reload</code>：重新启动虚拟机  </li></ul><p>Vagrant还包括如下一些操作：  </p><ul><li><p><code>vagrant box list</code><br>  显示当前已经添加的box列表  </p>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ vagrant box list</span><br><span class="line">base (virtualbox)</span><br></pre></td></tr></table></figure></li><li><p><code>vagrant box remove</code><br>  删除相应的box  </p>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vagrant box remove base virtualbox</span><br></pre></td></tr></table></figure></li><li><p><code>vagrant destroy</code><br>  停止当前正在运行的虚拟机并销毁所有创建的资源  </p></li><li><code>vagrant halt</code><br>  关机  </li><li><code>vagrant package</code><br>  打包命令，可以把当前的运行的虚拟机环境进行打包  </li><li><code>vagrant resume</code><br>  恢复前面被挂起的状态  </li><li><code>vagrant ssh-config</code><br>  输出用于ssh连接的一些信息  </li><li><code>vagrant status</code><br>  获取当前虚拟机的状态  </li><li><code>vagrant suspend</code><br>  挂起当前的虚拟机  </li></ul><blockquote><p>参考链接：<br><a href="https://github.com/astaxie/go-best-practice/blob/master/ebook/zh/01.3.md" target="_blank" rel="noopener">https://github.com/astaxie/go-best-practice/blob/master/ebook/zh/01.3.md</a></p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;Vagrant常用命令&quot;&gt;&lt;a href=&quot;#Vagrant常用命令&quot; class=&quot;headerlink&quot; title=&quot;Vagrant常用命令&quot;&gt;&lt;/a&gt;Vagrant常用命令&lt;/h1&gt;&lt;p&gt;在安装配置中，使用了一些基础命令  &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;c
+      
+    
+    </summary>
+    
+      <category term="后端" scheme="https://pengwenwu.github.io/categories/%E5%90%8E%E7%AB%AF/"/>
+    
+    
+      <category term="vagrant" scheme="https://pengwenwu.github.io/tags/vagrant/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>vagrant安装配置.md</title>
+    <link href="https://pengwenwu.github.io/2018/07/21/vagrant%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE-md/"/>
+    <id>https://pengwenwu.github.io/2018/07/21/vagrant安装配置-md/</id>
+    <published>2018-07-21T10:30:07.000Z</published>
+    <updated>2018-07-21T10:31:10.656Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h1><p>自行下载Vagrant、VirtualBox安装  </p><p>vagrant官网地址：<a href="https://www.vagrantup.com/" target="_blank" rel="noopener">https://www.vagrantup.com/</a>  </p><p>box下载：<a href="https://app.vagrantup.com/boxes/search" target="_blank" rel="noopener">https://app.vagrantup.com/boxes/search</a>  </p><h1 id="Vagrant配置"><a href="#Vagrant配置" class="headerlink" title="Vagrant配置"></a>Vagrant配置</h1><h2 id="下载box"><a href="#下载box" class="headerlink" title="下载box"></a>下载box</h2><p>box提供一个操作系统环境，可以自行下载想用的基础环境，比如Ubuntu、centos、debian等  </p><h2 id="添加box"><a href="#添加box" class="headerlink" title="添加box"></a>添加box</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vagrant box add base 远端的box地址或者本地的box文件名</span><br></pre></td></tr></table></figure><p><code>base</code>可以是box的自定义名称，用来标识添加的box，默认是base  </p><p>可以通过<code>vagrant list</code>查看刚刚添加的box  </p><h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vagrant init Box名称</span><br></pre></td></tr></table></figure><p>如果没有指定名称为base，则需要指定初始化的Box名称。此时将会在目录下生成一个<code>Vagrantfile</code>文件  </p><h2 id="启动虚拟机"><a href="#启动虚拟机" class="headerlink" title="启动虚拟机"></a>启动虚拟机</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vagrant up</span><br></pre></td></tr></table></figure><h2 id="ssh连接到虚拟机"><a href="#ssh连接到虚拟机" class="headerlink" title="ssh连接到虚拟机"></a>ssh连接到虚拟机</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vagrant ssh</span><br></pre></td></tr></table></figure><h1 id="Vagrantfile配置文件详解"><a href="#Vagrantfile配置文件详解" class="headerlink" title="Vagrantfile配置文件详解"></a>Vagrantfile配置文件详解</h1><p>目录下有一个文件<code>Vagrantfile</code>，里面包含有大量的配置信息，主要包括三个方面的配置，虚拟机的配置、SSH配置、Vagrant的一些基础配置。  </p><h2 id="box设置"><a href="#box设置" class="headerlink" title="box设置"></a>box设置</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">config.vm.box = <span class="string">"base"</span></span><br></pre></td></tr></table></figure><p>用于配置Vagrant要去启用哪个box作为系统，默认是<code>base</code>  </p><p>VirtualBox提供了VBoxManage这个命令行工具，可以让我们设定VM，用<code>modifyvm</code>这个命令让我们可以设定VM的名称和内存大小等等，这里说的名称指的是在VirtualBox中显示的名称<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">config.vm.provider <span class="string">"virtualbox"</span> <span class="keyword">do</span> |v|</span><br><span class="line">    v.customize [<span class="string">"modifyvm"</span>, :id, <span class="string">"--name"</span>, <span class="string">"astaxie"</span>, <span class="string">"--memory"</span>, <span class="string">"512"</span>]</span><br><span class="line">end</span><br></pre></td></tr></table></figure></p><p>这行设置的意思是调用VBoxManage的modifyvm的命令，设置VM的名称为astaxie，内存为512MB。你可以类似的通过定制其它VM属性来定制你自己的VM。</p><p>或者使用默认的配置信息修改虚拟机配置<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">config.vm.provider <span class="string">"virtualbox"</span> <span class="keyword">do</span> |vb|</span><br><span class="line"><span class="comment"># Display the VirtualBox GUI when booting the machine</span></span><br><span class="line"><span class="comment"># vb.gui = true</span></span><br><span class="line">  <span class="comment">#</span></span><br><span class="line"><span class="comment"># Customize the amount of memory on the VM:</span></span><br><span class="line">vb.memory = <span class="string">"1024"</span></span><br><span class="line">vb.cpus = <span class="string">"2"</span></span><br><span class="line">vb.name = <span class="string">"pww_centos7"</span></span><br><span class="line">end</span><br></pre></td></tr></table></figure></p><h2 id="网络设置"><a href="#网络设置" class="headerlink" title="网络设置"></a>网络设置</h2><p>Vagrant有两种方式来进行网络连接，一种是<code>host-only(主机模式)</code>，意思是主机和虚拟机之间的网络互访，其他人访问不到你的虚拟机。另一种是<code>Bridge(桥接模式)</code>，该模式下的VM就像是局域网中的一台独立的主机，也就是说需要VM到你的路由器要IP，这样的话局域网里面其他机器就可以访问它<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># host-only</span></span><br><span class="line">config.vm.network <span class="string">"private_network"</span>, ip: <span class="string">"192.168.33.10"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Bridge</span></span><br><span class="line">config.vm.network <span class="string">"public_network"</span></span><br></pre></td></tr></table></figure></p><h2 id="hosename设置"><a href="#hosename设置" class="headerlink" title="hosename设置"></a>hosename设置</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">config.vm.hostname = <span class="string">"go-app"</span></span><br></pre></td></tr></table></figure><p>设置hostname非常重要，因为当我们有很多台虚拟服务器的时候，都是依靠hostname來做识别的  </p><h2 id="同步目录（挂载）"><a href="#同步目录（挂载）" class="headerlink" title="同步目录（挂载）"></a>同步目录（挂载）</h2><p><code>/vagrant</code>目录默认就是当前的开发目录，这是在虚拟机开启的时候默认挂载同步的。我们还可以通过配置来设置额外的同步目录：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">config.vm.synced_folder <span class="string">"../data"</span>, <span class="string">"/vagrant_data"</span></span><br></pre></td></tr></table></figure></p><h2 id="端口转发（映射）"><a href="#端口转发（映射）" class="headerlink" title="端口转发（映射）"></a>端口转发（映射）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">config.vm.network :forwarded_port, guest: 80, host: 8080</span><br></pre></td></tr></table></figure><p>把对host机器上8080端口的访问请求forward到虚拟机的80端口的服务  </p><h2 id="多台vm通信"><a href="#多台vm通信" class="headerlink" title="多台vm通信"></a>多台vm通信</h2><p>上面的配置都是针对单个服务器配置，如果是多个服务器，比如一台应用服务器，一台redis服务器，可以使用下面的配置：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">Vagrant.configure(<span class="string">"2"</span>) <span class="keyword">do</span> |config|</span><br><span class="line">  config.vm.define :web <span class="keyword">do</span> |web|</span><br><span class="line">    web.vm.provider <span class="string">"virtualbox"</span> <span class="keyword">do</span> |v|</span><br><span class="line">          v.customize [<span class="string">"modifyvm"</span>, :id, <span class="string">"--name"</span>, <span class="string">"web"</span>, <span class="string">"--memory"</span>, <span class="string">"512"</span>]</span><br><span class="line">    end</span><br><span class="line">    web.vm.box = <span class="string">"CentOs7"</span></span><br><span class="line">    web.vm.hostname = <span class="string">"web"</span></span><br><span class="line">    web.vm.network :private_network, ip: <span class="string">"192.168.33.10"</span></span><br><span class="line">  end</span><br><span class="line"></span><br><span class="line">  config.vm.define :redis <span class="keyword">do</span> |redis|</span><br><span class="line">    redis.vm.provider <span class="string">"virtualbox"</span> <span class="keyword">do</span> |v|</span><br><span class="line">          v.customize [<span class="string">"modifyvm"</span>, :id, <span class="string">"--name"</span>, <span class="string">"redis"</span>, <span class="string">"--memory"</span>, <span class="string">"512"</span>]</span><br><span class="line">    end</span><br><span class="line">    redis.vm.box = <span class="string">"CentOs7"</span></span><br><span class="line">    redis.vm.hostname = <span class="string">"redis"</span></span><br><span class="line">    redis.vm.network :private_network, ip: <span class="string">"192.168.33.11"</span></span><br><span class="line">  end</span><br><span class="line">end</span><br></pre></td></tr></table></figure></p><p>也可以通过指定服务器名，ssh登录到指定服务器<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vagrant ssh redis</span><br></pre></td></tr></table></figure></p><p><strong>修改完配置记得用<code>vagrant reload</code>重启命令使配置生效</strong></p><blockquote><p>参考文档：<br><a href="https://github.com/astaxie/go-best-practice/blob/master/ebook/zh/01.2.md" target="_blank" rel="noopener">https://github.com/astaxie/go-best-practice/blob/master/ebook/zh/01.2.md</a><br><a href="https://blog.csdn.net/hel12he/article/details/51089774" target="_blank" rel="noopener">https://blog.csdn.net/hel12he/article/details/51089774</a></p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;准备&quot;&gt;&lt;a href=&quot;#准备&quot; class=&quot;headerlink&quot; title=&quot;准备&quot;&gt;&lt;/a&gt;准备&lt;/h1&gt;&lt;p&gt;自行下载Vagrant、VirtualBox安装  &lt;/p&gt;
+&lt;p&gt;vagrant官网地址：&lt;a href=&quot;https://www.vag
+      
+    
+    </summary>
+    
+      <category term="后端" scheme="https://pengwenwu.github.io/categories/%E5%90%8E%E7%AB%AF/"/>
+    
+    
+      <category term="vagrant" scheme="https://pengwenwu.github.io/tags/vagrant/"/>
+    
+  </entry>
   
   <entry>
     <title>如何保证后端接口的幂等性？</title>
@@ -510,61 +563,6 @@
     
     
       <category term="Git" scheme="https://pengwenwu.github.io/tags/Git/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>git pull更新指定文件</title>
-    <link href="https://pengwenwu.github.io/2018/05/13/git-pull%E6%9B%B4%E6%96%B0%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6/"/>
-    <id>https://pengwenwu.github.io/2018/05/13/git-pull更新指定文件/</id>
-    <published>2018-05-13T06:07:42.000Z</published>
-    <updated>2018-05-13T06:17:02.552Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p>经常会遇到，几个文件一起提交了，但是某些文件是要先执行的，不然一起pull下来会加载报错</p><h3 id="更新git指定文件"><a href="#更新git指定文件" class="headerlink" title="更新git指定文件"></a>更新git指定文件</h3><p>git fetch<br>git checkout origin/master – path/to/file</p></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;blockquote&gt;
-&lt;p&gt;经常会遇到，几个文件一起提交了，但是某些文件是要先执行的，不然一起pull下来会加载报错&lt;/p&gt;
-&lt;h3 id=&quot;更新git指定文件&quot;&gt;&lt;a href=&quot;#更新git指定文件&quot; class=&quot;headerlink&quot; title=&quot;更新git指定文件
-      
-    
-    </summary>
-    
-      <category term="Git" scheme="https://pengwenwu.github.io/categories/Git/"/>
-    
-    
-      <category term="Git" scheme="https://pengwenwu.github.io/tags/Git/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>阅读《微服务设计》笔记</title>
-    <link href="https://pengwenwu.github.io/2018/03/03/%E9%98%85%E8%AF%BB%E3%80%8A%E5%BE%AE%E6%9C%8D%E5%8A%A1%E8%AE%BE%E8%AE%A1%E3%80%8B%E7%AC%94%E8%AE%B0/"/>
-    <id>https://pengwenwu.github.io/2018/03/03/阅读《微服务设计》笔记/</id>
-    <published>2018-03-03T10:14:59.000Z</published>
-    <updated>2018-06-07T12:43:14.801Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p>记录阅读《微服务设计》收获的点  </p></blockquote><h2 id="什么是微服务？"><a href="#什么是微服务？" class="headerlink" title="什么是微服务？"></a>什么是微服务？</h2><p><strong>一些协同工作的小而自治的服务</strong></p><h2 id="打破外键关系"><a href="#打破外键关系" class="headerlink" title="打破外键关系"></a>打破外键关系</h2><p><strong>对于有外键关系的表如何做服务拆分？</strong><br>通过api调用访问  </p><ul><li>优点：数据表拆分，进而服务拆分</li><li>缺点：增加了数据库的调用，会影响性能。需要测试是否在可接受范围内，权衡拆分服务带来的好处</li></ul><h2 id="共享表拆分"><a href="#共享表拆分" class="headerlink" title="共享表拆分"></a>共享表拆分</h2><p><strong>共享表拆分后，如何保证插入数据的一致性？</strong><br>设计之初为了减少数据库的调用，必然会建立基于外键的共享表。拆分之后，如何保证同时插入多张表数据的一致性？（某张表插入失败）  </p><ul><li>通过<code>事务</code>处理  </li><li>推荐对及时性较弱的操作，异常捕获后放入队列或者日志文件中进行延迟处理，保证<code>最终一致性</code>  </li><li>终止整个操作，再发起<code>补偿事务</code>来抵消之前的操作（自动化处理）</li><li><p><code>分布式事务</code>。通过专门的事务管理器工具来协调底层事务（不推荐，易出错，难扩展）</p><blockquote><p>阅读完感觉云里雾里，可能是自己的水平还没到达那个深度。收获大概是：了解了后端的架构，后期拓展可能会遇到的问题，以及解决这样问题的思路。</p></blockquote></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;blockquote&gt;
-&lt;p&gt;记录阅读《微服务设计》收获的点  &lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&quot;什么是微服务？&quot;&gt;&lt;a href=&quot;#什么是微服务？&quot; class=&quot;headerlink&quot; title=&quot;什么是微服务？&quot;&gt;&lt;/a&gt;什么是微服务？&lt;/h2&gt;&lt;
-      
-    
-    </summary>
-    
-      <category term="后端" scheme="https://pengwenwu.github.io/categories/%E5%90%8E%E7%AB%AF/"/>
-    
-    
-      <category term="微服务" scheme="https://pengwenwu.github.io/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
     
   </entry>
   
