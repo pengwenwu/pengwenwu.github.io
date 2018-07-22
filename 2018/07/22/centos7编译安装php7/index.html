@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>centos7编译安装php7 | Pena&#39;s Blog | 莫道君行早，更有早行人</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="PHP,Linux">
+    <meta name="description" content="删除yum安装过的php相关模块1yum remove php* 依赖安装123456789yum -y install gcc automake autoconf libtool makeyum -y install gcc gcc-c++ glibcyum -y install libmcrypt-devel mhash-devel libxslt-devel \libjpeg libjpeg">
+<meta name="keywords" content="PHP,Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="centos7编译安装php7">
+<meta property="og:url" content="https://pengwenwu.github.io/2018/07/22/centos7编译安装php7/index.html">
+<meta property="og:site_name" content="Pena&#39;s Blog">
+<meta property="og:description" content="删除yum安装过的php相关模块1yum remove php* 依赖安装123456789yum -y install gcc automake autoconf libtool makeyum -y install gcc gcc-c++ glibcyum -y install libmcrypt-devel mhash-devel libxslt-devel \libjpeg libjpeg">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-07-22T15:57:27.733Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="centos7编译安装php7">
+<meta name="twitter:description" content="删除yum安装过的php相关模块1yum remove php* 依赖安装123456789yum -y install gcc automake autoconf libtool makeyum -y install gcc gcc-c++ glibcyum -y install libmcrypt-devel mhash-devel libxslt-devel \libjpeg libjpeg">
+    
+        <link rel="alternate" type="application/atom+xml" title="Pena&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.jpg">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.1">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">pengwenwu</h5>
+          <a href="mailto:pww932589183@163.com" title="pww932589183@163.com" class="mail">pww932589183@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/pengwenwu" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">centos7编译安装php7</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">centos7编译安装php7</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-07-22T15:56:20.000Z" itemprop="datePublished" class="page-time">
+  2018-07-22
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/后端/">后端</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#删除yum安装过的php相关模块"><span class="post-toc-number">1.</span> <span class="post-toc-text">删除yum安装过的php相关模块</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#依赖安装"><span class="post-toc-number">2.</span> <span class="post-toc-text">依赖安装</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#编译安装"><span class="post-toc-number">3.</span> <span class="post-toc-text">编译安装</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#配置php"><span class="post-toc-number">4.</span> <span class="post-toc-text">配置php</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#添加php安装目录到系统环境变量"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">添加php安装目录到系统环境变量</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#添加php配置文件"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">添加php配置文件</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#修改服务器所在时区"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">修改服务器所在时区</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#添加-php-fpm-配置文件"><span class="post-toc-number">4.4.</span> <span class="post-toc-text">添加 php-fpm 配置文件</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#添加-php-fpm-管理相关的配置文件到系统配置目录-etc-init-d"><span class="post-toc-number">4.5.</span> <span class="post-toc-text">添加 php-fpm 管理相关的配置文件到系统配置目录 /etc/init.d</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#添加-www-conf-配置文件"><span class="post-toc-number">4.6.</span> <span class="post-toc-text">添加 www.conf 配置文件</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#设置PHP日志目录和php-fpm运行进程的ID文件目录"><span class="post-toc-number">4.7.</span> <span class="post-toc-text">设置PHP日志目录和php-fpm运行进程的ID文件目录</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#设置php开机启动"><span class="post-toc-number">4.8.</span> <span class="post-toc-text">设置php开机启动</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#检测-php-fpm-系统服务是否启动成功"><span class="post-toc-number">4.9.</span> <span class="post-toc-text">检测 php-fpm 系统服务是否启动成功</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#测试PHP的配置文件是否无误"><span class="post-toc-number">4.10.</span> <span class="post-toc-text">测试PHP的配置文件是否无误</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#启动php系统服务"><span class="post-toc-number">4.11.</span> <span class="post-toc-text">启动php系统服务</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#查看php系统服务状态"><span class="post-toc-number">4.12.</span> <span class="post-toc-text">查看php系统服务状态</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#安装nginx"><span class="post-toc-number">5.</span> <span class="post-toc-text">安装nginx</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#配置环境变量"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">配置环境变量</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#常用nginx命令"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">常用nginx命令</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-centos7编译安装php7"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">centos7编译安装php7</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-07-22 23:56:20" datetime="2018-07-22T15:56:20.000Z"  itemprop="datePublished">2018-07-22</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/后端/">后端</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="删除yum安装过的php相关模块"><a href="#删除yum安装过的php相关模块" class="headerlink" title="删除yum安装过的php相关模块"></a>删除yum安装过的php相关模块</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum remove php*</span><br></pre></td></tr></table></figure>
+<h3 id="依赖安装"><a href="#依赖安装" class="headerlink" title="依赖安装"></a>依赖安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">yum -y install gcc automake autoconf libtool make</span><br><span class="line"></span><br><span class="line">yum -y install gcc gcc-c++ glibc</span><br><span class="line"></span><br><span class="line">yum -y install libmcrypt-devel mhash-devel libxslt-devel \</span><br><span class="line">libjpeg libjpeg-devel libpng libpng-devel freetype freetype-devel libxml2 libxml2-devel \</span><br><span class="line">zlib zlib-devel glibc glibc-devel glib2 glib2-devel bzip2 bzip2-devel \</span><br><span class="line">ncurses ncurses-devel curl curl-devel e2fsprogs e2fsprogs-devel \</span><br><span class="line">krb5 krb5-devel libidn libidn-devel openssl openssl-devel</span><br></pre></td></tr></table></figure>
+<h3 id="编译安装"><a href="#编译安装" class="headerlink" title="编译安装"></a>编译安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">wget http://cn2.php.net/distributions/php-7.2.8.tar.gz</span><br><span class="line">tar zvxf php-7.2.8.tar.gz</span><br><span class="line"><span class="built_in">cd</span> php-7.2.8</span><br><span class="line">./configure --prefix=/usr/<span class="built_in">local</span>/php  --<span class="built_in">enable</span>-fpm --with-mcrypt \</span><br><span class="line">--<span class="built_in">enable</span>-mbstring --<span class="built_in">disable</span>-pdo --with-curl --<span class="built_in">disable</span>-debug  --<span class="built_in">disable</span>-rpath \</span><br><span class="line">--<span class="built_in">enable</span>-inline-optimization --with-bz2  --with-zlib --<span class="built_in">enable</span>-sockets \</span><br><span class="line">--<span class="built_in">enable</span>-sysvsem --<span class="built_in">enable</span>-sysvshm --<span class="built_in">enable</span>-pcntl --<span class="built_in">enable</span>-mbregex \</span><br><span class="line">--with-mhash --<span class="built_in">enable</span>-zip --with-pcre-regex --with-mysql --with-mysqli \</span><br><span class="line">--with-gd --with-jpeg-dir</span><br><span class="line"></span><br><span class="line">make all install</span><br></pre></td></tr></table></figure>
+<h3 id="配置php"><a href="#配置php" class="headerlink" title="配置php"></a>配置php</h3><h4 id="添加php安装目录到系统环境变量"><a href="#添加php安装目录到系统环境变量" class="headerlink" title="添加php安装目录到系统环境变量"></a>添加php安装目录到系统环境变量</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/profile.d/php.sh</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:/usr/<span class="built_in">local</span>/php/bin/:/usr/<span class="built_in">local</span>/php/sbin/</span><br><span class="line"></span><br><span class="line"><span class="built_in">source</span> /etc/profile.d/php.sh</span><br></pre></td></tr></table></figure>
+<h4 id="添加php配置文件"><a href="#添加php配置文件" class="headerlink" title="添加php配置文件"></a>添加php配置文件</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp php.ini-production /usr/<span class="built_in">local</span>/php/etc/php.ini</span><br></pre></td></tr></table></figure>
+<h4 id="修改服务器所在时区"><a href="#修改服务器所在时区" class="headerlink" title="修改服务器所在时区"></a>修改服务器所在时区</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vim /usr/<span class="built_in">local</span>/php/etc/php.ini</span><br><span class="line"></span><br><span class="line">date.timezone = PRC</span><br></pre></td></tr></table></figure>
+<h4 id="添加-php-fpm-配置文件"><a href="#添加-php-fpm-配置文件" class="headerlink" title="添加 php-fpm 配置文件"></a>添加 php-fpm 配置文件</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/php/etc</span><br><span class="line"></span><br><span class="line">cp php-fpm.conf.default php-fpm.conf</span><br></pre></td></tr></table></figure>
+<h4 id="添加-php-fpm-管理相关的配置文件到系统配置目录-etc-init-d"><a href="#添加-php-fpm-管理相关的配置文件到系统配置目录-etc-init-d" class="headerlink" title="添加 php-fpm 管理相关的配置文件到系统配置目录 /etc/init.d"></a>添加 php-fpm 管理相关的配置文件到系统配置目录 /etc/init.d</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># /usr/local/php-7.2.8</span></span><br><span class="line">cp sapi/fpm/init.d.php-fpm /etc/init.d/php-fpm</span><br></pre></td></tr></table></figure>
+<h4 id="添加-www-conf-配置文件"><a href="#添加-www-conf-配置文件" class="headerlink" title="添加 www.conf 配置文件"></a>添加 www.conf 配置文件</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># /usr/local/php</span></span><br><span class="line">cp etc/php-fpm.d/www.conf.default etc/php-fpm.d/www.conf</span><br></pre></td></tr></table></figure>
+<h4 id="设置PHP日志目录和php-fpm运行进程的ID文件目录"><a href="#设置PHP日志目录和php-fpm运行进程的ID文件目录" class="headerlink" title="设置PHP日志目录和php-fpm运行进程的ID文件目录"></a>设置PHP日志目录和php-fpm运行进程的ID文件目录</h4><p>php-fpm运行进程的ID文件也就是 <code>php-fpm.pid</code>  </p>
+<p>设置php-fpm进程目录的用户和用户组为nginx  </p>
+<blockquote>
+<p>-r: 添加系统用户( 这里指将要被创建的系统用户nginx )<br>-g: 指定要创建的用户所属组( 这里指添加到新系统用户nginx到nginx系统用户组 )<br>-s: 新帐户的登录shell( <code>/sbin/nologin</code> 这里设置为将要被创建系统用户nginx不能用来登录系统 )<br>-d: 新帐户的主目录( 这里指定将要被创建的系统用户nginx的家目录为 <code>/usr/local/nginx</code> )<br>-M: 不要创建用户的主目录( 也就是说将要被创建的系统用户nginx不会在 <code>/home</code> 目录下创建 <code>nginx</code> 家目录 )</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加系统用户组nginx</span></span><br><span class="line">groupadd -r nginx</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建新的系统用户nginx, 并添加到系统用户组nginx, 设置不允许此用户名登录shell (如果你没有创建过系统用户nginx请创建)</span></span><br><span class="line">useradd -r -g nginx -s /sbin/nologin -d /usr/<span class="built_in">local</span>/nginx -M nginx</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建 `php-fpm` 日志目录</span></span><br><span class="line">mkdir -p /var/<span class="built_in">log</span>/php-fpm/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建 `php-fpm` 进程的ID(php-fpm.pid)文件运行目录</span></span><br><span class="line">mkdir -p /var/run/php-fpm</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改 `php-fpm` 进程的ID(php-fpm.pid)文件运行目录的所属用户和组</span></span><br><span class="line">chown -R nginx:nginx /var/run/php-fpm/</span><br></pre></td></tr></table></figure>
+<h4 id="设置php开机启动"><a href="#设置php开机启动" class="headerlink" title="设置php开机启动"></a>设置php开机启动</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 修改系统配置目录下的 `php-fpm` 文件可执行权限</span></span><br><span class="line">chmod +x /etc/init.d/php-fpm</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将系统配置目录下的 `php-fpm` 添加到 `系统服务`</span></span><br><span class="line">chkconfig --add php-fpm</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置 `php-fpm` `系统服务` 为开机启动</span></span><br><span class="line">chkconfig php-fpm on</span><br></pre></td></tr></table></figure>
+<h4 id="检测-php-fpm-系统服务是否启动成功"><a href="#检测-php-fpm-系统服务是否启动成功" class="headerlink" title="检测 php-fpm 系统服务是否启动成功"></a>检测 php-fpm 系统服务是否启动成功</h4><p>用 chkconfig 命令检测一下服务是否运行成功<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">chkconfig --list | grep php-fpm</span><br><span class="line"></span><br><span class="line">Note: This output shows SysV services only and does not include native</span><br><span class="line">      systemd services. SysV configuration data might be overridden by native</span><br><span class="line">      systemd configuration.</span><br><span class="line"></span><br><span class="line">      If you want to list systemd services use <span class="string">'systemctl list-unit-files'</span>.</span><br><span class="line">      To see services enabled on particular target use</span><br><span class="line">      <span class="string">'systemctl list-dependencies [target]'</span>.</span><br><span class="line"></span><br><span class="line">php-fpm         0:off   1:off   2:on    3:on    4:on    5:on    6:off</span><br><span class="line"></span><br><span class="line"><span class="comment"># 可见服务已经在 第2 到 第5 运行等级打开</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 禁用 `php-fpm` 开机启动</span></span><br><span class="line">chkconfig php-fpm off</span><br></pre></td></tr></table></figure></p>
+<h4 id="测试PHP的配置文件是否无误"><a href="#测试PHP的配置文件是否无误" class="headerlink" title="测试PHP的配置文件是否无误"></a>测试PHP的配置文件是否无误</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">php-fpm -t</span><br><span class="line"></span><br><span class="line">[22-Jul-2018 11:13:23] NOTICE: configuration file /usr/<span class="built_in">local</span>/php/etc/php-fpm.conf <span class="built_in">test</span> is successful</span><br><span class="line"></span><br><span class="line"><span class="comment"># 出现上面的提示也就是测试配置文件通过没有问题, 可以正式使用php服务了</span></span><br></pre></td></tr></table></figure>
+<h4 id="启动php系统服务"><a href="#启动php系统服务" class="headerlink" title="启动php系统服务"></a>启动php系统服务</h4><p>使用 <code>systemctl start</code> + <code>服务名</code> 启动系统服务<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start php-fpm.service</span><br></pre></td></tr></table></figure></p>
+<h4 id="查看php系统服务状态"><a href="#查看php系统服务状态" class="headerlink" title="查看php系统服务状态"></a>查看php系统服务状态</h4><p>使用 <code>systemctl status</code> + <code>服务名</code> 查看系统服务状态<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">systemctl status php-fpm.service</span><br><span class="line"></span><br><span class="line">● php-fpm.service - LSB: starts php-fpm</span><br><span class="line">   Loaded: loaded (/etc/rc.d/init.d/php-fpm; bad; vendor preset: disabled)</span><br><span class="line">   Active: active (running) since Sun 2018-07-22 11:15:47 UTC; 29s ago</span><br><span class="line">     Docs: man:systemd-sysv-generator(8)</span><br><span class="line">  Process: 13309 ExecStart=/etc/rc.d/init.d/php-fpm start (code=exited, status=0/SUCCESS)</span><br><span class="line">    Tasks: 3</span><br><span class="line">   Memory: 3.2M</span><br><span class="line">   CGroup: /system.slice/php-fpm.service</span><br><span class="line">           ├─13311 php-fpm: master process (/usr/<span class="built_in">local</span>/php/etc/php-fpm.conf)</span><br><span class="line">           ├─13312 php-fpm: pool www</span><br><span class="line">           └─13313 php-fpm: pool www</span><br><span class="line"></span><br><span class="line">Jul 22 11:15:47 localhost.localdomain systemd[1]: Starting LSB: starts php-fpm...</span><br><span class="line">Jul 22 11:15:47 localhost.localdomain systemd[1]: Started LSB: starts php-fpm.</span><br><span class="line">Jul 22 11:15:47 localhost.localdomain php-fpm[13309]: Starting php-fpm  <span class="keyword">done</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="安装nginx"><a href="#安装nginx" class="headerlink" title="安装nginx"></a>安装nginx</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/src</span><br><span class="line"></span><br><span class="line"><span class="comment"># 依赖安装</span></span><br><span class="line">yum install -y pcre pcre-devel</span><br><span class="line">yum install -y openssl openssl-devel</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载</span></span><br><span class="line">wget https://nginx.org/download/nginx-1.14.0.tar.gz</span><br><span class="line">tar -zxvf nginx-1.14.0.tar.gz</span><br><span class="line"><span class="built_in">cd</span> nginx-1.14.0/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编译</span></span><br><span class="line">./configure --prefix=/usr/<span class="built_in">local</span>/nginx --sbin-path=/usr/<span class="built_in">local</span>/nginx/nginx --conf-path=/usr/<span class="built_in">local</span>/nginx/nginx.conf --pid-path=/usr/<span class="built_in">local</span>/nginx/nginx.pid --with-http_ssl_module --with-http_realip_module --with-http_sub_module --with-http_gzip_static_module --with-http_stub_status_module  --with-pcre --with-cc-opt=<span class="string">"-Wno-deprecated-declarations"</span></span><br><span class="line"></span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+<h4 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">'export PATH=$PATH:/usr/local/nginx/nginx'</span> &gt; /etc/profile.d/nginx.sh</span><br><span class="line"></span><br><span class="line">cp /usr/<span class="built_in">local</span>/nginx/nginx /usr/bin</span><br></pre></td></tr></table></figure>
+<h4 id="常用nginx命令"><a href="#常用nginx命令" class="headerlink" title="常用nginx命令"></a>常用nginx命令</h4><ul>
+<li>启动<br>  nginx</li>
+<li>nginx -s stop</li>
+<li>nginx -s quit</li>
+<li>nginx -s reload</li>
+<li>nginx -s quit:此方式停止步骤是待nginx进程处理任务完毕进行停止</li>
+<li>nginx -s stop:此方式相当于先查出nginx进程id再使用kill命令强制杀掉进程</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-07-22T15:57:27.733Z" itemprop="dateUpdated">2018-07-22 23:57:27</time>
+</span><br>
+
+
+        
+        原文链接：<a href="/2018/07/22/centos7编译安装php7/" target="_blank" rel="external">https://pengwenwu.github.io/2018/07/22/centos7编译安装php7/</a>
+        
+    </div>
+    <footer>
+        <a href="https://pengwenwu.github.io">
+            <img src="/img/avatar.jpg" alt="pengwenwu">
+            pengwenwu
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://pengwenwu.github.io/2018/07/22/centos7编译安装php7/&title=《centos7编译安装php7》 — Pena's Blog&pic=https://pengwenwu.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://pengwenwu.github.io/2018/07/22/centos7编译安装php7/&title=《centos7编译安装php7》 — Pena's Blog&source=pengwenwu的个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://pengwenwu.github.io/2018/07/22/centos7编译安装php7/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《centos7编译安装php7》 — Pena's Blog&url=https://pengwenwu.github.io/2018/07/22/centos7编译安装php7/&via=https://pengwenwu.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://pengwenwu.github.io/2018/07/22/centos7编译安装php7/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/07/22/php的几种运行模式CLI、CGI、FastCGI、mod-php/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">php的几种运行模式CLI、CGI、FastCGI、mod_php</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'true' == 'true',
+            appId: "U2qzDNI480QyyzN2kDGB7bGu-gzGzoHsz",
+            appKey: "6o2PFFkLctFMxXg3qBrhr0CF",
+            avatar: "retro",
+            placeholder: "要不要说点什么？",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>pengwenwu &copy; 2017 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://pengwenwu.github.io/2018/07/22/centos7编译安装php7/&title=《centos7编译安装php7》 — Pena's Blog&pic=https://pengwenwu.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://pengwenwu.github.io/2018/07/22/centos7编译安装php7/&title=《centos7编译安装php7》 — Pena's Blog&source=pengwenwu的个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://pengwenwu.github.io/2018/07/22/centos7编译安装php7/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《centos7编译安装php7》 — Pena's Blog&url=https://pengwenwu.github.io/2018/07/22/centos7编译安装php7/&via=https://pengwenwu.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://pengwenwu.github.io/2018/07/22/centos7编译安装php7/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACsUlEQVR42u3aQU7DQAwF0N7/0rAFQdJve1yK9GZVtWHqF6SMa/vxiNfHl3X1/s/19Zqzrw8vPDw8vEHo9yFefcF9QPc3Jdn/fuermPHw8PC2edWgk0DzoJMDoHoNHh4e3vvwkneS9Hfjejw8PLx35vUKFleHR+9AwsPDw/tbXl6KTSqlSbrcS9MXay14eHh4MS/vIr3P65X+Hh4eHt64q54nvvnOvXGEZrR4eHh4C7xJoSFJl/M09764UN0HDw8Pb49XDXEyktVbo/YbHh4e3hqv9yDOb02SQFcLH1Fyj4eHh7fGmxwAk2ZVNXGv3m48PDy8Dd68yVQNqBpuXjJ+zDfCw8PDK6bUkwZVUj7oDSJUj5zLYgQeHh7eUV6vvdQrGVQHAqrDCse6Z3h4eHitzDMflsoT8ephM0nr8fDw8LZ5eQH37Nfn5d385uLh4eHt8Xppbt7CPzUW0GvL4eHh4e3xkp/0vaGB6sN9Ukp+9O43Hh4eXqtCeyqdPTsokP8meHLA4OHh4S3wJg3+5PGdt9PmOxcKJXh4eHgtXj4uUGjVFxPovFhc/RQPDw9vm5ck1klq20t/80gK/wY8PDy8Bd4kgc7HBfJVLtH2KtZ4eHh4h3h5An0fVtI261VZ8+/Fw8PD2+ZVh5l6w1iTQ6I6RvDtGjw8PLw1Xp5kzxta1T1Hhw0eHh7eGq9aJkiCOFsszmFPzj08PDy8Q7zk4ZsEN2+Y9UrGeHh4eK/hzRtUZ5PpSWPsl/3x8PDwFnjVkabJo7yapvcGtpoLDw8Pr8jrNaIK5YBD5YbkYIj6e3h4eHiHePMG2GRkKikNH6u14OHh4b2clz/0my2rQaqNh4eH9194vWPj1HpyO/Dw8PDWeM0/Dm5EXvadDxzg4eHhvYY3Ly70Shh5wj1poeHh4eEd5X0C6+uccZu4K7kAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.1"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.1" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
