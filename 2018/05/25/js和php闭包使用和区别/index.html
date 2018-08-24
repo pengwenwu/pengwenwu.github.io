@@ -28,7 +28,7 @@
 <meta property="og:site_name" content="Pena&#39;s Blog">
 <meta property="og:description" content="匿名函数 如果只是省去函数名，单纯的当作一个函数式方法返回，只能称为匿名函数（闭包需要将匿名函数当作结果返回），比如：    12345// jsvar foo = function(x, y) &amp;#123;    return x + y ;&amp;#125;;console.log(foo(1, 2));  // 3 123456&amp;lt;?php// php$foo = function($a, $">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-06-07T12:43:06.466Z">
+<meta property="og:updated_time" content="2018-06-07T12:43:08.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="js和php闭包使用和区别">
 <meta name="twitter:description" content="匿名函数 如果只是省去函数名，单纯的当作一个函数式方法返回，只能称为匿名函数（闭包需要将匿名函数当作结果返回），比如：    12345// jsvar foo = function(x, y) &amp;#123;    return x + y ;&amp;#125;;console.log(foo(1, 2));  // 3 123456&amp;lt;?php// php$foo = function($a, $">
@@ -232,7 +232,7 @@
 <p><code>this</code>的作用域好像一直是个比较奇怪的东西，对于上面两个例子，我的理解是：第一个例子，是在方法里调用的<code>this</code>，而这个<code>this</code>并没有<code>声明</code>，会隐式地创建一个全局变量，所以调用的全局的name；第二个，调用的<code>that</code>的时候，会向顶级链式查找是否声明<code>that</code>，而这个that有this赋值，这里的this又是通过对象方法调用，则该this指向这个object对象，所有最终调用的是object作用域内的name。不知道这么理解是不是有问题，还望大神指正。  </p>
 </blockquote>
 <p><strong>那其实js闭包的主要目的：访问函数内部的局部变量，即延长作用域链</strong><br>参考链接：<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures" target="_blank" rel="noopener">js闭包MDN文档</a>  </p>
-<h4 id="php闭包"><a href="#php闭包" class="headerlink" title="php闭包"></a>php闭包</h4><h5 id="php回调函数"><a href="#php回调函数" class="headerlink" title="php回调函数"></a>php回调函数</h5><p><a href="http://php.net/manual/zh/function.call-user-func.php" target="_blank" rel="noopener">mixed call_user_func ( callable $callback [, mixed $parameter [, mixed $… ]] )</a><br><a href="http://php.net/manual/zh/function.call-user-func-array.php" target="_blank" rel="noopener">mixed call_user_func_array ( callable $callback , array $param_arr )</a>  </p>
+<h4 id="php闭包"><a href="#php闭包" class="headerlink" title="php闭包"></a>php闭包</h4><h5 id="php回调函数"><a href="#php回调函数" class="headerlink" title="php回调函数"></a>php回调函数</h5><p>[mixed call_user_func ( callable $callback <a href="http://php.net/manual/zh/function.call-user-func.php" target="_blank" rel="noopener">, mixed $parameter [, mixed $… ]] )</a><br><a href="http://php.net/manual/zh/function.call-user-func-array.php" target="_blank" rel="noopener">mixed call_user_func_array ( callable $callback , array $param_arr )</a>  </p>
 <p>这两个函数都是把第一个参数作为回调函数d调用，后面接收参数，区别就是第二个函数第二参数接收数组；在使用上唯一的区别就是，<code>call_user_func</code>函数无法接收<code>引用传递</code>; 个人觉得同样是使用，call_user_func 相比call_user_func_array完全可以被替代，不知道是不是有一些性能上的优势。具体使用样例，请参考官方文档。  </p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">// 引用传递</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span><span class="params">(&amp;$a, &amp;$b)</span> </span>&#123;</span><br><span class="line">    $a ++;</span><br><span class="line">    $b --;</span><br><span class="line">&#125;;</span><br><span class="line">$a = $b = <span class="number">10</span>;</span><br><span class="line">call_user_func_array(<span class="string">'foo'</span>, [&amp;$a, &amp;$b]);</span><br><span class="line"><span class="keyword">echo</span> $a.<span class="string">"\n"</span>, $b; <span class="comment">// 11, 9</span></span><br></pre></td></tr></table></figure>
 <h5 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h5><p>基本用法，跟js的闭包类似  </p>
@@ -278,7 +278,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2018-06-07T12:43:06.466Z" itemprop="dateUpdated">2018-06-07 20:43:06</time>
+    最后更新时间：<time datetime="2018-06-07T12:43:08.000Z" itemprop="dateUpdated">2018-06-07 20:43:08</time>
 </span><br>
 
 

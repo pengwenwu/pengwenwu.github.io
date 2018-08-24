@@ -19,16 +19,16 @@
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="PHP,Linux,nginx">
+    <meta name="keywords" content="Linux,PHP,nginx">
     <meta name="description" content="删除yum安装过的php相关模块1yum remove php* 依赖安装123456789yum -y install gcc automake autoconf libtool makeyum -y install gcc gcc-c++ glibcyum -y install libmcrypt-devel mhash-devel libxslt-devel \libjpeg libjpeg">
-<meta name="keywords" content="PHP,Linux,nginx">
+<meta name="keywords" content="Linux,PHP,nginx">
 <meta property="og:type" content="article">
 <meta property="og:title" content="centos7编译安装php7和nginx">
 <meta property="og:url" content="https://pengwenwu.github.io/2018/07/22/centos7编译安装php7和nginx/index.html">
 <meta property="og:site_name" content="Pena&#39;s Blog">
 <meta property="og:description" content="删除yum安装过的php相关模块1yum remove php* 依赖安装123456789yum -y install gcc automake autoconf libtool makeyum -y install gcc gcc-c++ glibcyum -y install libmcrypt-devel mhash-devel libxslt-devel \libjpeg libjpeg">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-08-05T15:01:15.208Z">
+<meta property="og:updated_time" content="2018-08-05T15:01:16.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="centos7编译安装php7和nginx">
 <meta name="twitter:description" content="删除yum安装过的php相关模块1yum remove php* 依赖安装123456789yum -y install gcc automake autoconf libtool makeyum -y install gcc gcc-c++ glibcyum -y install libmcrypt-devel mhash-devel libxslt-devel \libjpeg libjpeg">
@@ -192,7 +192,7 @@
 <h4 id="修改服务器所在时区"><a href="#修改服务器所在时区" class="headerlink" title="修改服务器所在时区"></a>修改服务器所在时区</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vim /usr/<span class="built_in">local</span>/php/etc/php.ini</span><br><span class="line"></span><br><span class="line">date.timezone = PRC</span><br></pre></td></tr></table></figure>
 <h4 id="添加-php-fpm-配置文件"><a href="#添加-php-fpm-配置文件" class="headerlink" title="添加 php-fpm 配置文件"></a>添加 php-fpm 配置文件</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/php/etc</span><br><span class="line"></span><br><span class="line">cp php-fpm.conf.default php-fpm.conf</span><br></pre></td></tr></table></figure>
 <h4 id="添加-php-fpm-管理相关的配置文件到系统配置目录-etc-init-d"><a href="#添加-php-fpm-管理相关的配置文件到系统配置目录-etc-init-d" class="headerlink" title="添加 php-fpm 管理相关的配置文件到系统配置目录 /etc/init.d"></a>添加 php-fpm 管理相关的配置文件到系统配置目录 /etc/init.d</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># /usr/local/php-7.2.8</span></span><br><span class="line">cp sapi/fpm/init.d.php-fpm /etc/init.d/php-fpm</span><br></pre></td></tr></table></figure>
-<h4 id="添加-www-conf-配置文件"><a href="#添加-www-conf-配置文件" class="headerlink" title="添加 www.conf 配置文件"></a>添加 www.conf 配置文件</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># /usr/local/php</span></span><br><span class="line">cp etc/php-fpm.d/www.conf.default etc/php-fpm.d/www.conf</span><br></pre></td></tr></table></figure>
+<h4 id="添加-www-conf-配置文件"><a href="#添加-www-conf-配置文件" class="headerlink" title="添加 www.conf 配置文件"></a>添加 <a href="http://www.conf" target="_blank" rel="noopener">www.conf</a> 配置文件</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># /usr/local/php</span></span><br><span class="line">cp etc/php-fpm.d/www.conf.default etc/php-fpm.d/www.conf</span><br></pre></td></tr></table></figure>
 <h4 id="设置PHP日志目录和php-fpm运行进程的ID文件目录"><a href="#设置PHP日志目录和php-fpm运行进程的ID文件目录" class="headerlink" title="设置PHP日志目录和php-fpm运行进程的ID文件目录"></a>设置PHP日志目录和php-fpm运行进程的ID文件目录</h4><p>php-fpm运行进程的ID文件也就是 <code>php-fpm.pid</code>  </p>
 <p>设置php-fpm进程目录的用户和用户组为nginx  </p>
 <blockquote>
@@ -232,7 +232,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2018-08-05T15:01:15.208Z" itemprop="dateUpdated">2018-08-05 23:01:15</time>
+    最后更新时间：<time datetime="2018-08-05T15:01:16.000Z" itemprop="dateUpdated">2018-08-05 23:01:16</time>
 </span><br>
 
 
