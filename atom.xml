@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://pengwenwu.github.io/"/>
-  <updated>2018-09-03T15:05:48.962Z</updated>
+  <updated>2018-09-05T15:19:37.483Z</updated>
   <id>https://pengwenwu.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>RabbitMq服务端web UI配置</title>
+    <link href="https://pengwenwu.github.io/2018/09/05/RabbitMq%E6%9C%8D%E5%8A%A1%E7%AB%AFweb%20UI%E9%85%8D%E7%BD%AE/"/>
+    <id>https://pengwenwu.github.io/2018/09/05/RabbitMq服务端web UI配置/</id>
+    <published>2018-09-05T15:18:34.000Z</published>
+    <updated>2018-09-05T15:19:37.483Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="应用插件"><a href="#应用插件" class="headerlink" title="应用插件"></a>应用插件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rabbitmq-plugins <span class="built_in">enable</span> rabbitmq_management</span><br></pre></td></tr></table></figure><h2 id="访问"><a href="#访问" class="headerlink" title="访问"></a>访问</h2><p><a href="http://localhost:15672" target="_blank" rel="noopener">http://localhost:15672</a></p><h2 id="虚拟机端口映射无法访问"><a href="#虚拟机端口映射无法访问" class="headerlink" title="虚拟机端口映射无法访问"></a>虚拟机端口映射无法访问</h2><h3 id="RabbitMQ中的访问控制（身份验证，授权）"><a href="#RabbitMQ中的访问控制（身份验证，授权）" class="headerlink" title="RabbitMQ中的访问控制（身份验证，授权）"></a>RabbitMQ中的访问控制（身份验证，授权）</h3><blockquote><p>官方文档：<a href="https://www.rabbitmq.com/access-control.html" target="_blank" rel="noopener">https://www.rabbitmq.com/access-control.html</a>  </p></blockquote><p>默认用户为<code>guest</code>，密码为<code>guest</code>。通过修改配置文件或者以下命令添加新用户：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加新用户</span></span><br><span class="line">rabbitmqctl add_user root 123456</span><br><span class="line"><span class="comment"># 设置用户标签</span></span><br><span class="line">rabbitmqctl set_user_tags root administrator</span><br></pre></td></tr></table></figure></p><h2 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a>用户管理</h2><blockquote><p>更多用户管理命令，官方文档：<a href="https://www.rabbitmq.com/rabbitmqctl.8.html#User_Management" target="_blank" rel="noopener">https://www.rabbitmq.com/rabbitmqctl.8.html#User_Management</a></p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;应用插件&quot;&gt;&lt;a href=&quot;#应用插件&quot; class=&quot;headerlink&quot; title=&quot;应用插件&quot;&gt;&lt;/a&gt;应用插件&lt;/h2&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre
+      
+    
+    </summary>
+    
+      <category term="后端" scheme="https://pengwenwu.github.io/categories/%E5%90%8E%E7%AB%AF/"/>
+    
+    
+      <category term="PHP" scheme="https://pengwenwu.github.io/tags/PHP/"/>
+    
+      <category term="RabbitMq" scheme="https://pengwenwu.github.io/tags/RabbitMq/"/>
+    
+  </entry>
   
   <entry>
     <title>RabbitMq客户端-php-amqplib库</title>
@@ -391,11 +418,11 @@
       <category term="后端" scheme="https://pengwenwu.github.io/categories/%E5%90%8E%E7%AB%AF/"/>
     
     
-      <category term="php" scheme="https://pengwenwu.github.io/tags/php/"/>
-    
       <category term="workerman" scheme="https://pengwenwu.github.io/tags/workerman/"/>
     
       <category term="websocket" scheme="https://pengwenwu.github.io/tags/websocket/"/>
+    
+      <category term="php" scheme="https://pengwenwu.github.io/tags/php/"/>
     
   </entry>
   
@@ -531,37 +558,6 @@
       <category term="JS" scheme="https://pengwenwu.github.io/tags/JS/"/>
     
       <category term="闭包" scheme="https://pengwenwu.github.io/tags/%E9%97%AD%E5%8C%85/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>phpstorm或vscode使用psr2规范</title>
-    <link href="https://pengwenwu.github.io/2018/05/14/phpstorm%E6%88%96vscode%E4%BD%BF%E7%94%A8psr2%E8%A7%84%E8%8C%83/"/>
-    <id>https://pengwenwu.github.io/2018/05/14/phpstorm或vscode使用psr2规范/</id>
-    <published>2018-05-13T16:16:13.000Z</published>
-    <updated>2018-05-13T16:19:14.000Z</updated>
-    
-    <content type="html"><![CDATA[<ul><li>安装composer</li><li>全局安装phpcs</li></ul><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">composer global require squizlabs/php_codesniffer</span><br></pre></td></tr></table></figure><h3 id="vscode直接插件搜索phpcs安装"><a href="#vscode直接插件搜索phpcs安装" class="headerlink" title="vscode直接插件搜索phpcs安装"></a>vscode直接插件搜索phpcs安装</h3><h3 id="phpstorm"><a href="#phpstorm" class="headerlink" title="phpstorm"></a>phpstorm</h3><p>全局安装phpcs后，会在<strong>C:\Users{user name}\AppData\Roaming\Composer\vendor\bin</strong>下生成一个<code>phpcs.bat</code>，后面会用到</p><ul><li>phpstorm -&gt; setting</li><li>languages &amp; Frameworks-&gt;PHP-&gt;Code Sniffer点击Configuration右侧的按钮</li><li>找到刚才的phpcs.bat，点击<code>Validate</code>，确认</li><li>Editor-&gt;Inspection-&gt;PHP</li><li>双击PHP Code Sniffer validation，点击Coding standard右侧的刷新按钮，然后选择psr2，确定</li></ul><p><strong>参考链接</strong>: <a href="https://laravel-china.org/topics/1692/how-to-use-phpstorm-gracefully" target="_blank" rel="noopener">如何优雅地使用phpstorm?</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;ul&gt;
-&lt;li&gt;安装composer&lt;/li&gt;
-&lt;li&gt;全局安装phpcs&lt;/li&gt;
-&lt;/ul&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/sp
-      
-    
-    </summary>
-    
-      <category term="PHP" scheme="https://pengwenwu.github.io/categories/PHP/"/>
-    
-    
-      <category term="PHP" scheme="https://pengwenwu.github.io/tags/PHP/"/>
-    
-      <category term="PSR" scheme="https://pengwenwu.github.io/tags/PSR/"/>
     
   </entry>
   

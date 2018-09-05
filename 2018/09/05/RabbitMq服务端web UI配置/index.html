@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>RabbitMq服务端web UI配置 | Pena&#39;s Blog | 莫道君行早，更有早行人</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="PHP,RabbitMq">
+    <meta name="description" content="应用插件1rabbitmq-plugins enable rabbitmq_management 访问http://localhost:15672 虚拟机端口映射无法访问RabbitMQ中的访问控制（身份验证，授权） 官方文档：https://www.rabbitmq.com/access-control.html    默认用户为guest，密码为guest。通过修改配置文件或者以下命令添加新用">
+<meta name="keywords" content="PHP,RabbitMq">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RabbitMq服务端web UI配置">
+<meta property="og:url" content="https://pengwenwu.github.io/2018/09/05/RabbitMq服务端web UI配置/index.html">
+<meta property="og:site_name" content="Pena&#39;s Blog">
+<meta property="og:description" content="应用插件1rabbitmq-plugins enable rabbitmq_management 访问http://localhost:15672 虚拟机端口映射无法访问RabbitMQ中的访问控制（身份验证，授权） 官方文档：https://www.rabbitmq.com/access-control.html    默认用户为guest，密码为guest。通过修改配置文件或者以下命令添加新用">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-09-05T15:19:37.483Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RabbitMq服务端web UI配置">
+<meta name="twitter:description" content="应用插件1rabbitmq-plugins enable rabbitmq_management 访问http://localhost:15672 虚拟机端口映射无法访问RabbitMQ中的访问控制（身份验证，授权） 官方文档：https://www.rabbitmq.com/access-control.html    默认用户为guest，密码为guest。通过修改配置文件或者以下命令添加新用">
+    
+        <link rel="alternate" type="application/atom+xml" title="Pena&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">pengwenwu</h5>
+          <a href="mailto:pww932589183@163.com" title="pww932589183@163.com" class="mail">pww932589183@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/pengwenwu" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">RabbitMq服务端web UI配置</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">RabbitMq服务端web UI配置</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-09-05T15:18:34.000Z" itemprop="datePublished" class="page-time">
+  2018-09-05
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/后端/">后端</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#应用插件"><span class="post-toc-number">1.</span> <span class="post-toc-text">应用插件</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#访问"><span class="post-toc-number">2.</span> <span class="post-toc-text">访问</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#虚拟机端口映射无法访问"><span class="post-toc-number">3.</span> <span class="post-toc-text">虚拟机端口映射无法访问</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#RabbitMQ中的访问控制（身份验证，授权）"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">RabbitMQ中的访问控制（身份验证，授权）</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#用户管理"><span class="post-toc-number">4.</span> <span class="post-toc-text">用户管理</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-RabbitMq服务端web UI配置"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">RabbitMq服务端web UI配置</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-09-05 23:18:34" datetime="2018-09-05T15:18:34.000Z"  itemprop="datePublished">2018-09-05</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/后端/">后端</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="应用插件"><a href="#应用插件" class="headerlink" title="应用插件"></a>应用插件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rabbitmq-plugins <span class="built_in">enable</span> rabbitmq_management</span><br></pre></td></tr></table></figure>
+<h2 id="访问"><a href="#访问" class="headerlink" title="访问"></a>访问</h2><p><a href="http://localhost:15672" target="_blank" rel="noopener">http://localhost:15672</a></p>
+<h2 id="虚拟机端口映射无法访问"><a href="#虚拟机端口映射无法访问" class="headerlink" title="虚拟机端口映射无法访问"></a>虚拟机端口映射无法访问</h2><h3 id="RabbitMQ中的访问控制（身份验证，授权）"><a href="#RabbitMQ中的访问控制（身份验证，授权）" class="headerlink" title="RabbitMQ中的访问控制（身份验证，授权）"></a>RabbitMQ中的访问控制（身份验证，授权）</h3><blockquote>
+<p>官方文档：<a href="https://www.rabbitmq.com/access-control.html" target="_blank" rel="noopener">https://www.rabbitmq.com/access-control.html</a>  </p>
+</blockquote>
+<p>默认用户为<code>guest</code>，密码为<code>guest</code>。通过修改配置文件或者以下命令添加新用户：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加新用户</span></span><br><span class="line">rabbitmqctl add_user root 123456</span><br><span class="line"><span class="comment"># 设置用户标签</span></span><br><span class="line">rabbitmqctl set_user_tags root administrator</span><br></pre></td></tr></table></figure></p>
+<h2 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a>用户管理</h2><blockquote>
+<p>更多用户管理命令，官方文档：<a href="https://www.rabbitmq.com/rabbitmqctl.8.html#User_Management" target="_blank" rel="noopener">https://www.rabbitmq.com/rabbitmqctl.8.html#User_Management</a></p>
+</blockquote>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-09-05T15:19:37.483Z" itemprop="dateUpdated">2018-09-05 23:19:37</time>
+</span><br>
+
+
+        
+        原文链接：<a href="/2018/09/05/RabbitMq服务端web UI配置/" target="_blank" rel="external">https://pengwenwu.github.io/2018/09/05/RabbitMq服务端web UI配置/</a>
+        
+    </div>
+    <footer>
+        <a href="https://pengwenwu.github.io">
+            <img src="/img/avatar.jpg" alt="pengwenwu">
+            pengwenwu
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RabbitMq/">RabbitMq</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://pengwenwu.github.io/2018/09/05/RabbitMq服务端web UI配置/&title=《RabbitMq服务端web UI配置》 — Pena's Blog&pic=https://pengwenwu.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://pengwenwu.github.io/2018/09/05/RabbitMq服务端web UI配置/&title=《RabbitMq服务端web UI配置》 — Pena's Blog&source=pengwenwu的个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://pengwenwu.github.io/2018/09/05/RabbitMq服务端web UI配置/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《RabbitMq服务端web UI配置》 — Pena's Blog&url=https://pengwenwu.github.io/2018/09/05/RabbitMq服务端web UI配置/&via=https://pengwenwu.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://pengwenwu.github.io/2018/09/05/RabbitMq服务端web UI配置/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/09/03/RabbitMq客户端-php-amqplib库/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">RabbitMq客户端-php-amqplib库</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'true' == 'true',
+            appId: "U2qzDNI480QyyzN2kDGB7bGu-gzGzoHsz",
+            appKey: "6o2PFFkLctFMxXg3qBrhr0CF",
+            avatar: "retro",
+            placeholder: "要不要说点什么？",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>pengwenwu &copy; 2017 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://pengwenwu.github.io/2018/09/05/RabbitMq服务端web UI配置/&title=《RabbitMq服务端web UI配置》 — Pena's Blog&pic=https://pengwenwu.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://pengwenwu.github.io/2018/09/05/RabbitMq服务端web UI配置/&title=《RabbitMq服务端web UI配置》 — Pena's Blog&source=pengwenwu的个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://pengwenwu.github.io/2018/09/05/RabbitMq服务端web UI配置/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《RabbitMq服务端web UI配置》 — Pena's Blog&url=https://pengwenwu.github.io/2018/09/05/RabbitMq服务端web UI配置/&via=https://pengwenwu.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://pengwenwu.github.io/2018/09/05/RabbitMq服务端web UI配置/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACtUlEQVR42u3ayW7cQAwFQP//TydXA7Z6Hpf22EDpNFC0dHUAkSb58REf/z4dX8+fr/98zdffT88837t84OHh4Q2Wfn70GfO0iDMg2azz1jytGQ8PD+82L190/qE/b8p5odVNfDyPh4eH92t41YQ4WkqQG+Ph4eH9Rd45DCSf+2SD8t94eHh47+IlC0rKrMmZagkj2aCFWgseHh5ezJuks+/6faW/h4eHhzfuqldb+NURgSRZz4PBN3fh4eHhXeDlH9y8dJuc7xUsquvEw8PDu8erNvInYaP3/N7IAh4eHt7P8HaHsZIXz5PvUakCDw8Pb4nXS6Crzar83rxsUQgJeHh4eAPe/COeDA3M39ULY3h4eHi7vPlgU5JGVze0N9T1zarw8PDwLvAmKe9WGbdXPh7FPTw8PLwxb5IEVxtRvabaZEABDw8Pb5dXbcZXy6x5cbYXWl48DQ8PD+8Cb95k6rWsqoEkCQyPZ/Dw8PBWedEcwaBcO1/oZMQBDw8P7wavmvLOxwvyhebbF/0f4uHh4S3xekXbfCk5qVf2LdRa8PDw8H6EVy039Fpl1SCU/yseHh7eDV6h1ht/6KvJerWRlr8dDw8P7wavV0rIR6OqR06NWnR4eHh4F3jVEsD8mny5+aa/eD4eHh7eBV4vwe0l1nlg6JWMo2IEHh4e3pjXuzlvXOUbl58pDBng4eHhXePNX1lu7Q9GFpr1aTw8PLxVXp5G5wlxspX59c0DDw8Pb5V3o0GVw3J8r/GGh4eHd4M3+cZOmmE9xlahGQ8PD2/OqwaDSdusukELgQEPDw/vGm9S3k0+4r3iRXVY4cVMBB4eHt6bePnHvRdglsvBeHh4eL+AlyfivXJDr7gcxQ08PDy8Vd58IKDasuoNLlQDDB4eHt4NXu8P/vnI1AS2W87Aw8PDi3n/ATl2sYaO0O/EAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
