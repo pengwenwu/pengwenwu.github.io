@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>CI框架3.x源码阅读笔记四之基准点组件Benchmark.php | Pena&#39;s Blog | 莫道君行早，更有早行人</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="PHP,CodeIgniter">
+    <meta name="description" content="BenchMark，是CI的基准点组件，主要用于mark各种时间点、记录内存使用等参数，便于性能测试和追踪    只是用来计算程序运行消耗的时间和内存  属性公共属性：$marker只是用于所有基准标记的数组   方法公共方法：mark($name)标记当前的时间点1234public function mark($name)&amp;#123;    $this-&amp;gt;marker[$name] =">
+<meta name="keywords" content="PHP,CodeIgniter">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CI框架3.x源码阅读笔记四之基准点组件Benchmark.php">
+<meta property="og:url" content="https://pengwenwu.github.io/2018/09/19/CI框架3-x源码阅读笔记四之基准点组件Benchmark-php/index.html">
+<meta property="og:site_name" content="Pena&#39;s Blog">
+<meta property="og:description" content="BenchMark，是CI的基准点组件，主要用于mark各种时间点、记录内存使用等参数，便于性能测试和追踪    只是用来计算程序运行消耗的时间和内存  属性公共属性：$marker只是用于所有基准标记的数组   方法公共方法：mark($name)标记当前的时间点1234public function mark($name)&amp;#123;    $this-&amp;gt;marker[$name] =">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-09-19T14:57:02.057Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CI框架3.x源码阅读笔记四之基准点组件Benchmark.php">
+<meta name="twitter:description" content="BenchMark，是CI的基准点组件，主要用于mark各种时间点、记录内存使用等参数，便于性能测试和追踪    只是用来计算程序运行消耗的时间和内存  属性公共属性：$marker只是用于所有基准标记的数组   方法公共方法：mark($name)标记当前的时间点1234public function mark($name)&amp;#123;    $this-&amp;gt;marker[$name] =">
+    
+        <link rel="alternate" type="application/atom+xml" title="Pena&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">pengwenwu</h5>
+          <a href="mailto:pww932589183@163.com" title="pww932589183@163.com" class="mail">pww932589183@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/pengwenwu" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">CI框架3.x源码阅读笔记四之基准点组件Benchmark.php</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">CI框架3.x源码阅读笔记四之基准点组件Benchmark.php</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-09-19T14:56:25.000Z" itemprop="datePublished" class="page-time">
+  2018-09-19
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/后端/">后端</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#属性"><span class="post-toc-number">1.</span> <span class="post-toc-text">属性</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#公共属性：-marker"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">公共属性：$marker</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#方法"><span class="post-toc-number">2.</span> <span class="post-toc-text">方法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#公共方法：mark-name"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">公共方法：mark($name)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#公共方法：elapsed-time-point1-‘’-point2-‘’-decimals-4"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">公共方法：elapsed_time($point1 = ‘’, $point2 = ‘’, $decimals = 4)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#memory-usage"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">memory_usage()</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-CI框架3-x源码阅读笔记四之基准点组件Benchmark-php"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">CI框架3.x源码阅读笔记四之基准点组件Benchmark.php</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-09-19 22:56:25" datetime="2018-09-19T14:56:25.000Z"  itemprop="datePublished">2018-09-19</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/后端/">后端</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <blockquote>
+<p>BenchMark，是CI的基准点组件，主要用于mark各种时间点、记录内存使用等参数，便于性能测试和追踪   </p>
+<p>只是用来计算程序运行消耗的时间和内存</p>
+</blockquote>
+<h2 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h2><h3 id="公共属性：-marker"><a href="#公共属性：-marker" class="headerlink" title="公共属性：$marker"></a>公共属性：$marker</h3><p>只是用于所有基准标记的数组  </p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><h3 id="公共方法：mark-name"><a href="#公共方法：mark-name" class="headerlink" title="公共方法：mark($name)"></a>公共方法：mark($name)</h3><p>标记当前的时间点<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">mark</span><span class="params">($name)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">$this</span>-&gt;marker[$name] = microtime(<span class="keyword">TRUE</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>使用流程如下：  </p>
+<ol>
+<li>标记一个起始点</li>
+<li>标记一个结束点</li>
+<li>使用elapsed_time方法计算时间差  </li>
+</ol>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 标记一个起始点</span></span><br><span class="line"><span class="keyword">$this</span>-&gt;benchmark-&gt;mark(<span class="string">'code_init'</span>);</span><br><span class="line"><span class="comment">// ... 代码主体</span></span><br><span class="line"><span class="comment">// 标记一个结束点</span></span><br><span class="line"><span class="keyword">$this</span>-&gt;benchmark-&gt;mark(<span class="string">'code_end'</span>);</span><br><span class="line"><span class="comment">// 计算时间差</span></span><br><span class="line"><span class="keyword">echo</span> <span class="keyword">$this</span>-&gt;benchmark-&gt;elapsed_time(<span class="string">'code_start'</span>, <span class="string">'code_end'</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="公共方法：elapsed-time-point1-‘’-point2-‘’-decimals-4"><a href="#公共方法：elapsed-time-point1-‘’-point2-‘’-decimals-4" class="headerlink" title="公共方法：elapsed_time($point1 = ‘’, $point2 = ‘’, $decimals = 4)"></a>公共方法：elapsed_time($point1 = ‘’, $point2 = ‘’, $decimals = 4)</h3><p>计算两个标记点之间的时差<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">elapsed_time</span><span class="params">($point1 = <span class="string">''</span>, $point2 = <span class="string">''</span>, $decimals = <span class="number">4</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> ($point1 === <span class="string">''</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'&#123;elapsed_time&#125;'</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ( ! <span class="keyword">isset</span>(<span class="keyword">$this</span>-&gt;marker[$point1]))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">''</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ( ! <span class="keyword">isset</span>(<span class="keyword">$this</span>-&gt;marker[$point2]))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;marker[$point2] = microtime(<span class="keyword">TRUE</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> number_format(<span class="keyword">$this</span>-&gt;marker[$point2] - <span class="keyword">$this</span>-&gt;marker[$point1], $decimals);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="memory-usage"><a href="#memory-usage" class="headerlink" title="memory_usage()"></a>memory_usage()</h3><p>显示内存占用<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">memory_usage</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'&#123;memory_usage&#125;'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>参考链接：<a href="https://blog.csdn.net/zhihua_w/article/details/52846274" target="_blank" rel="noopener">https://blog.csdn.net/zhihua_w/article/details/52846274</a></p>
+</blockquote>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-09-19T14:57:02.057Z" itemprop="dateUpdated">2018-09-19 22:57:02</time>
+</span><br>
+
+
+        
+        原文链接：<a href="/2018/09/19/CI框架3-x源码阅读笔记四之基准点组件Benchmark-php/" target="_blank" rel="external">https://pengwenwu.github.io/2018/09/19/CI框架3-x源码阅读笔记四之基准点组件Benchmark-php/</a>
+        
+    </div>
+    <footer>
+        <a href="https://pengwenwu.github.io">
+            <img src="/img/avatar.jpg" alt="pengwenwu">
+            pengwenwu
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CodeIgniter/">CodeIgniter</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://pengwenwu.github.io/2018/09/19/CI框架3-x源码阅读笔记四之基准点组件Benchmark-php/&title=《CI框架3.x源码阅读笔记四之基准点组件Benchmark.php》 — Pena's Blog&pic=https://pengwenwu.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://pengwenwu.github.io/2018/09/19/CI框架3-x源码阅读笔记四之基准点组件Benchmark-php/&title=《CI框架3.x源码阅读笔记四之基准点组件Benchmark.php》 — Pena's Blog&source=pengwenwu的个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://pengwenwu.github.io/2018/09/19/CI框架3-x源码阅读笔记四之基准点组件Benchmark-php/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《CI框架3.x源码阅读笔记四之基准点组件Benchmark.php》 — Pena's Blog&url=https://pengwenwu.github.io/2018/09/19/CI框架3-x源码阅读笔记四之基准点组件Benchmark-php/&via=https://pengwenwu.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://pengwenwu.github.io/2018/09/19/CI框架3-x源码阅读笔记四之基准点组件Benchmark-php/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/09/05/RabbitMq服务端web UI配置/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">RabbitMq服务端web UI配置</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'true' == 'true',
+            appId: "U2qzDNI480QyyzN2kDGB7bGu-gzGzoHsz",
+            appKey: "6o2PFFkLctFMxXg3qBrhr0CF",
+            avatar: "retro",
+            placeholder: "要不要说点什么？",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>pengwenwu &copy; 2017 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://pengwenwu.github.io/2018/09/19/CI框架3-x源码阅读笔记四之基准点组件Benchmark-php/&title=《CI框架3.x源码阅读笔记四之基准点组件Benchmark.php》 — Pena's Blog&pic=https://pengwenwu.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://pengwenwu.github.io/2018/09/19/CI框架3-x源码阅读笔记四之基准点组件Benchmark-php/&title=《CI框架3.x源码阅读笔记四之基准点组件Benchmark.php》 — Pena's Blog&source=pengwenwu的个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://pengwenwu.github.io/2018/09/19/CI框架3-x源码阅读笔记四之基准点组件Benchmark-php/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《CI框架3.x源码阅读笔记四之基准点组件Benchmark.php》 — Pena's Blog&url=https://pengwenwu.github.io/2018/09/19/CI框架3-x源码阅读笔记四之基准点组件Benchmark-php/&via=https://pengwenwu.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://pengwenwu.github.io/2018/09/19/CI框架3-x源码阅读笔记四之基准点组件Benchmark-php/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADMUlEQVR42u3aQXLbQAwEQP//0841qcT0DEBVxHXz5GJJ5vbyAGGwHx/x9fnbdX0n/2/X3/r7/ld38ufWFzY2NvZD2J+X1/VCZ38ngM16rr+LjY2NfSo7KTM5Jikq+RKvC9WsHGJjY2NjJ+Unoc6emxQ2bGxsbOx7o5+kdCWtxX8oYNjY2NgPYSdLyeOb/GqD/uttfUmWho2Njf327M1o9t3+fsl8GxsbG/uN2Z+3XrPNykOotlx9uU5sbGzsg9ibozabdiIZ4l7fz8OpL7cbGxsb+wh2Gxu1I9ukFO3vt4eEsLGxsU9i18PRUauQY9rCORsYY2NjY5/Knv30b1P39gBlG1cVJRYbGxv7CHYe5bTtx6Yo5hHVcOOwsbGxD2K30U87Xr3rKZsB8HBGgY2Njf0Qdn7gpi1L+TbdGzlFRQ4bGxv7UHY7WM0P3MyGB5u11YMBbGxs7IPYSUh0Hdm0g4G7QqVieICNjY19HLuFtUH/rNnIS1feumBjY2Ofys7bhqRg5JFT3sDkWxm9PGxsbOyD2EkEk0fzs7KXR1eb9gMbGxv7VHb0w7188H6Jr1jJH9/FxsbGPoidBO6bscGsvclHy3m7UiRe2NjY2A9n5yWkXXQyAE4+P/suNjY29qns2fGa9ijkvSOEfGuiUAkbGxv74ex9fNNuzT7ubwOjb4IkbGxs7CPYeQzUbkdb3hLMrCHBxsbGPps9a0g2I9h8u2cjhOSFYWNjY5/BTh6zKWb5uHdW8IaxFDY2NvZx7GG8Hixxf7Bmc2Dom8EANjY29nHstqRtykxeGtshATY2NvZPY0ej0PKH/l0LzYOk/PP/yNKwsbGxH85uS1cOa1uU/FntS8LGxsY+m90GOkkLMSsqbWOT4IvZCDY2NvZj2bPYaHYQpy1XbZtUDDawsbGxD2LnV87I24N2MNzGWDdc2NjY2A9h50VrdkQmx8ze1TCQwsbGxj6OvQlxNod7NuVqU3SxsbGxfyZ7Fi3lhWoWTrVjYGxsbOyfzJ61AW3Dk4+KV20MNjY29nHsdjS7AeSB1KaUflNisbGxsQ9it0WuDZjy4W5bMvM2ZjXfxsbGxn5f9i/BULWpn9NHewAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
