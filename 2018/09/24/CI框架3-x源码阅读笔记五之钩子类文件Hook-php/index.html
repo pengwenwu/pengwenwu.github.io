@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>CI框架3.x源码阅读笔记五之钩子类文件Hook.php | Pena&#39;s Blog | 莫道君行早，更有早行人</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="PHP,CodeIgniter">
+    <meta name="description" content="CI框架可以实现在不修改系统核心文件的基础上来改变或增加系统的核心运行功能（如重写缓存、输出等），那就是Hooks。钩子是什么呢？可以这样理解：    钩子是一种事件驱动模式，它的核心自然是事件（CI框架中pre_system，pre_controller等都是特定的事件） 既然是事件驱动，那么必然要包含最重要的两个步骤: (1)、事件注册。对于Hook而言，就是指Hook钩子的挂载。(2).事件">
+<meta name="keywords" content="PHP,CodeIgniter">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CI框架3.x源码阅读笔记五之钩子类文件Hook.php">
+<meta property="og:url" content="https://pengwenwu.github.io/2018/09/24/CI框架3-x源码阅读笔记五之钩子类文件Hook-php/index.html">
+<meta property="og:site_name" content="Pena&#39;s Blog">
+<meta property="og:description" content="CI框架可以实现在不修改系统核心文件的基础上来改变或增加系统的核心运行功能（如重写缓存、输出等），那就是Hooks。钩子是什么呢？可以这样理解：    钩子是一种事件驱动模式，它的核心自然是事件（CI框架中pre_system，pre_controller等都是特定的事件） 既然是事件驱动，那么必然要包含最重要的两个步骤: (1)、事件注册。对于Hook而言，就是指Hook钩子的挂载。(2).事件">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-09-24T15:08:20.977Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CI框架3.x源码阅读笔记五之钩子类文件Hook.php">
+<meta name="twitter:description" content="CI框架可以实现在不修改系统核心文件的基础上来改变或增加系统的核心运行功能（如重写缓存、输出等），那就是Hooks。钩子是什么呢？可以这样理解：    钩子是一种事件驱动模式，它的核心自然是事件（CI框架中pre_system，pre_controller等都是特定的事件） 既然是事件驱动，那么必然要包含最重要的两个步骤: (1)、事件注册。对于Hook而言，就是指Hook钩子的挂载。(2).事件">
+    
+        <link rel="alternate" type="application/atom+xml" title="Pena&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">pengwenwu</h5>
+          <a href="mailto:pww932589183@163.com" title="pww932589183@163.com" class="mail">pww932589183@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/pengwenwu" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">CI框架3.x源码阅读笔记五之钩子类文件Hook.php</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">CI框架3.x源码阅读笔记五之钩子类文件Hook.php</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-09-24T15:07:57.000Z" itemprop="datePublished" class="page-time">
+  2018-09-24
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/后端/">后端</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#组件初始化（构造函数）"><span class="post-toc-number">1.</span> <span class="post-toc-text">组件初始化（构造函数）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#call调用指定的钩子"><span class="post-toc-number">2.</span> <span class="post-toc-text">call调用指定的钩子</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#run执行特定的钩子程序"><span class="post-toc-number">3.</span> <span class="post-toc-text">run执行特定的钩子程序</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-CI框架3-x源码阅读笔记五之钩子类文件Hook-php"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">CI框架3.x源码阅读笔记五之钩子类文件Hook.php</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-09-24 23:07:57" datetime="2018-09-24T15:07:57.000Z"  itemprop="datePublished">2018-09-24</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/后端/">后端</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>CI框架可以实现在不修改系统核心文件的基础上来改变或增加系统的核心运行功能（如重写缓存、输出等），那就是Hooks。钩子是什么呢？可以这样理解：  </p>
+<ol>
+<li>钩子是一种事件驱动模式，它的核心自然是事件（CI框架中pre_system，pre_controller等都是特定的事件）</li>
+<li>既然是事件驱动，那么必然要包含最重要的两个步骤: (1)、事件注册。对于Hook而言，就是指Hook钩子的挂载。(2).事件触发。在特定的时间点call特定的钩子，执行相应的钩子程序。</li>
+<li>既然是事件驱动，那么也应该支持统一挂钩点的多个注册事件。</li>
+<li>启动Hook钩子之后，程序的流程可能会发生变化，且钩子之间可能有相互调用的可能性，如果处理不当，会有死循环的可能性。同时，钩子的启用使得程序在一定程度上变得复杂，难以调试。  </li>
+</ol>
+<p>CI有这些挂钩点：  </p>
+<ul>
+<li><code>pre_system</code>： 在系统执行的早期调用，这个时候只有 <code>基准测试类</code> 和 <code>钩子类</code> 被加载了， 还没有执行到路由或其他的流程。</li>
+<li><code>pre_controller</code>: 在你的控制器调用之前执行，所有的基础类都已加载，路由和安全检查也已经完成。</li>
+<li><code>post_controller_constructor</code>: 在你的控制器实例化之后立即执行，控制器的任何方法都还尚未调用。</li>
+<li><code>post_controller</code>: 在你的控制器完全运行结束时执行。</li>
+<li><code>display_override</code>: 覆盖 _display() 方法，该方法用于在系统执行结束时向浏览器发送最终的页面结果。 这可以让你有自己的显示页面的方法。注意你可能需要使用 $this-&gt;CI =&amp; get_instance() 方法来获取 CI 超级对象，以及使用 $this-&gt;CI-&gt;output-&gt;get_output() 方法来 获取最终的显示数据。</li>
+<li><code>cache_override</code>: 使用你自己的方法来替代 输出类 中的 _display_cache() 方法，这让你有自己的缓存显示机制。</li>
+<li><p><code>post_system</code> 在最终的页面发送到浏览器之后、在系统的最后期被调用。</p>
+<p>CI中钩子的核心功能是由Hook组件完成的：  </p>
+</li>
+<li>enabled: 钩子功能是否开启的标志。</li>
+<li>hooks :保存系统中启用的钩子列表。</li>
+<li>in_progress:之后我们会看到，这个标志位用于防止钩子之间的互相调用而导致的死循环。</li>
+<li>_construct是Hook组件的构造函数，这其中调用了_initialize来完成初始化的工作。</li>
+<li>call_hook: 调用_run_hook来call指定的钩子程序。之前CodeIgniter.php中我们已经看到，call_hook是实际提供给外部调用的接口。</li>
+<li>_run_hook: 实际执行钩子程序的函数。</li>
+</ul>
+<p>使用挂钩点：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$hook[<span class="string">'pre_controller'</span>][] = <span class="keyword">array</span>(</span><br><span class="line">    <span class="string">'class'</span>    =&gt; <span class="string">'MyClass'</span>, <span class="comment">// 调用的类名，这一项可以留空。</span></span><br><span class="line">    <span class="string">'function'</span> =&gt; <span class="string">'MyMethod'</span>, <span class="comment">// 调用的方法或函数的名称。</span></span><br><span class="line">    <span class="string">'filename'</span> =&gt; <span class="string">'Myclass.php'</span>, <span class="comment">// 包含你的类或函数的文件名。</span></span><br><span class="line">    <span class="string">'filepath'</span> =&gt; <span class="string">'hooks'</span>, <span class="comment">// 包含你的脚本文件的目录名。 注意： 你的脚本必须放在 application/ 目录里面，所以 filepath 是相对 application/ 目录的路径</span></span><br><span class="line">    <span class="string">'params'</span>   =&gt; <span class="keyword">array</span>(<span class="string">'beer'</span>, <span class="string">'wine'</span>, <span class="string">'snacks'</span>) <span class="comment">// 传递给你脚本的任何参数，可选。</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure></p>
+<h3 id="组件初始化（构造函数）"><a href="#组件初始化（构造函数）" class="headerlink" title="组件初始化（构造函数）"></a>组件初始化（构造函数）</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 初始化，获取config配置</span></span><br><span class="line">    $CFG =&amp; load_class(<span class="string">'Config'</span>, <span class="string">'core'</span>);</span><br><span class="line">    log_message(<span class="string">'info'</span>, <span class="string">'Hooks Class Initialized'</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 检测配置是否开启钩子</span></span><br><span class="line">    <span class="keyword">if</span> ($CFG-&gt;item(<span class="string">'enable_hooks'</span>) === <span class="keyword">FALSE</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取钩子配置信息</span></span><br><span class="line">    <span class="keyword">if</span> (file_exists(APPPATH.<span class="string">'config/hooks.php'</span>))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">include</span>(APPPATH.<span class="string">'config/hooks.php'</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (file_exists(APPPATH.<span class="string">'config/'</span>.ENVIRONMENT.<span class="string">'/hooks.php'</span>))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">include</span>(APPPATH.<span class="string">'config/'</span>.ENVIRONMENT.<span class="string">'/hooks.php'</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// If there are no hooks, we're done.</span></span><br><span class="line">    <span class="keyword">if</span> ( ! <span class="keyword">isset</span>($hook) <span class="keyword">OR</span> ! is_array($hook))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">$this</span>-&gt;hooks =&amp; $hook;</span><br><span class="line">    <span class="keyword">$this</span>-&gt;enabled = <span class="keyword">TRUE</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="call调用指定的钩子"><a href="#call调用指定的钩子" class="headerlink" title="call调用指定的钩子"></a>call调用指定的钩子</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">call_hook</span><span class="params">($which = <span class="string">''</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">/// 检查钩子是否启用，以及call的钩子是否被预定义</span></span><br><span class="line">    <span class="keyword">if</span> ( ! <span class="keyword">$this</span>-&gt;enabled <span class="keyword">OR</span> ! <span class="keyword">isset</span>(<span class="keyword">$this</span>-&gt;hooks[$which]))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">FALSE</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 检查同一个挂钩点是否启用了多个钩子</span></span><br><span class="line">    <span class="keyword">if</span> (is_array(<span class="keyword">$this</span>-&gt;hooks[$which]) &amp;&amp; ! <span class="keyword">isset</span>(<span class="keyword">$this</span>-&gt;hooks[$which][<span class="string">'function'</span>]))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">foreach</span> (<span class="keyword">$this</span>-&gt;hooks[$which] <span class="keyword">as</span> $val)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">$this</span>-&gt;_run_hook($val);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;_run_hook(<span class="keyword">$this</span>-&gt;hooks[$which]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">TRUE</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="run执行特定的钩子程序"><a href="#run执行特定的钩子程序" class="headerlink" title="run执行特定的钩子程序"></a>run执行特定的钩子程序</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">_run_hook</span><span class="params">($data)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// data为上述我们定义的调用方式</span></span><br><span class="line">    <span class="keyword">if</span> (is_callable($data))</span><br><span class="line">    &#123;</span><br><span class="line">        is_array($data)</span><br><span class="line">            ? $data[<span class="number">0</span>]-&gt;&#123;$data[<span class="number">1</span>]&#125;()</span><br><span class="line">            : $data();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">TRUE</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">elseif</span> ( ! is_array($data))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">FALSE</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 防止重复调用</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;_in_progress === <span class="keyword">TRUE</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设置文件路径</span></span><br><span class="line">    <span class="keyword">if</span> ( ! <span class="keyword">isset</span>($data[<span class="string">'filepath'</span>], $data[<span class="string">'filename'</span>]))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">FALSE</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    $filepath = APPPATH.$data[<span class="string">'filepath'</span>].<span class="string">'/'</span>.$data[<span class="string">'filename'</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ( ! file_exists($filepath))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">FALSE</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设置类名和方法名</span></span><br><span class="line">    $class		= <span class="keyword">empty</span>($data[<span class="string">'class'</span>]) ? <span class="keyword">FALSE</span> : $data[<span class="string">'class'</span>];</span><br><span class="line">    $function	= <span class="keyword">empty</span>($data[<span class="string">'function'</span>]) ? <span class="keyword">FALSE</span> : $data[<span class="string">'function'</span>];</span><br><span class="line">    $params		= <span class="keyword">isset</span>($data[<span class="string">'params'</span>]) ? $data[<span class="string">'params'</span>] : <span class="string">''</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">empty</span>($function))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">FALSE</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">$this</span>-&gt;_in_progress = <span class="keyword">TRUE</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 调用方法</span></span><br><span class="line">    <span class="keyword">if</span> ($class !== <span class="keyword">FALSE</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// The object is stored?</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="keyword">$this</span>-&gt;_objects[$class]))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (method_exists(<span class="keyword">$this</span>-&gt;_objects[$class], $function))</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">$this</span>-&gt;_objects[$class]-&gt;$function($params);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;_in_progress = <span class="keyword">FALSE</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            class_exists($class, <span class="keyword">FALSE</span>) <span class="keyword">OR</span> <span class="keyword">require_once</span>($filepath);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> ( ! class_exists($class, <span class="keyword">FALSE</span>) <span class="keyword">OR</span> ! method_exists($class, $function))</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;_in_progress = <span class="keyword">FALSE</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// Store the object and execute the method</span></span><br><span class="line">            <span class="keyword">$this</span>-&gt;_objects[$class] = <span class="keyword">new</span> $class();</span><br><span class="line">            <span class="keyword">$this</span>-&gt;_objects[$class]-&gt;$function($params);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        function_exists($function) <span class="keyword">OR</span> <span class="keyword">require_once</span>($filepath);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> ( ! function_exists($function))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;_in_progress = <span class="keyword">FALSE</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        $function($params);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">$this</span>-&gt;_in_progress = <span class="keyword">FALSE</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">TRUE</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-09-24T15:08:20.977Z" itemprop="dateUpdated">2018-09-24 23:08:20</time>
+</span><br>
+
+
+        
+        原文链接：<a href="/2018/09/24/CI框架3-x源码阅读笔记五之钩子类文件Hook-php/" target="_blank" rel="external">https://pengwenwu.github.io/2018/09/24/CI框架3-x源码阅读笔记五之钩子类文件Hook-php/</a>
+        
+    </div>
+    <footer>
+        <a href="https://pengwenwu.github.io">
+            <img src="/img/avatar.jpg" alt="pengwenwu">
+            pengwenwu
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CodeIgniter/">CodeIgniter</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://pengwenwu.github.io/2018/09/24/CI框架3-x源码阅读笔记五之钩子类文件Hook-php/&title=《CI框架3.x源码阅读笔记五之钩子类文件Hook.php》 — Pena's Blog&pic=https://pengwenwu.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://pengwenwu.github.io/2018/09/24/CI框架3-x源码阅读笔记五之钩子类文件Hook-php/&title=《CI框架3.x源码阅读笔记五之钩子类文件Hook.php》 — Pena's Blog&source=pengwenwu的个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://pengwenwu.github.io/2018/09/24/CI框架3-x源码阅读笔记五之钩子类文件Hook-php/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《CI框架3.x源码阅读笔记五之钩子类文件Hook.php》 — Pena's Blog&url=https://pengwenwu.github.io/2018/09/24/CI框架3-x源码阅读笔记五之钩子类文件Hook-php/&via=https://pengwenwu.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://pengwenwu.github.io/2018/09/24/CI框架3-x源码阅读笔记五之钩子类文件Hook-php/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/09/19/CI框架3-x源码阅读笔记四之基准点组件Benchmark-php/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">CI框架3.x源码阅读笔记四之基准点组件Benchmark.php</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'true' == 'true',
+            appId: "U2qzDNI480QyyzN2kDGB7bGu-gzGzoHsz",
+            appKey: "6o2PFFkLctFMxXg3qBrhr0CF",
+            avatar: "retro",
+            placeholder: "要不要说点什么？",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>pengwenwu &copy; 2017 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://pengwenwu.github.io/2018/09/24/CI框架3-x源码阅读笔记五之钩子类文件Hook-php/&title=《CI框架3.x源码阅读笔记五之钩子类文件Hook.php》 — Pena's Blog&pic=https://pengwenwu.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://pengwenwu.github.io/2018/09/24/CI框架3-x源码阅读笔记五之钩子类文件Hook-php/&title=《CI框架3.x源码阅读笔记五之钩子类文件Hook.php》 — Pena's Blog&source=pengwenwu的个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://pengwenwu.github.io/2018/09/24/CI框架3-x源码阅读笔记五之钩子类文件Hook-php/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《CI框架3.x源码阅读笔记五之钩子类文件Hook.php》 — Pena's Blog&url=https://pengwenwu.github.io/2018/09/24/CI框架3-x源码阅读笔记五之钩子类文件Hook-php/&via=https://pengwenwu.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://pengwenwu.github.io/2018/09/24/CI框架3-x源码阅读笔记五之钩子类文件Hook-php/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADI0lEQVR42u3aQU7DQAwFUO5/aVgjRPJtD6hxX1YVpMm86cKab398xNfnj+v67/lzes+svrd5YWNjYz+EnS/l57eSz9Vl5e+6fuPN1mBjY2OvY1+/Pl96UpCSKwcn68TGxsbGvi5LOSMpnDky/3mwsbGxsecHlQRfXfo/FTBsbGzsh7B7kf01OI+NenHVP2Vp2NjY2C/Prkb2r/z5T/rb2NjY2C/MnkT2+ZBN9c78yNFsPGBjY2MvYvdGdiZRfjUMqpar5L3Y2NjYm9h5NDMf0Kk2JPK/l9sY2NjY2IvYk/Iwb/fmBbJKTZ6DjY2NvY/de9y8RM2PGdVjEjY2NvYm9nUYlA/fFBKsuHnc4xUaA9jY2Ngr2PPXV9u3+RacKqVRGcPGxsZ+LLs3plMNcfK28alyeGD4EhsbG/tR7FNLmTQD8qVPxoDK/W1sbGzsB7J7JWSy9F5LoPrMb8/BxsbGXsSuRu0HEqxBa7l6/IjaA9jY2NgPZ1cPDKear/OoqDCRVP0yNjY29mPZeZBUDZiqIdQk0oo2AhsbG3sR+2xxqt7Z28Rq1FU4gWFjY2OvYM+PH9UDRh7r5wUssmBjY2OvYOehUi/Wr5bJU1nQzdqwsbGxF7Gr4zjVoZlT25q3n5uDRNjY2NiPZSdhUL5BOabHy++/OSZhY2NjL2XnoU+vpJ0a08kbxjcpGjY2NvYido5JDhWT8Zr5sSc62GBjY2OvY/eauEmQlAc989ZC/l5sbGzsrexJ0NNrMPQ2aNLS+NbfxsbGxl7B7i2uWtiqx56kmCUtjeawDjY2NvZj2Tk+j3LOHnLy55e3GxsbG/vh7OrgzrzhOjnA9BoV2NjY2O/D7l05Mi9L14vurRkbGxt7H/uzeE0aunlUNN+gm29hY2NjL2L3SlS+NeW2a6t0Jf/FxsbG3s3uFa28Kdtj9NZQaD9jY2Njr2PnwzH5/dVRnryFnFfgX1eFjY2N/cbsXpQzif6TLai2q7GxsbHfmV1F9gZx8h+g14rGxsbG3seel4T5/fl68u34dZuwsbGxF7Gr0cxkOHLSZsgHhg6P7GBjY2O/LvsLGaJpBAzugAIAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
