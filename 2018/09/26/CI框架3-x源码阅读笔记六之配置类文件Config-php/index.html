@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>CI框架3.x源码阅读笔记六之配置类文件Config.php | Pena&#39;s Blog | 莫道君行早，更有早行人</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="PHP,CodeIgniter">
+    <meta name="description" content="首先对CI框架的配置管理类文件Config.php进行一个简要的类结构及说明：    config：所有的配置项都存储在$config数组中，item()方法取值也是从这里取 is_loaded：是一个数组，用当前上下文加载过的文件路径做数组元素。如果路径存在，则说明以及加载过该配置文件， 无需重复加载   _config_path：默认值 array(APPPATH)，配置文件存储路径，程序循环">
+<meta name="keywords" content="PHP,CodeIgniter">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CI框架3.x源码阅读笔记六之配置类文件Config.php">
+<meta property="og:url" content="https://pengwenwu.github.io/2018/09/26/CI框架3-x源码阅读笔记六之配置类文件Config-php/index.html">
+<meta property="og:site_name" content="Pena&#39;s Blog">
+<meta property="og:description" content="首先对CI框架的配置管理类文件Config.php进行一个简要的类结构及说明：    config：所有的配置项都存储在$config数组中，item()方法取值也是从这里取 is_loaded：是一个数组，用当前上下文加载过的文件路径做数组元素。如果路径存在，则说明以及加载过该配置文件， 无需重复加载   _config_path：默认值 array(APPPATH)，配置文件存储路径，程序循环">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-09-26T15:08:01.712Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CI框架3.x源码阅读笔记六之配置类文件Config.php">
+<meta name="twitter:description" content="首先对CI框架的配置管理类文件Config.php进行一个简要的类结构及说明：    config：所有的配置项都存储在$config数组中，item()方法取值也是从这里取 is_loaded：是一个数组，用当前上下文加载过的文件路径做数组元素。如果路径存在，则说明以及加载过该配置文件， 无需重复加载   _config_path：默认值 array(APPPATH)，配置文件存储路径，程序循环">
+    
+        <link rel="alternate" type="application/atom+xml" title="Pena&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">pengwenwu</h5>
+          <a href="mailto:pww932589183@163.com" title="pww932589183@163.com" class="mail">pww932589183@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/pengwenwu" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">CI框架3.x源码阅读笔记六之配置类文件Config.php</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">CI框架3.x源码阅读笔记六之配置类文件Config.php</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-09-26T15:06:39.000Z" itemprop="datePublished" class="page-time">
+  2018-09-26
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/后端/">后端</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#加载配置文件（-construct-load-）"><span class="post-toc-number">1.</span> <span class="post-toc-text">加载配置文件（__construct(), load()）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#construct"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">__construct()</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#load"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">load()</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#获取配置项值（item-、slash-item-）"><span class="post-toc-number">2.</span> <span class="post-toc-text">获取配置项值（item()、slash_item()）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#item"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">item()</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#slash-item"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">slash_item()</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#set-item"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">set_item()</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#url路由处理（site-url-、base-url-、-uri-string-、system-url-）"><span class="post-toc-number">3.</span> <span class="post-toc-text">url路由处理（site_url()、base_url()、_uri_string()、system_url()）</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-CI框架3-x源码阅读笔记六之配置类文件Config-php"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">CI框架3.x源码阅读笔记六之配置类文件Config.php</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-09-26 23:06:39" datetime="2018-09-26T15:06:39.000Z"  itemprop="datePublished">2018-09-26</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/后端/">后端</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>首先对CI框架的配置管理类文件Config.php进行一个简要的类结构及说明：  </p>
+<ul>
+<li>config：所有的配置项都存储在$config数组中，item()方法取值也是从这里取</li>
+<li>is_loaded：是一个数组，用当前上下文加载过的文件路径做数组元素。如果路径存在，则说明以及加载过该配置文件， 无需重复加载  </li>
+<li>_config_path：默认值 array(APPPATH)，配置文件存储路径，程序循环加载</li>
+<li>__construct()：加载默认config.php中的配置。如果config[“base_url’]不存在，则重新根据当前$_SERVER中信息计算并设置</li>
+<li>load()：加载自定义配置文件</li>
+<li>item()：获取配置项</li>
+<li>slash_item()：获取配置项，并在结尾增加”/“</li>
+<li>set_item()：设置配置项</li>
+<li>base_url()、site_url()、system_url()、_uri_string()：主要用于URL辅助函数调用。system_url()已经弃用</li>
+</ul>
+<p>主要完成以下几个主要功能：  </p>
+<ol>
+<li>加载配置文件</li>
+<li>获取配置项值</li>
+<li>设置配置项值（临时）</li>
+<li>url路由处理</li>
+</ol>
+<h3 id="加载配置文件（-construct-load-）"><a href="#加载配置文件（-construct-load-）" class="headerlink" title="加载配置文件（__construct(), load()）"></a>加载配置文件（__construct(), load()）</h3><h4 id="construct"><a href="#construct" class="headerlink" title="__construct()"></a>__construct()</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">$this</span>-&gt;config =&amp; get_config();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 在config/config.php下有非必需配置项base_url, 如果没有值，则自动给他进行赋值</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">empty</span>(<span class="keyword">$this</span>-&gt;config[<span class="string">'base_url'</span>]))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// The regular expression is only a basic validation for a valid "Host" header.</span></span><br><span class="line">        <span class="comment">// It's not exhaustive, only checks for valid characters.</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">isset</span>($_SERVER[<span class="string">'HTTP_HOST'</span>]) &amp;&amp; preg_match(<span class="string">'/^((\[[0-9a-f:]+\])|(\d&#123;1,3&#125;(\.\d&#123;1,3&#125;)&#123;3&#125;)|[a-z0-9\-\.]+)(:\d+)?$/i'</span>, $_SERVER[<span class="string">'HTTP_HOST'</span>]))</span><br><span class="line">        &#123;</span><br><span class="line">            $base_url = (is_https() ? <span class="string">'https'</span> : <span class="string">'http'</span>).<span class="string">'://'</span>.$_SERVER[<span class="string">'HTTP_HOST'</span>]</span><br><span class="line">                .substr($_SERVER[<span class="string">'SCRIPT_NAME'</span>], <span class="number">0</span>, strpos($_SERVER[<span class="string">'SCRIPT_NAME'</span>], basename($_SERVER[<span class="string">'SCRIPT_FILENAME'</span>])));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            $base_url = <span class="string">'http://localhost/'</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">$this</span>-&gt;set_item(<span class="string">'base_url'</span>, $base_url);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    log_message(<span class="string">'info'</span>, <span class="string">'Config Class Initialized'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在Config组件实例化之前，所有的组配置文件的获取都是由get_config()函数来代理的。在Config组件实例化时，要将所有的配置存放到自己的私有变量$config中，便于之后的访问和处理：$this-&gt;config =&amp; get_config();。</p>
+<h4 id="load"><a href="#load" class="headerlink" title="load()"></a>load()</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">load</span><span class="params">($file = <span class="string">''</span>, $use_sections = FALSE, $fail_gracefully = FALSE)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    $file = ($file === <span class="string">''</span>) ? <span class="string">'config'</span> : str_replace(<span class="string">'.php'</span>, <span class="string">''</span>, $file);</span><br><span class="line">    $loaded = <span class="keyword">FALSE</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 默认值APPPATH</span></span><br><span class="line">    <span class="keyword">foreach</span> (<span class="keyword">$this</span>-&gt;_config_paths <span class="keyword">as</span> $path)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 在默认配置目录以及指定环境的配置目录里查找</span></span><br><span class="line">        <span class="keyword">foreach</span> (<span class="keyword">array</span>($file, ENVIRONMENT.DIRECTORY_SEPARATOR.$file) <span class="keyword">as</span> $location)</span><br><span class="line">        &#123;</span><br><span class="line">            $file_path = $path.<span class="string">'config/'</span>.$location.<span class="string">'.php'</span>;</span><br><span class="line">            <span class="comment">// 判断是否加载过</span></span><br><span class="line">            <span class="keyword">if</span> (in_array($file_path, <span class="keyword">$this</span>-&gt;is_loaded, <span class="keyword">TRUE</span>))</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">TRUE</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> ( ! file_exists($file_path))</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">include</span>($file_path);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> ( ! <span class="keyword">isset</span>($config) <span class="keyword">OR</span> ! is_array($config))</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> ($fail_gracefully === <span class="keyword">TRUE</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">FALSE</span>;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                show_error(<span class="string">'Your '</span>.$file_path.<span class="string">' file does not appear to contain a valid configuration array.'</span>);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> ($use_sections === <span class="keyword">TRUE</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">$this</span>-&gt;config[$file] = <span class="keyword">isset</span>(<span class="keyword">$this</span>-&gt;config[$file])</span><br><span class="line">                    ? array_merge(<span class="keyword">$this</span>-&gt;config[$file], $config)</span><br><span class="line">                    : $config;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">$this</span>-&gt;config = array_merge(<span class="keyword">$this</span>-&gt;config, $config);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 存储，表明已加载</span></span><br><span class="line">            <span class="keyword">$this</span>-&gt;is_loaded[] = $file_path;</span><br><span class="line">            $config = <span class="keyword">NULL</span>;</span><br><span class="line">            $loaded = <span class="keyword">TRUE</span>;</span><br><span class="line">            log_message(<span class="string">'debug'</span>, <span class="string">'Config file loaded: '</span>.$file_path);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ($loaded === <span class="keyword">TRUE</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">TRUE</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">elseif</span> ($fail_gracefully === <span class="keyword">TRUE</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">FALSE</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    show_error(<span class="string">'The configuration file '</span>.$file.<span class="string">'.php does not exist.'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这是Config组件中较核心的方法之一，所有的参数都是可选参数，我们这里简单解释一下各形参的含义：  </p>
+<ul>
+<li>$file：需要加载的配置文件，可以包含后缀名也不可以不包含，如果未指定该参数，则默认加载Config.php文件；</li>
+<li>\$user_sections：是否为加载的配置文件使用独立的section，这么说可能还是不明白，试想，如果你定义了自己的配置文件，而你的配置文件中的配置项可能与Config.php文件中的配置项冲突，通过指定$section为true可以防止配置项的覆盖；</li>
+<li>$fail_gracefully：要load的配置文件不存在时的处理。Gracefully意为优雅的，如果该参数设置为true,则在文件不存在时只会返回false，而不会显示错误。</li>
+</ul>
+<p>在不启用user_secitons的情况下，如果你的配置文件中有与主配置文件Config.php相同的键，则会覆盖主配置文件中的项；</p>
+<h3 id="获取配置项值（item-、slash-item-）"><a href="#获取配置项值（item-、slash-item-）" class="headerlink" title="获取配置项值（item()、slash_item()）"></a>获取配置项值（item()、slash_item()）</h3><h4 id="item"><a href="#item" class="headerlink" title="item()"></a>item()</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">item</span><span class="params">($item, $index = <span class="string">''</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> ($index == <span class="string">''</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">isset</span>(<span class="keyword">$this</span>-&gt;config[$item]) ? <span class="keyword">$this</span>-&gt;config[$item] : <span class="keyword">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">isset</span>(<span class="keyword">$this</span>-&gt;config[$index], <span class="keyword">$this</span>-&gt;config[$index][$item]) ? <span class="keyword">$this</span>-&gt;config[$index][$item] : <span class="keyword">NULL</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>item方法用于在配置中获取特定的配置项。注意，如果你在load配置文件的时候启用了use_sections，则在使用item()获取配置项的时候需要指定第二个参数，也就是加载的配置文件的文件名（不包含后缀）。</p>
+<h4 id="slash-item"><a href="#slash-item" class="headerlink" title="slash_item()"></a>slash_item()</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">slash_item</span><span class="params">($item)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> ( ! <span class="keyword">isset</span>(<span class="keyword">$this</span>-&gt;config[$item]))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">elseif</span> (trim(<span class="keyword">$this</span>-&gt;config[$item]) === <span class="string">''</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">''</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> rtrim(<span class="keyword">$this</span>-&gt;config[$item], <span class="string">'/'</span>).<span class="string">'/'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>slash_item()实际上与item()方法类似，但他不会去用户的配置中寻找，并且，他返回的是主配置文件中的配置项，并在配置项最后添加反斜杠。</p>
+<h4 id="set-item"><a href="#set-item" class="headerlink" title="set_item()"></a>set_item()</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">set_item</span><span class="params">($item, $value)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">$this</span>-&gt;config[$item] = $value;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="url路由处理（site-url-、base-url-、-uri-string-、system-url-）"><a href="#url路由处理（site-url-、base-url-、-uri-string-、system-url-）" class="headerlink" title="url路由处理（site_url()、base_url()、_uri_string()、system_url()）"></a>url路由处理（site_url()、base_url()、_uri_string()、system_url()）</h3><p>几个方法的区别：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">echo</span> <span class="string">"site_url  : "</span>,<span class="keyword">$this</span>-&gt;config-&gt;site_url(<span class="string">"index/hello"</span>),<span class="string">"&lt;/br&gt;"</span>;</span><br><span class="line"><span class="comment">//site_url : http://www.citest.com/index/hello.html</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">"base_url  : "</span>,<span class="keyword">$this</span>-&gt;config-&gt;base_url(<span class="string">"index/hello"</span>),<span class="string">"&lt;br/&gt;"</span>;</span><br><span class="line"><span class="comment">//base_url : http://www.citest.com/index/hello</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">"system_url: "</span>,<span class="keyword">$this</span>-&gt;config-&gt;system_url();</span><br><span class="line"><span class="comment">//system_url: http://www.citest.com/system/</span></span><br></pre></td></tr></table></figure></p>
+<p>我们可以通过输出的结果，看出它们之间的区别。site_url是添加了suffix，base_url则是没有添加suffix的url地址，而system_url这个东西很奇怪，是获取系统的url路径。但实际上，由于system路径并没有直接执行的脚本，所以这个方法的实际用途是什么，暂时不知。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-09-26T15:08:01.712Z" itemprop="dateUpdated">2018-09-26 23:08:01</time>
+</span><br>
+
+
+        
+        原文链接：<a href="/2018/09/26/CI框架3-x源码阅读笔记六之配置类文件Config-php/" target="_blank" rel="external">https://pengwenwu.github.io/2018/09/26/CI框架3-x源码阅读笔记六之配置类文件Config-php/</a>
+        
+    </div>
+    <footer>
+        <a href="https://pengwenwu.github.io">
+            <img src="/img/avatar.jpg" alt="pengwenwu">
+            pengwenwu
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CodeIgniter/">CodeIgniter</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://pengwenwu.github.io/2018/09/26/CI框架3-x源码阅读笔记六之配置类文件Config-php/&title=《CI框架3.x源码阅读笔记六之配置类文件Config.php》 — Pena's Blog&pic=https://pengwenwu.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://pengwenwu.github.io/2018/09/26/CI框架3-x源码阅读笔记六之配置类文件Config-php/&title=《CI框架3.x源码阅读笔记六之配置类文件Config.php》 — Pena's Blog&source=pengwenwu的个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://pengwenwu.github.io/2018/09/26/CI框架3-x源码阅读笔记六之配置类文件Config-php/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《CI框架3.x源码阅读笔记六之配置类文件Config.php》 — Pena's Blog&url=https://pengwenwu.github.io/2018/09/26/CI框架3-x源码阅读笔记六之配置类文件Config-php/&via=https://pengwenwu.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://pengwenwu.github.io/2018/09/26/CI框架3-x源码阅读笔记六之配置类文件Config-php/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/10/15/centos7源码安装redis服务端/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">centos7源码安装redis服务端</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/09/24/CI框架3-x源码阅读笔记五之钩子类文件Hook-php/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">CI框架3.x源码阅读笔记五之钩子类文件Hook.php</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'true' == 'true',
+            appId: "U2qzDNI480QyyzN2kDGB7bGu-gzGzoHsz",
+            appKey: "6o2PFFkLctFMxXg3qBrhr0CF",
+            avatar: "retro",
+            placeholder: "要不要说点什么？",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>pengwenwu &copy; 2017 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://pengwenwu.github.io/2018/09/26/CI框架3-x源码阅读笔记六之配置类文件Config-php/&title=《CI框架3.x源码阅读笔记六之配置类文件Config.php》 — Pena's Blog&pic=https://pengwenwu.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://pengwenwu.github.io/2018/09/26/CI框架3-x源码阅读笔记六之配置类文件Config-php/&title=《CI框架3.x源码阅读笔记六之配置类文件Config.php》 — Pena's Blog&source=pengwenwu的个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://pengwenwu.github.io/2018/09/26/CI框架3-x源码阅读笔记六之配置类文件Config-php/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《CI框架3.x源码阅读笔记六之配置类文件Config.php》 — Pena's Blog&url=https://pengwenwu.github.io/2018/09/26/CI框架3-x源码阅读笔记六之配置类文件Config-php/&via=https://pengwenwu.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://pengwenwu.github.io/2018/09/26/CI框架3-x源码阅读笔记六之配置类文件Config-php/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADKUlEQVR42u3aS27jQAwFwNz/0p5tgCD2e6Q8iNql1cCQ5S4KGIafr6/4eny7fn7y8/Of3/0aXb/9ylXPx8bGxj6D/Xh65fe0x30epllYi3NiY2NjH8d+fqDkcO2dLfL5d3MLNjY2NnbyF/4sRc2Cgo2NjY29YT8/7vN7knZVHj5sbGxs7LaVk/xwG6zZa3h7Lw0bGxv7z7PbAuMv//st821sbGzsP8x+lNcsCV1VluSJ6oUCGxsb+yB2ngDaA20KmNnIuT0/NjY29uewZ236vEk0S3V5fVFPRbCxsbFvxc6TQb4osx8kvKNcqd8kNjY29k3YbeNmPx5uVyfblFa/c2xsbOwj2O1PzhpMwzppNMotiiVsbGzsI9jtn/KzQ18VlKuaUNjY2NhnsPN1nKuaSvnTNs/HxsbG/jT2Jv20y5rtIs6mLRWtXWJjY2PfnL051iadJE9uk9MsiNjY2Nh3Z2/SzGxlsx0z5MPmvNDCxsbGPom9GcG2KzttiGezjnYlCBsbG/vu7Hyd8aomTtu6ap8cBR0bGxv7w9j71NKODZKxxKz4wcbGxj6b3RYb+YGScLyjdHnRS8PGxsY+gr0Z6LYFSZvA8k5+O3LAxsbGPomdHysJx+aefERxwbonNjY29nHsthiYtaLyFHhZsfHby8PGxsY+iN2mrjydzNpMSZHTDi1eNJWwsbGxb86erePkn7Tj27bBlL+2F100bGxs7JuzZ6PcvLmTJJg8rG0Iovk2NjY29hHsfUMnLyHyhaF8qFB8go2NjX0Qe7OaMwtEQt2EY1jeYGNjY9+c3SabIjHExcZswJwHJRoSYGNjY9+cvW/3t82j2crOZQ0mbGxs7EPZ+SpMm1ry+//PMhA2Njb2GexHee3XZfLB8CY1vkjA2NjY2Aex2//6ZwXGbJDcJte2IYWNjY19EnuTtPJh7SxZbsYML9IhNjY29nHsdqclTzbJeDgZQrTtpBd3YmNjY38wO1/TyZ+2aVrl38LGxsbGTpZj8lR01SJO2xTDxsbGPpU9a/TPUkibwDavJ9pUwsbGxr45u23QJMPXpM20D9MmuNjY2NhHsP8BSdjtOaP1Z1IAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
